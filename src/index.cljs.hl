@@ -5,10 +5,15 @@
 (defc god true)
 (defc clicks 0)
 
+
+
 (defelem upgrade-btn
   [{:keys [level]} kids]
-  (let [datum (d/data level)]
-    ((button :click #(println "upgrade" )) (:text datum) kids)))
+  (let [datum (d/data level)
+      text (:text datum)
+      bump (:bump datum)
+      func (fn [] (js/setInterval #(swap! clicks (fn [m] (+ m bump))) 1000))]
+    ((button :click func) text kids)))
 
 (html
   (head
