@@ -4,15 +4,16 @@
 
 (defc god true)
 (defc clicks 0)
+(defc add-every 0)
 
-
+(js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
 (defelem upgrade-btn
   [{:keys [level]} kids]
   (let [datum (d/data level)
       text (:text datum)
       bump (:bump datum)
-      func (fn [] (js/setInterval #(swap! clicks (fn [m] (+ m bump))) 1000))]
+      func #(swap! add-every (fn [m] (+ m bump)))]
     ((button :click func) text kids)))
 
 (html
@@ -21,6 +22,7 @@
     )
   (body
     (h3 clicks " words")
+    (h5 add-every " added every second")
     
     (button :click #(swap! clicks inc) "Write a word")
 
