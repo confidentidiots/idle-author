@@ -1,7 +1,14 @@
-(page "index.html")
+(page "index.html"
+  (:require
+    [data.index :as d]))
 
 (defc god true)
 (defc clicks 0)
+
+(defelem upgrade-btn
+  [{:keys [level]} kids]
+  (let [datum (d/data level)]
+    ((button :click #(println "upgrade" )) (:text datum) kids)))
 
 (html
   (head
@@ -18,8 +25,8 @@
     
     (cell= (cond-> nil
       (< 0 clicks) (p "This is here to make Hoplon work.")
-      (< 10 clicks) (p "Notepad (writes 0.1 per second)")
-      (< 100 clicks) (p "100")
-      (< 1000 clicks) (p "1000")))
+      (< 10 clicks) (p (upgrade-btn :level 10))
+      (< 100 clicks) (p (upgrade-btn :level 100))
+      (< 1000 clicks) (p (upgrade-btn :level 1000))))
 
     ))
