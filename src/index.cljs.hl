@@ -1,0 +1,39 @@
+(page "index.html")
+
+(defc god true)
+(defc clicks 0)
+
+(defelem swap-button
+  [{:keys [state func] :or {func identity} :as attr} kids]
+  (let [attr (dissoc attr :state :func)]
+    ((button :click #(swap! state (deref* func))) attr kids)))
+
+(defelem counter
+  [attr _]
+  (let [my-count (cell 0)]
+    (div attr
+      (label (text "~{my-count}"))
+      (swap-button :state my-count :func inc "+")
+      (swap-button :state my-count :func dec "-"))))
+
+(html
+  (head
+    ; (link :href "app.css" :rel "stylesheet" :type "text/css")
+    )
+  (body
+    (h3 clicks " words")
+    
+    (button :click #(swap! clicks inc) "Write a word")
+
+    (if-tpl god
+      (for [n [10 100 1000]]
+        (button :click #(swap! clicks (fn [m] (+ m n))) (str "Write " n " words"))))
+    
+
+    (cell= (cond-> nil
+      (< 0 clicks) (p "This is here to make Hoplon work.")
+      (< 10 clicks) (p "Notepad (writes 0.1 per second)")
+      (< 100 clicks) (p "100")
+      (< 1000 clicks) (p "1000")))
+
+    ))
