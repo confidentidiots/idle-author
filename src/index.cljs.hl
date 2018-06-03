@@ -5,16 +5,34 @@
 (defc god true)
 (defc clicks 0)
 (defc add-every 0)
+(defc sales 0)
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
+
+; upgrade: add-every go up by value in upgrade lookup
+;       sales go down by the value of the key in the upgrade lookup
 (defelem upgrade-btn
   [{:keys [level]} kids]
   (let [datum (d/data level)
       text (:text datum)
       bump (:bump datum)
-      func #(swap! add-every (fn [m] (+ m bump)))]
-    ((button :click func) text kids)))
+      func #(swap! add-every (fn [m] (+ m bump)))
+      func2 #(swap! sales (fn [m] (- m level)))
+      func-all (fn [] (func) (func2))]
+    ((button :click func-all) text kids)))
+
+; sell: sales go up by value in sales lookup
+;       words go down by the value of the key in the sales lookup
+(defelem sell-btn
+  [{:keys [level]} kids]
+  (let [datum (d/sale level)
+      text (:text datum)
+      bump (:bump datum)
+      func #(swap! sales (fn [m] (+ m bump)))
+      func2 #(swap! clicks (fn [m] (- m level)))
+      func-all (fn [] (func) (func2))]
+    ((button :click func-all) text kids)))
 
 (html
   (head
@@ -22,6 +40,7 @@
     )
   (body
     (h3 clicks " words")
+    (h3 sales " sales")
     (h5 add-every " added every second")
     
     (button :click #(swap! clicks inc) "Write a word")
@@ -30,10 +49,18 @@
       (for [n [10 100 1000]]
         (button :click #(swap! clicks (fn [m] (+ m n))) (str "Write " n " words"))))
     
+    (h4 "Upgrade")
+    (cell= (cond-> nil
+      (< 0 sales) (p "This is here to make Hoplon work.")
+      (< 10 sales) (p (upgrade-btn :level 10))
+      (< 100 sales) (p (upgrade-btn :level 100))
+      (< 1000 sales) (p (upgrade-btn :level 1000))))
+
+    (h4 "Sell")
     (cell= (cond-> nil
       (< 0 clicks) (p "This is here to make Hoplon work.")
-      (< 10 clicks) (p (upgrade-btn :level 10))
-      (< 100 clicks) (p (upgrade-btn :level 100))
-      (< 1000 clicks) (p (upgrade-btn :level 1000))))
+      (< 10 clicks) (p (sell-btn :level 10))
+      (< 100 clicks) (p (sell-btn :level 100))
+      (< 1000 clicks) (p (sell-btn :level 1000))))
 
     ))
