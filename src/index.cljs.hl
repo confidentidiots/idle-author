@@ -7,6 +7,7 @@
 (defc add-every 0)
 (defc sales 0)
 (defc xs [10 100 1000])
+(def levels (map #(Math/pow 10 %) (range 1 6)))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
@@ -47,17 +48,19 @@
     (button :click #(swap! clicks inc) "Write a word")
 
     (if-tpl god
-      (for [n [10 100 1000]]
-        (button :click #(swap! clicks (fn [m] (+ m n))) (str "Write " n " words"))))
+      (for [n levels]
+        (button :click #(swap! clicks (fn [m] (+ m n))) n)))
     
     (h4 "Upgrade")
-    (for [x [10 100 1000]]
-      (cell= (if (< x sales)
-      (p (upgrade-btn :level x)))))
+    (cell=
+      (for [x levels]
+        (if (< x sales)
+        (p (upgrade-btn :level x)))))
 
     (h4 "Sell")
-    (for [x [10 100 1000]]
-      (cell= (if (< x clicks)
-      (p (sell-btn :level x)))))
-    
+    (cell=
+      (for [x levels]
+        (if (< x clicks)
+        (p (sell-btn :level x)))))
+
     ))
