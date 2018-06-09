@@ -7,6 +7,9 @@
 (defc add-every 0)
 (defc sales 0)
 (defc xs [10 100 1000])
+(def limit 6)
+(def levels2 (range 1 6))
+(defn mult-fn [n] (Math/pow 10 n))
 (def levels (map #(Math/pow 10 %) (range 1 6)))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
@@ -29,6 +32,16 @@
 (defelem sell-btn
   [{:keys [level]} kids]
   (let [datum (d/sale level)
+      text (:text datum)
+      bump (:bump datum)
+      func #(swap! sales (fn [m] (+ m bump)))
+      func2 #(swap! clicks (fn [m] (- m level)))
+      func-all (fn [] (func) (func2))]
+    ((button :click func-all) text kids)))
+
+(defelem sell-btn2
+  [{:keys [level]} kids]
+  (let [datum (d/upgrades level)
       text (:text datum)
       bump (:bump datum)
       func #(swap! sales (fn [m] (+ m bump)))
@@ -59,8 +72,9 @@
 
     (h4 "Sell")
     (cell=
-      (for [x levels]
+      (for [level levels2]
+        (let [x (mult-fn level)]
         (if (< x clicks)
-        (p (sell-btn :level x)))))
+        (p (sell-btn :level x))))))
 
     ))
