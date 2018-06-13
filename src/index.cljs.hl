@@ -9,7 +9,7 @@
 (defc levels (range 1 6))
 
 (def limit 6)
-(defn mult-fn [n] (Math/pow 10 @n))
+(defn level-stepper-fn [n] (Math/pow 10 @n))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
@@ -17,7 +17,7 @@
 ;       sales go down by the value of the key in the upgrade lookup
 (defelem upgrade-btn
   [{:keys [level]} kids]
-  (let [text (d/products level)
+  (let [text (d/upgrades level)
       bump level ; mult here
       func #(swap! add-every (fn [m] (+ m bump)))
       func2 #(swap! sales (fn [m] (- m level)))
@@ -28,7 +28,7 @@
 ;       words go down by the value of the key in the sales lookup
 (defelem sell-btn
   [{:keys [level]} kids]
-  (let [text (d/upgrades level)
+  (let [text (d/products level)
       bump level ; mult here
       func #(swap! sales (fn [m] (+ m bump)))
       func2 #(swap! clicks (fn [m] (- m level)))
@@ -49,23 +49,23 @@
     (if-tpl god
       (div
       (for-tpl [level levels]
-        (let [n (mult-fn level)]
+        (let [n (level-stepper-fn level)]
           (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
     
     (h4 "Upgrade")
     (for-tpl [level levels]
-      (let [n (mult-fn level)]
+      (let [level-exp (level-stepper-fn level)]
         (div
           (cell=
-            (if (< n sales)
+            (if (< level-exp sales)
               (p (upgrade-btn :level level)))))))
 
     (h4 "Sell")
     (for-tpl [level levels]
-      (let [n (mult-fn level)]
+      (let [level-exp (level-stepper-fn level)]
         (div
           (cell=
-            (if (< n clicks)
+            (if (< level-exp clicks)
               (p (sell-btn :level level)))))))
 
     ))
