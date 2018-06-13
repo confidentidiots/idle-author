@@ -6,10 +6,10 @@
 (defc clicks 0)
 (defc add-every 0)
 (defc sales 0)
-(def levels (range 1 6))
+(defc levels (range 1 6))
 
 (def limit 6)
-(defn mult-fn [n] (Math/pow 10 n))
+(defn mult-fn [n] (Math/pow 10 @n))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
@@ -47,26 +47,28 @@
     
     (button :click #(swap! clicks inc) "Write a word")
 
-    
     (if-tpl god
-      (for [level levels]
+      (div
+      (for-tpl [level levels]
         (let [n (mult-fn level)]
-        (button :click #(swap! clicks (fn [m] (+ m n))) n))))
+        (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
     
     (h4 "Upgrade")
-    (cell=
-      (for [level levels]
-        (let [n (mult-fn level)]
-        (if (< n sales)
+    (for-tpl [level levels]
+      (let [n (mult-fn level)]
+        (div
+          (cell=
+      (if (< n sales)
         (div
           (p (str n " < " sales))
-          (p (upgrade-btn :level level)))))))
+          (p (upgrade-btn :level level))))))))
 
     (h4 "Sell")
-    (cell=
-      (for [level levels]
-        (let [n (mult-fn level)]
-        (if (< n clicks)
-        (p (sell-btn :level level))))))
+    (for-tpl [level levels]
+      (let [n (mult-fn level)]
+        (div
+          (cell=
+          (if (< n clicks)
+          (p (sell-btn :level level)))))))
 
     ))
