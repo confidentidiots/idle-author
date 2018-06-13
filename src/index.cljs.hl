@@ -2,14 +2,20 @@
   (:require
     [data.index :as d]))
 
+(def limit (Math/min (count d/upgrades) (count d/products)))
+
 (defc god true)
 (defc clicks 0)
 (defc add-every 0)
 (defc sales 0)
-(defc levels (range 1 6))
+(defc levels (range 1 limit))
 
-(def limit 6)
-(defn level-stepper-fn [n] (Math/pow 10 @n))
+
+(defn level-stepper-fn [n]
+  (+
+    (Math/pow @n 4)
+    (* 10 @n)))
+(defn cost [n] (* 10 n))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
 
@@ -18,7 +24,7 @@
 (defelem upgrade-btn
   [{:keys [level]} kids]
   (let [text (d/upgrades level)
-      bump level ; mult here
+      bump (cost level)
       func #(swap! add-every (fn [m] (+ m bump)))
       func2 #(swap! sales (fn [m] (- m level)))
       func-all (fn [] (func) (func2))]
@@ -29,7 +35,7 @@
 (defelem sell-btn
   [{:keys [level]} kids]
   (let [text (d/products level)
-      bump level ; mult here
+      bump (cost level)
       func #(swap! sales (fn [m] (+ m bump)))
       func2 #(swap! clicks (fn [m] (- m level)))
       func-all (fn [] (func) (func2))]
@@ -67,5 +73,15 @@
           (cell=
             (if (< level-exp clicks)
               (p (sell-btn :level level)))))))
+
+    (h4 "List")
+    (ol
+    (for-tpl [level levels]
+      (let [level-exp (level-stepper-fn level)
+            text (d/products @level)
+            price (cost @level)]
+          (li text " @ " level-exp " $" price ))
+
+          ))
 
     ))
