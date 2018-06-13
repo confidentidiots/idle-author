@@ -26,7 +26,6 @@
 
 ; sell: sales go up by value in sales lookup
 ;       words go down by the value of the key in the sales lookup
-
 (defelem sell-btn
   [{:keys [level]} kids]
   (let [text (d/upgrades level)
@@ -59,9 +58,7 @@
         (div
           (cell=
             (if (< n sales)
-              (div
-                (p (str n " < " sales))
-                (p (upgrade-btn :level level))))))))
+              (p (upgrade-btn :level level)))))))
 
     (h4 "Sell")
     (for-tpl [level levels]
