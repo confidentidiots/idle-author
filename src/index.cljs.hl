@@ -51,24 +51,24 @@
       (div
       (for-tpl [level levels]
         (let [n (mult-fn level)]
-        (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
+          (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
     
     (h4 "Upgrade")
     (for-tpl [level levels]
       (let [n (mult-fn level)]
         (div
           (cell=
-      (if (< n sales)
-        (div
-          (p (str n " < " sales))
-          (p (upgrade-btn :level level))))))))
+            (if (< n sales)
+              (div
+                (p (str n " < " sales))
+                (p (upgrade-btn :level level))))))))
 
     (h4 "Sell")
     (for-tpl [level levels]
       (let [n (mult-fn level)]
         (div
           (cell=
-          (if (< n clicks)
-          (p (sell-btn :level level)))))))
+            (if (< n clicks)
+              (p (sell-btn :level level)))))))
 
     ))
