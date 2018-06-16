@@ -10,11 +10,10 @@
 (defc sales 0)
 (defc levels (range 1 limit))
 
-
-(defn level-stepper-fn [n]
+(defn level-value-fn [n]
   (+
-    (Math/pow @n 4)
-    (* 10 @n)))
+    (Math/pow n 4)
+    (* 10 n)))
 (defn cost [n] (* 10 n))
 
 (js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
@@ -22,24 +21,22 @@
 ; upgrade: add-every go up by value in upgrade lookup
 ;       sales go down by the value of the key in the upgrade lookup
 (defelem upgrade-btn
-  [{:keys [level]} kids]
+  [{:keys [level value]} kids]
   (let [text (d/upgrades level)
-      bump (cost level)
-      func #(swap! add-every (fn [m] (+ m bump)))
-      func2 #(swap! sales (fn [m] (- m level)))
+      func #(swap! add-every (fn [m] (+ m level)))
+      func2 #(swap! sales (fn [m] (- m value)))
       func-all (fn [] (func) (func2))]
-    ((button :click func-all) text kids)))
+    ((button :click func-all) (str text " ($" value ")") kids)))
 
 ; sell: sales go up by value in sales lookup
 ;       words go down by the value of the key in the sales lookup
 (defelem sell-btn
-  [{:keys [level]} kids]
+  [{:keys [level out in]} kids]
   (let [text (d/products level)
-      bump (cost level)
-      func #(swap! sales (fn [m] (+ m bump)))
-      func2 #(swap! clicks (fn [m] (- m level)))
+      func #(swap! sales (fn [m] (+ m in)))
+      func2 #(swap! clicks (fn [m] (- m out)))
       func-all (fn [] (func) (func2))]
-    ((button :click func-all) text kids)))
+    ((button :click func-all) (str text " (" out " words @ $" in ")" ) kids)))
 
 (html
   (head
@@ -55,33 +52,58 @@
     (if-tpl god
       (div
       (for-tpl [level levels]
-        (let [n (level-stepper-fn level)]
+        (let [n (level-value-fn @level)]
           (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
     
     (h4 "Upgrade")
     (for-tpl [level levels]
-      (let [level-exp (level-stepper-fn level)]
+      (let [value (cost @level)]
         (div
           (cell=
-            (if (< level-exp sales)
-              (p (upgrade-btn :level level)))))))
+            (if (< value sales)
+              (p (upgrade-btn :level level :value value)))))))
 
     (h4 "Sell")
     (for-tpl [level levels]
-      (let [level-exp (level-stepper-fn level)]
+      (let [out (level-value-fn @level)
+          in (cost @level)]
         (div
           (cell=
-            (if (< level-exp clicks)
-              (p (sell-btn :level level)))))))
+            (if (<= out clicks)
+              (p (sell-btn :level level :out out :in in  )))))))
 
-    (h4 "List")
-    (ol
+    (h4 "Upgrades")
+    (table
+      (thead
+        (tr
+          (td "Name")
+          (td "Cost")
+          (td "Bump")))
+      (tbody
     (for-tpl [level levels]
-      (let [level-exp (level-stepper-fn level)
+      (let [level-exp (level-value-fn level)
+            text (d/upgrades @level)
+            price (cost @level)]
+          (tr
+            (td text)
+            (td price)
+            (td level " every second"))))))
+
+    (h4 "Sell")
+    (table
+      (thead
+        (tr
+          (td "Name")
+          (td "Clicks")
+          (td "Cash")))
+      (tbody
+    (for-tpl [level levels]
+      (let [level-exp (level-value-fn @level)
             text (d/products @level)
             price (cost @level)]
-          (li text " @ " level-exp " $" price ))
-
-          ))
+          (tr
+            (td text)
+            (td level-exp)
+            (td price))))))
 
     ))
