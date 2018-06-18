@@ -5,18 +5,23 @@
 (def limit (Math/min (count d/upgrades) (count d/products)))
 
 (defc god true)
+(defc total-clicks 0)
 (defc clicks 0)
 (defc add-every 0)
 (defc sales 0)
 (defc levels (range 1 limit))
 
+(defn click-fn [func] (do
+  (swap! clicks func)
+  (swap! total-clicks func)))
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
     (* 10 n)))
-(defn cost [n] (* 10 n))
+(defn buy-cost [n] (* 10 n))
+(defn sell-cost [n] (* 2 n))
 
-(js/setInterval #(swap! clicks (fn [m] (+ m @add-every))) 1000)
+(js/setInterval #(click-fn (fn [m] (+ m @add-every))) 1000)
 
 ; upgrade: add-every go up by value in upgrade lookup
 ;       sales go down by the value of the key in the upgrade lookup
@@ -47,17 +52,17 @@
     (h3 "$" sales " income")
     (h5 add-every " added every second")
     
-    (button :click #(swap! clicks inc) "Write a word")
+    (button :click #(click-fn inc) "Write a word")
 
-    (if-tpl god
+    (if-tpl god 
       (div
       (for-tpl [level levels]
         (let [n (level-value-fn @level)]
-          (button :click #(swap! clicks (fn [m] (+ m n))) n)))))
+          (button :click #(click-fn (fn [m] (+ m n))) n)))))
     
     (h4 "Upgrade")
     (for-tpl [level levels]
-      (let [value (cost @level)]
+      (let [value (buy-cost @level)]
         (div
           (cell=
             (if (< value sales)
@@ -66,44 +71,48 @@
     (h4 "Sell")
     (for-tpl [level levels]
       (let [out (level-value-fn @level)
-          in (cost @level)]
+          in (sell-cost @level)]
         (div
           (cell=
             (if (<= out clicks)
               (p (sell-btn :level level :out out :in in  )))))))
 
-    (h4 "Upgrades")
-    (table
-      (thead
-        (tr
-          (td "Name")
-          (td "Cost")
-          (td "Bump")))
-      (tbody
-    (for-tpl [level levels]
-      (let [level-exp (level-value-fn level)
-            text (d/upgrades @level)
-            price (cost @level)]
-          (tr
-            (td text)
-            (td price)
-            (td level " every second"))))))
+    (if-tpl god
+      (div
 
-    (h4 "Sell")
-    (table
-      (thead
-        (tr
-          (td "Name")
-          (td "Clicks")
-          (td "Cash")))
-      (tbody
-    (for-tpl [level levels]
-      (let [level-exp (level-value-fn @level)
-            text (d/products @level)
-            price (cost @level)]
-          (tr
-            (td text)
-            (td level-exp)
-            (td price))))))
+        (h4 "Grand total " total-clicks)
+        (h4 "Upgrades")
+        (table
+          (thead
+            (tr
+              (td "Name")
+              (td "Cost")
+              (td "Bump")))
+          (tbody
+        (for-tpl [level levels]
+          (let [level-exp (level-value-fn level)
+                text (d/upgrades @level)
+                price (buy-cost @level)]
+              (tr
+                (td text)
+                (td price)
+                (td level " every second"))))))
 
+        (h4 "Sell")
+        (table
+          (thead
+            (tr
+              (td "Name")
+              (td "Words")
+              (td "Cash")))
+          (tbody
+        (for-tpl [level levels]
+          (let [level-exp (level-value-fn @level)
+                text (d/products @level)
+                price (sell-cost @level)]
+              (tr
+                (td text)
+                (td level-exp)
+                (td price))))))
+      )) ; if god
     ))
