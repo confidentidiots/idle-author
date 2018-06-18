@@ -6,3 +6,17 @@ body {
 .debug {
     background-color: #ee1;
 }
+
+/* grid */
+.sell {
+    grid-area: sell;
+}
+.upgrade {
+    grid-area: upgrade;
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "sell upgrade"
+}

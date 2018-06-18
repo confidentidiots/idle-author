@@ -68,23 +68,26 @@
         (let [n (level-value-fn @level)]
           (button :click #(click-fn (fn [m] (+ m n))) n)))))
     
-    (h4 "Upgrade")
-    (for-tpl [level levels]
-      (let [value (buy-cost @level)]
-        (div
-          (cell=
-            (if (< value sales)
-              (p (upgrade-btn :level level :value value)))))))
-
-    (h4 "Sell")
-    (for-tpl [level levels]
-      (let [out (level-value-fn @level)
-          in (sell-cost @level)]
-        (div
-          (cell=
-            (if (<= out clicks)
-              (p (sell-btn :level level :out out :in in  )))))))
-
+    (div :class "wrapper"
+      (div :class "upgrade"
+        (h4 "Upgrade")
+        (for-tpl [level levels]
+          (let [value (buy-cost @level)]
+            (div
+              (cell=
+                (if (< value sales)
+                  (p (upgrade-btn :level level :value value))))))))
+      (div :class "sell"
+        (h4 "Sell")
+        (for-tpl [level levels]
+          (let [out (level-value-fn @level)
+              in (sell-cost @level)]
+            (div
+              (cell=
+                (if (<= out clicks)
+                  (p (sell-btn :level level :out out :in in  ))))))))
+    ) ; wrapper
+      
     (if-tpl god
       (div :class "debug"
 
