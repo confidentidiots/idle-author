@@ -1,6 +1,7 @@
 (page "index.html"
   (:require
-    [data.index :as d]))
+    [data.index :as d]
+    [clojure.string :as string]))
 
 (def limit (Math/min (count d/upgrades) (count d/products)))
 
@@ -93,8 +94,12 @@
 
         (h4 "Grand total " total-clicks)
 
-        (h4 "Sell log " sell-log)
-        (h4 "Upgrade log " upgrade-log)
+        (h4 "Sell log "
+          (for-tpl [l sell-log]
+            (span l "-")))
+        (h4 "Upgrade log "
+          (for-tpl [l upgrade-log]
+          (span l "-")))
 
         (h4 "Upgrades")
         (table
