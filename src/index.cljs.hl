@@ -10,7 +10,7 @@
 (defc clicks 0)
 (defc add-every 0)
 (defc sales 0)
-(defc levels (range 1 limit))
+(defc levels (reverse (range 1 limit)))
 (defc sell-log (vec (replicate limit 0)))
 (defc upgrade-log (vec (replicate limit 0)))
 
@@ -46,7 +46,7 @@
 ; sell: sales go up by value in sales lookup
 ;       words go down by the value of the key in the sales lookup
 (defelem sell-btn
-  [{:keys [level out in]} kids]
+  [{:keys [level out in ]} kids]
   (let [text (d/products level)
       func #(swap! sales (fn [m] (+ m in)))
       func2 #(swap! clicks (fn [m] (- m out)))
@@ -54,8 +54,8 @@
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " (" out " words @ $" in ")" )]
 
-      (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
-      ))
+    (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
+  ))
 
 (html
   (head
@@ -81,15 +81,21 @@
             (div
               (cell=
                 (p (upgrade-btn :level level :value value)))))))
-                
+
       (div :class "sell"
         (h4 "Sell")
         (for-tpl [level levels]
           (let [out (level-value-fn @level)
-              in (sell-cost @level)]
+              in (sell-cost @level)
+              parent (cell= (sell-log (- level 1)))]
             (div
-              (cell=
-                (p (sell-btn :level level :out out :in in (span "hey"))))))))
+              (cell= 
+                (div 
+                  (if-tpl (not= 0 parent)
+                    (p (sell-btn :level level :out out :in in)))
+                  (if-tpl (= level 1)
+                    (p (sell-btn :level level :out out :in in)))      
+              ))))))
     ) ; wrapper
       
     (if-tpl god
