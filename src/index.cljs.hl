@@ -37,8 +37,11 @@
       func #(swap! add-every (fn [m] (+ m level)))
       func2 #(swap! sales (fn [m] (- m value)))
       func3 #(log level upgrade-log)
-      func-all (fn [] (func) (func2) (func3))]
-    ((button :click func-all) (str text " ($" value ")") kids)))
+      func-all (fn [] (func) (func2) (func3))
+      button-text (str text " ($" value ")")]
+
+    (button :disabled (cell= (> value sales)) :click func-all button-text kids)
+    ))
 
 ; sell: sales go up by value in sales lookup
 ;       words go down by the value of the key in the sales lookup
@@ -48,9 +51,11 @@
       func #(swap! sales (fn [m] (+ m in)))
       func2 #(swap! clicks (fn [m] (- m out)))
       func3 #(log level sell-log)
-      func-all (fn [] (func) (func2) (func3))]
-      
-    ((button :click func-all) (str text " (" out " words @ $" in ")" ) kids)))
+      func-all (fn [] (func) (func2) (func3))
+      button-text (str text " (" out " words @ $" in ")" )]
+
+      (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
+      ))
 
 (html
   (head
@@ -61,7 +66,6 @@
     (h5 "Creativity boost of " add-every " words every second")
     
     (button :click #(click-fn inc) "Write a word")
-    (button :click #(log 1 sell-log) "log a sell")
 
     (if-tpl god 
       (div
@@ -76,8 +80,8 @@
           (let [value (buy-cost @level)]
             (div
               (cell=
-                (if (< value sales)
-                  (p (upgrade-btn :level level :value value))))))))
+                (p (upgrade-btn :level level :value value)))))))
+                
       (div :class "sell"
         (h4 "Sell")
         (for-tpl [level levels]
@@ -85,8 +89,7 @@
               in (sell-cost @level)]
             (div
               (cell=
-                (if (<= out clicks)
-                  (p (sell-btn :level level :out out :in in  ))))))))
+                (p (sell-btn :level level :out out :in in (span "hey"))))))))
     ) ; wrapper
       
     (if-tpl god
