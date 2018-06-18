@@ -77,10 +77,16 @@
       (div :class "upgrade"
         (h4 "Upgrade")
         (for-tpl [level levels]
-          (let [value (buy-cost @level)]
+          (let [value (buy-cost @level)
+              parent (cell= (upgrade-log (- level 1)))]
             (div
               (cell=
-                (p (upgrade-btn :level level :value value)))))))
+                (div
+                  (if-tpl (not= 0 parent)
+                    (p (upgrade-btn :level level :value value)))
+                  (if-tpl (= level 1)
+                  (p (upgrade-btn :level level :value value)))
+              ))))))
 
       (div :class "sell"
         (h4 "Sell")
@@ -94,7 +100,7 @@
                   (if-tpl (not= 0 parent)
                     (p (sell-btn :level level :out out :in in)))
                   (if-tpl (= level 1)
-                    (p (sell-btn :level level :out out :in in)))      
+                    (p (sell-btn :level level :out out :in in)))
               ))))))
     ) ; wrapper
       
