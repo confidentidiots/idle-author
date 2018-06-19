@@ -34,13 +34,18 @@
 (defelem upgrade-btn
   [{:keys [level value]} kids]
   (let [text (d/upgrades level)
+      count (cell= (upgrade-log level))
       func #(swap! add-every (fn [m] (+ m level)))
       func2 #(swap! sales (fn [m] (- m value)))
       func3 #(log level upgrade-log)
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " ($" value ")")]
 
-    (button :disabled (cell= (> value sales)) :click func-all button-text kids)
+    (div
+      (button :disabled (cell= (> value sales)) :click func-all button-text kids)  
+        (span (cell= (str "Bought " count)))
+      )
+    
     ))
 
 ; sell: sales go up by value in sales lookup
@@ -48,13 +53,18 @@
 (defelem sell-btn
   [{:keys [level out in ]} kids]
   (let [text (d/products level)
+      count  (cell= (sell-log level))
       func #(swap! sales (fn [m] (+ m in)))
       func2 #(swap! clicks (fn [m] (- m out)))
       func3 #(log level sell-log)
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " (" out " words @ $" in ")" )]
 
-    (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
+      (div 
+        (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
+        (span (cell= (str "Sold " count)))
+        )
+    
   ))
 
 (html
