@@ -93,9 +93,9 @@
               (cell=
                 (div
                   (if-tpl (not= 0 parent)
-                    (p (upgrade-btn :level level :value value)))
+                    (upgrade-btn :level level :value value))
                   (if-tpl (= level 1)
-                  (p (upgrade-btn :level level :value value)))
+                    (upgrade-btn :level level :value value))
               ))))))
 
       (div :class "sell"
@@ -108,9 +108,9 @@
               (cell= 
                 (div 
                   (if-tpl (not= 0 parent)
-                    (p (sell-btn :level level :out out :in in)))
+                    (sell-btn :level level :out out :in in))
                   (if-tpl (= level 1)
-                    (p (sell-btn :level level :out out :in in)))
+                    (sell-btn :level level :out out :in in))
               ))))))
     ) ; wrapper
       
