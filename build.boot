@@ -31,4 +31,4 @@
   (comp
     (hoplon)
     (cljs :optimizations :advanced)
-    (target :dir #{"target"})))
+    (target :dir #{"docs"})))
