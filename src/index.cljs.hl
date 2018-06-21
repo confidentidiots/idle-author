@@ -52,7 +52,7 @@
 ;       words go down by the value of the key in the sales lookup
 (defelem sell-btn
   [{:keys [level out in ]} kids]
-  (let [text (d/products level)
+  (let [text (d/products (js/parseInt level))
       count  (cell= (sell-log level))
       func #(swap! sales (fn [m] (+ m in)))
       func2 #(swap! clicks (fn [m] (- m out)))
@@ -60,9 +60,13 @@
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " (" out " words @ $" in ")" )]
 
-      (div 
-        (button :disabled (cell= (> out clicks)) :click func-all button-text kids)
-        (span (cell= (str "Sold " count)))
+      ;(print (str "level " level " in " in " out " out))
+      (tr
+        (td text)
+        (td out)
+        (td in)
+        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids)) 
+        (td count)
         )
     
   ))
@@ -99,19 +103,39 @@
               ))))))
 
       (div :class "sell"
-        (h4 "Sell")
-        (for-tpl [level levels]
-          (let [out (level-value-fn @level)
-              in (sell-cost @level)
-              parent (cell= (sell-log (- level 1)))]
-            (div
-              (cell= 
-                (div 
-                  (if-tpl (not= 0 parent)
-                    (sell-btn :level level :out out :in in))
-                  (if-tpl (= level 1)
-                    (sell-btn :level level :out out :in in))
-              ))))))
+        
+        (table
+          (caption "Sell")
+          (thead
+            (tr
+              (th "Thing")
+              (th "Minus")
+              (th "Plus")
+              (th "Sell")
+              (th "Count")))
+          (for-tpl [level levels]
+            (let [out (cell= (level-value-fn level))
+                in (cell= (sell-cost level))
+                parent (cell= (sell-log (- level 1)))]
+
+                  (tbody
+                    (if-tpl (cell= (not= 0 parent))
+                      (sell-btn
+                        :level @level
+                        :out @out
+                        :in @in)
+                    )
+                    (if-tpl (cell= (= level 1))
+                      (sell-btn
+                        :level @level
+                        :out @out
+                        :in @in)
+                    )
+                  ) ; tbody
+            ) ; let
+          ) ; for-tpl
+        ) ; table
+      ) ; div class=sell
     ) ; wrapper
       
     (if-tpl god
