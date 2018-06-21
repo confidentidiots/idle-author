@@ -41,12 +41,13 @@
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " ($" value ")")]
 
-    (div
-      (button :disabled (cell= (> value sales)) :click func-all button-text kids)  
-        (span (cell= (str "Bought " count)))
-      )
-    
-    ))
+      (tr
+        (td text)
+        (td "$" value)
+        (td level " words per second")
+        (td count)
+        (td
+          (button :disabled (cell= (> value sales)) :click func-all "Buy" kids)))))
 
 ; sell: sales go up by value in sales lookup
 ;       words go down by the value of the key in the sales lookup
@@ -60,16 +61,12 @@
       func-all (fn [] (func) (func2) (func3))
       button-text (str text " (" out " words @ $" in ")" )]
 
-      ;(print (str "level " level " in " in " out " out))
       (tr
         (td text)
         (td out)
         (td "$" in)
         (td count)
-        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids))
-        )
-    
-  ))
+        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids)))))
 
 (html
   (head
@@ -88,19 +85,26 @@
           (button :click #(click-fn (fn [m] (+ m n))) n)))))
     
     (div :class "wrapper"
+
       (div :class "upgrade"
-        (h4 "Upgrade")
-        (for-tpl [level levels]
-          (let [value (buy-cost @level)
-              parent (cell= (upgrade-log (- level 1)))]
-            (div
-              (cell=
-                (div
-                  (if-tpl (not= 0 parent)
-                    (upgrade-btn :level level :value value))
-                  (if-tpl (= level 1)
-                    (upgrade-btn :level level :value value))
-              ))))))
+        (table
+          (caption "Upgrade your tools")
+          (thead
+            (tr
+              (th "Thing")
+              (th "Cost")
+              (th "Boost")
+              (th "# Bought")
+              (th "")))
+          (for-tpl [level levels]
+            (let [value (cell= (buy-cost level))
+                parent (cell= (upgrade-log (- level 1)))]
+              (tbody
+                (if-tpl (cell= (not= 0 parent))
+                  (upgrade-btn :level @level :value @value))
+                (if-tpl (cell= (= level 1))
+                  (upgrade-btn :level @level :value @value))
+              )))))
 
       (div :class "sell"
         
@@ -112,32 +116,16 @@
               (th "Word cost")
               (th "Income")
               (th "# Sold")
-              (th "")
-              ))
+              (th "")))
           (for-tpl [level levels]
             (let [out (cell= (level-value-fn level))
                 in (cell= (sell-cost level))
                 parent (cell= (sell-log (- level 1)))]
-
-                  (tbody
-                    (if-tpl (cell= (not= 0 parent))
-                      (sell-btn
-                        :level @level
-                        :out @out
-                        :in @in)
-                    )
-                    (if-tpl (cell= (= level 1))
-                      (sell-btn
-                        :level @level
-                        :out @out
-                        :in @in)
-                    )
-                  ) ; tbody
-            ) ; let
-          ) ; for-tpl
-        ) ; table
-      ) ; div class=sell
-    ) ; wrapper
+              (tbody
+                (if-tpl (cell= (not= 0 parent))
+                  (sell-btn :level @level :out @out :in @in))
+                (if-tpl (cell= (= level 1))
+                  (sell-btn :level @level :out @out :in @in))))))))
       
     (if-tpl god
       (div :class "debug"
