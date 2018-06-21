@@ -64,9 +64,9 @@
       (tr
         (td text)
         (td out)
-        (td in)
-        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids)) 
+        (td "$" in)
         (td count)
+        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids))
         )
     
   ))
@@ -105,14 +105,15 @@
       (div :class "sell"
         
         (table
-          (caption "Sell")
+          (caption "Sell your words")
           (thead
             (tr
               (th "Thing")
-              (th "Minus")
-              (th "Plus")
-              (th "Sell")
-              (th "Count")))
+              (th "Word cost")
+              (th "Income")
+              (th "# Sold")
+              (th "")
+              ))
           (for-tpl [level levels]
             (let [out (cell= (level-value-fn level))
                 in (cell= (sell-cost level))
@@ -150,13 +151,14 @@
           (for-tpl [l upgrade-log]
           (span l "-")))
 
-        (h4 "Upgrades")
+        
         (table
+          (caption "Upgrades")
           (thead
             (tr
-              (td "Name")
-              (td "Cost")
-              (td "Bump")))
+              (th "Name")
+              (th "Cost")
+              (th "Bump")))
           (tbody
         (for-tpl [level levels]
           (let [level-exp (level-value-fn level)
@@ -167,13 +169,13 @@
                 (td price)
                 (td level " every second"))))))
 
-        (h4 "Sell")
         (table
+          (caption "Sell")
           (thead
             (tr
-              (td "Name")
-              (td "Words")
-              (td "Cash")))
+              (th "Name")
+              (th "Words")
+              (th "Cash")))
           (tbody
         (for-tpl [level levels]
           (let [level-exp (level-value-fn @level)
