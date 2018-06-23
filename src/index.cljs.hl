@@ -14,7 +14,7 @@
 (defc sell-log (vec (replicate limit 0)))
 (defc upgrade-log (vec (replicate limit 0)))
 
-(defn click-fn [func] (do
+(defn click-fn [func] (dosync
   (swap! clicks func)
   (swap! total-clicks func)))
 (defn level-value-fn [n]
