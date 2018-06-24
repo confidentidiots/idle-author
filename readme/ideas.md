@@ -1,3 +1,9 @@
+# Intro
+
+Some ideas. Not all of these will make it into the game. Some of these really are moonshots.
+
+# Disasters
+
 Allow disasters. You then lose work.
 Some research, hence kit can mitigate against losing a bunch of work.
 
