@@ -8,6 +8,9 @@
 
 ;
 (deftest test-sell
-  (let [state (atom { :things {"bar" 2}})]
-    (is (= (sell state "foo") {:things { "foo" 1 "bar" 2}}))
-    (is (= (sell state "bar") {:things { "foo" 1 "bar" 3}}))))
+  (let [state (atom { :things {}})]
+    (is (= (sell state "Slogan") {:things { "Slogan" 1 :money 33.219280948873624}}))
+    (is (= (sell state "Slogan") {:things { "Slogan" 2 :money 54.17831369176747}}))
+    (is (= (sell state "Copy") {:things { "Copy" 1 "Slogan" 2 :money 386.37112318050373}}))))
+
+;
