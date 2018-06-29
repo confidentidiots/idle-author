@@ -19,3 +19,16 @@
         money-cost (upgrade :cost)]
       
       (gain-fn n money-cost)))
+
+(defn- sell [state thing]
+  (let [current-count (get-in state [:things thing] 0)
+        future-count (inc current-count)
+        thing-income (income thing future-count)
+        inc-money (partial + thing-income)]
+    (-> state
+      ; record that we sold one more of thing
+      (update-in [:things thing] (fnil inc 0))
+      ; add income
+      (update-in [:money] (fnil inc-money 0)))))
+      ; subtract words
+      ;(update-in [:clicks] (fnil dec 0)))))
