@@ -6,7 +6,7 @@
 (def limit (Math/min (count d/tools) (count d/products)))
 
 (defc god true)
-(defc total-clicks 0)
+
 (defc clicks 0)
 (defc add-every 0)
 (defc sales 0)
@@ -15,8 +15,7 @@
 (defc upgrade-log (vec (replicate limit 0)))
 
 (defn click-fn [func] (dosync
-  (swap! clicks func)
-  (swap! total-clicks func)))
+  (swap! clicks func)))
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -129,8 +128,6 @@
 
     (if-tpl god
       (div :class "debug"
-
-        (h4 "Grand total " total-clicks)
 
         (h4 "Sell log "
           (for-tpl [l sell-log]
