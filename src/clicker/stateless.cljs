@@ -2,25 +2,41 @@
 
 (defn gain [db key thing-name n]
   "Given a thing (like a tool or product as indicated by 'key'),
-  if I buy/sell it the Nth time
+  if I tap (i.e. buy/sell) it the Nth time
   what is the gain as per the gain-fn?"
   (let [sub-db (db key)
-        things (sub-db :items)
         gain-fn (sub-db :gain-fn)
-        thing (first (filter #(= thing-name (% :name)) things))
+        thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
         cost (thing :cost)]
       
       (gain-fn n cost)))
 
-(defn- sell [db state thing]
-  (let [current-count (get-in state [:things thing] 0)
+(defn tap [db key state thing-name]
+  "Given I tap a thing, make changes to the current game state
+  and return the game state."
+  (let [sub-db (db key)
+        thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
+        gain-key (sub-db :gain)
+        loss-key (sub-db :loss)
+        current-count (get-in state [:things thing-name] 0)
         future-count (inc current-count)
-        thing-income (gain :product db thing future-count)
-        inc-money (partial + thing-income)]
+        thing-gain (gain db key thing-name future-count)
+        thing-loss (thing :cost)
+        gain-amount (partial + thing-gain)
+        loss-amount (partial - thing-loss)]
+    ; (print ">> tap: "
+    ;   {
+    ;     :future-count future-count
+    ;     :name thing-name
+    ;     :gain-key gain-key
+    ;     :loss-key loss-key
+    ;     :thing-gain thing-gain
+    ;     :thing-loss thing-loss})
+
     (-> state
-      ; record that we sold one more of thing
-      (update-in [:things thing] (fnil inc 0))
-      ; add income
-      (update-in [:money] (fnil inc-money 0)))))
-      ; subtract words
-      ;(update-in [:clicks] (fnil dec 0)))))
+      ; record that we've tapped one more of this thing
+      (update-in [:things thing-name] (fnil inc 0))
+      ; you gain some
+      (update-in [gain-key] (fnil gain-amount 0))
+      ; you lose some
+      (update-in [loss-key] (fnil loss-amount 0)))))

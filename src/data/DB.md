@@ -36,11 +36,11 @@ When you sell product X the second time (N=2), you make X2 amount income, where 
 
 When buying a tool, its `:gain-fn` determines its clicks-per-second benefit and it is a function of N (the number of a tool I've bought), which decays with increasing N.
 
-## `:tap`
+## `:gain` and `:loss`
 
-The common vocabulary for buying and selling stuff is "tapping" stuff. Tap a product to sell it. Tap a tool to buy it.
+When buying or selling stuff, different variables in the game state increase (`:gain`) and decrease (`:loss`). E.g. when selling product, you generally `:gain` more `:money`.
 
-When tapping stuff, different variables in the game state increase and decrease. E.g. when selling product, money generally goes up.
+*Note: The common vocabulary for buying and selling is "tapping". Tap a product to sell it. Tap a tool to buy it.*
 
 ## Other
 

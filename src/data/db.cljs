@@ -1,16 +1,12 @@
 (ns data.db)
 
-; products are sold, and tools are bought.
-; but common word for buy/sell is tap/tapping
 (def data
   {
     :product
     {
-      :tap
-      {
-        :up :money
-        :down :clicks}
+      :gain :money
       :gain-fn (fn [n word-cost] (/ word-cost (js/Math.log10 (+ 1 n))))
+      :loss :clicks
       :items
       [
         {:name "Slogan" :cost 10}
@@ -26,11 +22,9 @@
     
     :tool
     {
-      :tap
-      {
-        :up :add-every
-        :down :money}
+      :gain :add-every
       :gain-fn (fn [n money-cost] (/ (js/Math.log money-cost) (js/Math.log (+ n 1))))
+      :loss :money
       :items
       [
         {:name "Notepad" :cost 2}

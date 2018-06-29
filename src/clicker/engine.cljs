@@ -1,21 +1,25 @@
 (ns clicker.engine
-  (:require [clicker.stateless :as s]))
+  (:require [clicker.stateless :as s]
+            [data.db :refer [data]]
+            [clicker.util :as u]))
 
-; (def state
-;   (atom
-;     { :clicks 0}))
+; All engine functions accept a state atom as argument
+; (amongst other things)
+; The caller would initialise game state like this:
+; (def state (atom {}))
+
+; (defn click [state]
+;   (-> state
+;     (update-in [:clicks] inc)))
 
 (defn click [state]
-  (swap! state update-in [:clicks] inc))
-      
+  (swap! state update-in [:clicks] (fnil inc 0)))
 
-(defn sell [state thing]
-  (swap! state (partial s/sell thing)))
+(defn tap [state thing-name]
+  "When tapping a thing, find its sub DB key, then call stateless/tap."
+  (let [sub-db-key (u/find-db-key data thing-name)]
+    (reset! state (s/tap data sub-db-key @state thing-name))))
 
-; (def x (atom {:things {"bar" 1}}))
-; (@x :things)
-; (get-in @x [:things "bar"])
-; (get-in @x [:things "foo"] 9)
 
-; (def add-nine (partial + 9))
-; (add-nine 7)
+; (def statex (atom {}))
+; (tap statex "Novella")
