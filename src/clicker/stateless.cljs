@@ -1,27 +1,21 @@
 (ns clicker.stateless)
-  
-(defn income [db thing n]
-  "Given a thing, if I sell it the Nth time, what is the income?"
-  (let [items (db :products)
-        item (first (filter #(= thing (% :name)) items))
-        income-fn (db :income)
-        word-cost (item :cost)]
 
-    (income-fn n word-cost)))
-
-(defn gain [db upgrade-name n]
-  "Given an upgrade, if I buy it the Nth time, what is the gain?"
-  (let [upgrades (db :tools)
-        upgrade (first (filter #(= upgrade-name (% :name)) upgrades))
-        gain-fn (db :gain-fn)
-        money-cost (upgrade :cost)]
+(defn gain [db key thing-name n]
+  "Given a thing (like a tool or product as indicated by 'key'),
+  if I buy/sell it the Nth time
+  what is the gain as per the gain-fn?"
+  (let [sub-db (db key)
+        things (sub-db :items)
+        gain-fn (sub-db :gain-fn)
+        thing (first (filter #(= thing-name (% :name)) things))
+        cost (thing :cost)]
       
-      (gain-fn n money-cost)))
+      (gain-fn n cost)))
 
 (defn- sell [db state thing]
   (let [current-count (get-in state [:things thing] 0)
         future-count (inc current-count)
-        thing-income (income db thing future-count)
+        thing-income (gain :product db thing future-count)
         inc-money (partial + thing-income)]
     (-> state
       ; record that we sold one more of thing
