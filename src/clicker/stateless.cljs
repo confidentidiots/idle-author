@@ -23,7 +23,7 @@
         thing-gain (gain db key thing-name future-count)
         thing-loss (thing :cost)
         gain-amount (partial + thing-gain)
-        loss-amount (partial - thing-loss)]
+        loss-amount (partial + (- thing-loss))]
     ; (print ">> tap: "
     ;   {
     ;     :future-count future-count
