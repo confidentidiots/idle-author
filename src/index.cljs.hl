@@ -3,7 +3,7 @@
     [data.index :as d]
     [clojure.string :as string]))
 
-(def limit (Math/min (count d/upgrades) (count d/products)))
+(def limit (Math/min (count d/tools) (count d/products)))
 
 (defc god true)
 (defc total-clicks 0)
@@ -33,7 +33,7 @@
 ;       sales go down by the value of the key in the upgrade lookup
 (defelem upgrade-btn
   [{:keys [level value]} kids]
-  (let [text (d/upgrades level)
+  (let [text (d/tools level)
       count (cell= (upgrade-log level))
       func #(swap! add-every (fn [m] (+ m level)))
       func2 #(swap! sales (fn [m] (- m value)))
@@ -75,15 +75,15 @@
     (h3 clicks " words")
     (h3 "$" sales " income")
     (h5 "Creativity boost of " add-every " words every second")
-    
+
     (button :click #(click-fn inc) "Write a word")
 
-    (if-tpl god 
+    (if-tpl god
       (div
       (for-tpl [level levels]
         (let [n (level-value-fn @level)]
           (button :click #(click-fn (fn [m] (+ m n))) n)))))
-    
+
     (div :class "wrapper"
 
       (div :class "upgrade"
@@ -107,7 +107,7 @@
               )))))
 
       (div :class "sell"
-        
+
         (table
           (caption "Sell your words")
           (thead
@@ -126,7 +126,7 @@
                   (sell-btn :level @level :out @out :in @in))
                 (if-tpl (cell= (= level 1))
                   (sell-btn :level @level :out @out :in @in))))))))
-      
+
     (if-tpl god
       (div :class "debug"
 
@@ -139,9 +139,9 @@
           (for-tpl [l upgrade-log]
           (span l "-")))
 
-        
+
         (table
-          (caption "Upgrades")
+          (caption "Tools")
           (thead
             (tr
               (th "Name")
@@ -150,7 +150,7 @@
           (tbody
         (for-tpl [level levels]
           (let [level-exp (level-value-fn level)
-                text (d/upgrades @level)
+                text (d/tools @level)
                 price (buy-cost @level)]
               (tr
                 (td text)

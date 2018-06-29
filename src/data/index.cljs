@@ -1,22 +1,6 @@
-(ns data.index)
+(ns data.index
+  (:require [data.db :refer [data]]))
 
-(def multiplier (fn [n] (* n 2)))
+(def tools (into [] (concat ["ignored"] (map :name (get-in data [:tool :items])))))
 
-(def upgrades [
-               "-- ignored --"
-               "Notepad"
-               "Moleskine"
-               "iPad"
-               "Laptop"
-               "Amanuensis"])
-    
-
-(def products [
-               "-- ignored --"
-               "Slogan"
-               "Copy"
-               "Blog post"
-               "Magazine article"
-               "Newspaper article"
-               "Short story"])
-    
+(def products (into [] (concat ["ignored"] (map :name (get-in data [:product :items])))))
