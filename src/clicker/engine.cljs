@@ -21,7 +21,3 @@
     (if (s/can-tap? data sub-db-key @state thing-name)
       (reset! state (s/tap data sub-db-key @state thing-name))
       state)))
-
-
-; (def statex (atom {}))
-; (tap statex "Novella")

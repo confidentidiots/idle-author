@@ -22,3 +22,18 @@
       (=
         @state
         {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
+
+(deftest test-all
+  (let [state (atom {})
+        _1 (doseq [i (range 100)] (click state))
+        _2 (tap state "Slogan")
+        _3 (tap state "Slogan")
+        _4 (tap state "Notepad")]
+        (is
+          (=
+            @state
+            {
+              :clicks 80
+              :things {"Slogan" 2 "Notepad" 1}
+              :money 52.17831369176747
+              :add-every 1}))))
