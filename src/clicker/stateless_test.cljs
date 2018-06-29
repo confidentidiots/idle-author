@@ -1,6 +1,6 @@
 (ns clicker.stateless-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [clicker.stateless :refer [gain tap]]
+            [clicker.stateless :refer [gain tap can-tap?]]
             [data.db :refer [data]]))
 ; TODO use test data instead of game data that might change (as we balance the game)
 
@@ -17,11 +17,11 @@
   (is (= (gain data :tool "Moleskine" 2) 2.095903274289385)))
 
 (deftest test-tap-for-product
-  (let [state { :things {}}
+  (let [state {}
         state1 (tap data :product state "Slogan")
-        state2 (tap data :product state1 "Slogan")    
+        state2 (tap data :product state1 "Slogan")
         state3 (tap data :product state2 "Copy")]
-    
+
     (is (= (get-in state1 [:things "Slogan"]) 1))
     (is (= (state1 :money) 33.219280948873624))
 
@@ -31,3 +31,17 @@
     (is (= (get-in state3 [:things "Slogan"]) 2))
     (is (= (get-in state3 [:things "Copy"]) 1))
     (is (= (state3 :money) 386.37112318050373))))
+
+; Slogan is 10 clicks
+(deftest test-product-can-tap?
+  (is (= false (can-tap? data :product {} "Slogan")))
+  (is (= false (can-tap? data :product { :clicks 9} "Slogan")))
+  (is (= true (can-tap? data :product { :clicks 10} "Slogan")))
+  (is (= true (can-tap? data :product { :clicks 999} "Slogan"))))
+
+; Notepad cost 2 money
+(deftest test-tool-can-tap?
+  (is (= false (can-tap? data :tool {} "Notepad")))
+  (is (= false (can-tap? data :tool { :money 1} "Notepad")))
+  (is (= true (can-tap? data :tool { :money 2} "Notepad")))
+  (is (= true (can-tap? data :tool { :money 999} "Notepad"))))

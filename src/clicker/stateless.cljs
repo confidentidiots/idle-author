@@ -8,12 +8,13 @@
         gain-fn (sub-db :gain-fn)
         thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
         cost (thing :cost)]
-      
+
       (gain-fn n cost)))
 
 (defn tap [db key state thing-name]
   "Given I tap a thing, make changes to the current game state
-  and return the game state."
+  and return the game state.
+  It's a good idea to wrap this with can-tap?"
   (let [sub-db (db key)
         thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
         gain-key (sub-db :gain)
@@ -40,3 +41,14 @@
       (update-in [gain-key] (fnil gain-amount 0))
       ; you lose some
       (update-in [loss-key] (fnil loss-amount 0)))))
+
+(defn can-tap? [db key state thing-name]
+  "Can I tap a thing? Not if its loss goes below zero."
+  (let [sub-db (db key)
+        thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
+        loss-key (sub-db :loss)
+        thing-loss (thing :cost)
+        current-loser (state loss-key 0)
+        future-loser (- current-loser thing-loss)]
+
+    (<= 0 future-loser)))

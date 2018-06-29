@@ -18,7 +18,9 @@
 (defn tap [state thing-name]
   "When tapping a thing, find its sub DB key, then call stateless/tap."
   (let [sub-db-key (u/find-db-key data thing-name)]
-    (reset! state (s/tap data sub-db-key @state thing-name))))
+    (if (s/can-tap? data sub-db-key @state thing-name)
+      (reset! state (s/tap data sub-db-key @state thing-name))
+      state)))
 
 
 ; (def statex (atom {}))

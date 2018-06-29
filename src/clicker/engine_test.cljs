@@ -15,10 +15,10 @@
         {:things { "Novella" 1}, :money 99657.84284662087, :clicks 0}))))
 
 (deftest test-taptap
-  (let [state (atom {})
+  (let [state (atom { :clicks 60000})
         _ (tap state "Novella")
         _2 (tap state "Novella")]
     (is
-      (= 
+      (=
         @state
-        {:things { "Novella" 2}, :money 162534.94107530243, :clicks -60000}))))
+        {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
