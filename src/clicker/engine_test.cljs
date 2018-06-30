@@ -6,6 +6,10 @@
   (let [state (atom {})]
     (is (= (click state) {:clicks 1}))))
 
+(deftest test-click-change-fn
+  (let [state (atom {})]
+    (is (= (click state :change-fn inc) {:clicks 1}))))
+
 (deftest test-tap
   (let [state (atom { :clicks 30000})
         _ (tap state "Novella")]

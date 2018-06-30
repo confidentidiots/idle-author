@@ -12,8 +12,9 @@
 ;   (-> state
 ;     (update-in [:clicks] inc)))
 
-(defn click [state]
-  (swap! state update-in [:clicks] (fnil inc 0)))
+(defn click [state & {:keys [change-fn] :or {change-fn inc}}]
+  (swap! state update-in [:clicks] (fnil change-fn 0)))
+
 
 (defn tap [state thing-name]
   "When tapping a thing, find its sub DB key, then call stateless/tap."
