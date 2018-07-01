@@ -1,112 +1,96 @@
 (page "index.html"
   (:require
-    [data.index :as d]
+    [clicker.engine :as e]
+    [data.db :as d]
     [clojure.string :as string]))
 
-(def limit (Math/min (count d/tools) (count d/products)))
-
+(defc state { :clicks 0})
 (defc god true)
-
-(defc clicks 0)
-(defc add-every 0)
-(defc sales 0)
-(defc levels (reverse (range 1 limit)))
-(defc sell-log (vec (replicate limit 0)))
-(defc upgrade-log (vec (replicate limit 0)))
-
-(defn click-fn [func] (dosync
-  (swap! clicks func)))
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
     (* 10 n)))
-(defn buy-cost [n] (* 10 n))
-(defn sell-cost [n] (* 2 n))
-(defn log [level which]
-  (do
-    (reset! which (update-in @which [level] inc))))
 
-(js/setInterval #(click-fn (fn [m] (+ m @add-every))) 1000)
+; sentinels
+(defc= clicks (:clicks state))
+(defc= add-every (:add-every state))
+(defc= money (:money state))
+; (defc= sell-log (:things state))
+; (defc= upgrade-log (:things state)) ; TODO maybe just a single log
+
+; (js/setInterval #(e/click (fn [m] (+ m @add-every))) 1000)
 
 ; upgrade: add-every go up by value in upgrade lookup
-;       sales go down by the value of the key in the upgrade lookup
-(defelem upgrade-btn
-  [{:keys [level value]} kids]
-  (let [text (d/tools level)
-      count (cell= (upgrade-log level))
-      func #(swap! add-every (fn [m] (+ m level)))
-      func2 #(swap! sales (fn [m] (- m value)))
-      func3 #(log level upgrade-log)
-      func-all (fn [] (func) (func2) (func3))
-      button-text (str text " ($" value ")")]
+;       money go down by the value of the key in the upgrade lookup
+; (defelem upgrade-btn
+;   [{:keys [level value]} kids]
+;   (let [text (d/tools level)
+;       count 1 ;(cell= (upgrade-log level))
+;       func-all (fn [] nil)
+;       button-text (str text " ($" value ")")]
+
+;       (tr
+;         (td text)
+;         (td "$" value)
+;         (td level " words per second")
+;         (td count)
+;         (td
+;           (button :disabled (cell= (> value money)) :click func-all "Buy" kids)))))
+
+; sell: money go up by value in money lookup
+;       words go down by the value of the key in the money lookup
+(defelem sell-buttons [kids]
+  (for [product (get-in d/data [:product :items])]
+    (do
+      (let [name (product :name)
+      loss (product :cost)
+      gain 99
+      count 1 ;(cell= (sell-log level))
+      func-all (fn [] nil)
+      disabled (cell= (not (e/can-tap? state name)))]
 
       (tr
-        (td text)
-        (td "$" value)
-        (td level " words per second")
+        (td name)
+        (td loss)
+        (td "$" gain )
         (td count)
-        (td
-          (button :disabled (cell= (> value sales)) :click func-all "Buy" kids)))))
+        (td (button :disabled disabled :click func-all "Sell" kids))))
+    ) ; do
+    ))
 
-; sell: sales go up by value in sales lookup
-;       words go down by the value of the key in the sales lookup
-(defelem sell-btn
-  [{:keys [level out in ]} kids]
-  (let [text (d/products (js/parseInt level))
-      count  (cell= (sell-log level))
-      func #(swap! sales (fn [m] (+ m in)))
-      func2 #(swap! clicks (fn [m] (- m out)))
-      func3 #(log level sell-log)
-      func-all (fn [] (func) (func2) (func3))
-      button-text (str text " (" out " words @ $" in ")" )]
-
-      (tr
-        (td text)
-        (td out)
-        (td "$" in)
-        (td count)
-        (td (button :disabled (cell= (> out clicks)) :click func-all "Sell" kids)))))
 
 (html
   (head
     (link :href "app.css" :rel "stylesheet" :type "text/css"))
   (body
     (h3 clicks " words")
-    (h3 "$" sales " income")
-    (h5 "Creativity boost of " add-every " words every second")
+    ; (h3 "$" money " income")
+    ; (h5 "Creativity boost of " add-every " words every second")
 
-    (button :click #(click-fn inc) "Write a word")
+    (button :click #(e/click state) "Write a word")
 
     (if-tpl god
       (div
-      (for-tpl [level levels]
-        (let [n (level-value-fn @level)]
-          (button :click #(click-fn (fn [m] (+ m n))) n)))))
+      (for [level (range 6)]
+        (let [n (level-value-fn level)]
+          (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
 
     (div :class "wrapper"
 
-      (div :class "upgrade"
-        (table
-          (caption "Upgrade your tools")
-          (thead
-            (tr
-              (th "Thing")
-              (th "Cost")
-              (th "Boost")
-              (th "# Bought")
-              (th "")))
-          (for-tpl [level levels]
-            (let [value (cell= (buy-cost level))
-                parent (cell= (upgrade-log (- level 1)))]
-              (tbody
-                (if-tpl (cell= (not= 0 parent))
-                  (upgrade-btn :level @level :value @value))
-                (if-tpl (cell= (= level 1))
-                  (upgrade-btn :level @level :value @value))
-              )))))
+      ; (div :class "upgrade"
+      ;   (table
+      ;     (caption "Upgrade your tools")
+      ;     (thead
+      ;       (tr
+      ;         (th "Thing")
+      ;         (th "Cost")
+      ;         (th "Boost")
+      ;         (th "# Bought")
+      ;         (th "")))
+      ;         ;(upgrade-btn :level 1 :value 1)
+      ;         ))
 
       (div :class "sell"
-
         (table
           (caption "Sell your words")
           (thead
@@ -116,59 +100,10 @@
               (th "Income")
               (th "# Sold")
               (th "")))
-          (for-tpl [level levels]
-            (let [out (cell= (level-value-fn level))
-                in (cell= (sell-cost level))
-                parent (cell= (sell-log (- level 1)))]
-              (tbody
-                (if-tpl (cell= (not= 0 parent))
-                  (sell-btn :level @level :out @out :in @in))
-                (if-tpl (cell= (= level 1))
-                  (sell-btn :level @level :out @out :in @in))))))))
+            (sell-buttons ))
+        )
 
-    (if-tpl god
-      (div :class "debug"
-
-        (h4 "Sell log "
-          (for-tpl [l sell-log]
-            (span l "-")))
-        (h4 "Upgrade log "
-          (for-tpl [l upgrade-log]
-          (span l "-")))
+              ) ; div.wrapper
 
 
-        (table
-          (caption "Tools")
-          (thead
-            (tr
-              (th "Name")
-              (th "Cost")
-              (th "Bump")))
-          (tbody
-        (for-tpl [level levels]
-          (let [level-exp (level-value-fn level)
-                text (d/tools @level)
-                price (buy-cost @level)]
-              (tr
-                (td text)
-                (td price)
-                (td level " every second"))))))
-
-        (table
-          (caption "Sell")
-          (thead
-            (tr
-              (th "Name")
-              (th "Words")
-              (th "Cash")))
-          (tbody
-        (for-tpl [level levels]
-          (let [level-exp (level-value-fn @level)
-                text (d/products @level)
-                price (sell-cost @level)]
-              (tr
-                (td text)
-                (td level-exp)
-                (td price))))))
-      )) ; if god
     ))

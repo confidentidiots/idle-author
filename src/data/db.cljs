@@ -19,7 +19,7 @@
         {:name "Novel" :cost 80000}
         {:name "English Wikipedia" :cost 3500000000}
         {:name "Wikipedia" :cost 30000000000}]}
-    
+
     :tool
     {
       :gain :add-every

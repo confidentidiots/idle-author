@@ -1,6 +1,6 @@
 (ns clicker.engine-test
   (:require [cljs.test :refer-macros [deftest is use-fixtures]]
-            [clicker.engine :refer [click tap]]))
+            [clicker.engine :refer [click tap can-tap?]]))
 
 (deftest test-click
   (let [state (atom {})]
@@ -41,3 +41,9 @@
               :things {"Slogan" 2 "Notepad" 1}
               :money 52.17831369176747
               :add-every 1}))))
+;
+(deftest test-product-can-tap?
+  (is (= false (can-tap? (atom {}) "Slogan")))
+  (is (= false (can-tap? (atom { :clicks 9}) "Slogan")))
+  (is (= true (can-tap? (atom { :clicks 10}) "Slogan")))
+  (is (= true (can-tap? (atom { :clicks 999}) "Slogan"))))
