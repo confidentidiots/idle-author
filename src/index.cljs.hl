@@ -1,8 +1,11 @@
 (page "index.html"
+  (:import [goog.string.format])
   (:require
     [clicker.engine :as e]
     [data.db :as d]
-    [clojure.string :as string]))
+    [clojure.string :as string]
+    [goog.string :as gstring]
+    [goog.string.format]))
 
 (defc state { :clicks 0})
 (defc god true)
@@ -43,21 +46,19 @@
   (for [product (get-in d/data [:product :items])]
     (do
       (let [name (product :name)
-      loss (product :cost)
-      gain 99
-      count 1 ;(cell= (sell-log level))
-      func-all (fn [] nil)
-      disabled (cell= (not (e/can-tap? state name)))]
+            loss (product :cost)
+            gain (e/next-gain state name)
+            gain-fmt (gstring/format "%.2f" gain)
+            count 1 ;(cell= (sell-log level))
+            func-all (fn [] nil)
+            disabled (cell= (not (e/can-tap? state name)))]
 
-      (tr
-        (td name)
-        (td loss)
-        (td "$" gain )
-        (td count)
-        (td (button :disabled disabled :click func-all "Sell" kids))))
-    ) ; do
-    ))
-
+       (tr
+         (td name)
+         (td loss)
+         (td "$" gain-fmt)
+         (td count)
+         (td (button :disabled disabled :click func-all "Sell" kids)))))))
 
 (html
   (head
@@ -71,9 +72,9 @@
 
     (if-tpl god
       (div
-      (for [level (range 6)]
-        (let [n (level-value-fn level)]
-          (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
+       (for [level (range 6)]
+         (let [n (level-value-fn level)]
+           (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
 
     (div :class "wrapper"
 
@@ -100,10 +101,4 @@
               (th "Income")
               (th "# Sold")
               (th "")))
-            (sell-buttons ))
-        )
-
-              ) ; div.wrapper
-
-
-    ))
+          (sell-buttons))))))

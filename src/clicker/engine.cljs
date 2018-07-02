@@ -27,4 +27,7 @@
     (s/can-tap? data @state thing-name)
     (s/can-tap? data state thing-name)))
 
-; TODO next-gain
+(defn next-gain [state thing-name]
+  (if (instance? cljs.core.Atom state)
+    (s/next-gain data @state thing-name)
+    (s/next-gain data state thing-name)))

@@ -15,6 +15,7 @@
     [com.cemerick/piggieback "0.2.2"  :scope "test"]
     [weasel                  "0.7.0"  :scope "test"]
     [org.clojure/tools.nrepl "0.2.13" :scope "test"]
+    [funcool/cuerdas "2.0.5"]
     ]
   :source-paths #{"src"}
   :asset-paths  #{"assets"})
