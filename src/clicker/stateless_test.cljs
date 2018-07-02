@@ -1,6 +1,6 @@
 (ns clicker.stateless-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [clicker.stateless :refer [gain tap can-tap? next-gain]]
+            [clicker.stateless :refer [gain tap can-tap? next-gain count]]
             [data.db :refer [data]]))
 ; TODO use test data instead of game data that might change (as we balance the game)
 
@@ -50,3 +50,7 @@
   (is (= (next-gain data {} "Slogan") 33.219280948873624))
   (is (= (next-gain data { :things {"Slogan" 1} } "Slogan") 20.959032742893847))
   (is (= (next-gain data { :things {"Slogan" 2} } "Slogan") 16.609640474436812)))
+
+(deftest test-count
+  (is (= (count {} "Slogan") 0))
+  (is (= (count { :things {"Slogan" 1}} "Slogan") 1)))

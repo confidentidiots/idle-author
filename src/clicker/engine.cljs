@@ -31,3 +31,8 @@
   (if (instance? cljs.core.Atom state)
     (s/next-gain data @state thing-name)
     (s/next-gain data state thing-name)))
+
+(defn count [state thing-name]
+  (if (instance? cljs.core.Atom state)
+    (s/count @state thing-name)
+    (s/count state thing-name)))

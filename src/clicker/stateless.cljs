@@ -67,3 +67,6 @@
         future-count (inc current-count)
         thing-gain (gain db thing-name future-count)]
     thing-gain))
+
+(defn count [state thing-name]
+  (get-in state [:things thing-name] 0))

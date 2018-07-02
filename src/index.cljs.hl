@@ -49,8 +49,8 @@
             loss (product :cost)
             gain (e/next-gain state name)
             gain-fmt (gstring/format "%.2f" gain)
-            count 1 ;(cell= (sell-log level))
-            func-all (fn [] nil)
+            count (cell= (e/count state name))
+            click-fn #(e/tap state name)
             disabled (cell= (not (e/can-tap? state name)))]
 
        (tr
@@ -58,7 +58,7 @@
          (td loss)
          (td "$" gain-fmt)
          (td count)
-         (td (button :disabled disabled :click func-all "Sell" kids)))))))
+         (td (button :disabled disabled :click click-fn "Sell" kids)))))))
 
 (html
   (head
