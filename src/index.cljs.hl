@@ -7,27 +7,27 @@
     [goog.string :as gstring]
     [goog.string.format]))
 
-(defc state { :clicks 0})
-(defc god true)
+(defc state {})
+(defc god false)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
     (* 10 n)))
 
 ; sentinels
-(defc= clicks (:clicks state))
-(defc= add-every (:add-every state))
+(defc= clicks (gstring/format "%.0f" (:clicks state 0)))
+(defc= add-every (:add-every state 0))
+(defc= add-every-fmt (gstring/format "%.2f" add-every))
 (defc= money (gstring/format "%.2f" (:money state 0)))
-; (defc= sell-log (:things state))
-; (defc= upgrade-log (:things state)) ; TODO maybe just a single log
 
-; (js/setInterval #(e/click (fn [m] (+ m @add-every))) 1000)
+(js/setInterval
+  #(e/click state :change-fn (fn [m] (+ m @add-every))) 1000)
 
-(defelem sell-buttons [kids]
-  (for [product (get-in d/data [:product :items])]
+(defelem rows [{:keys [type btn-txt]} kids]
+  (for [thing (get-in d/data [type :items])]
     (do
-      (let [name (product :name)
-            loss (product :cost)
+      (let [name (thing :name)
+            loss (thing :cost)
             gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
             count (cell= (e/count state name))
             click-fn #(e/tap state name)
@@ -36,9 +36,9 @@
        (tr
          (td name)
          (td loss)
-         (td "$" gain)
+         (td gain)
          (td count)
-         (td (button :disabled disabled :click click-fn "Sell" kids)))))))
+         (td (button :disabled disabled :click click-fn btn-txt kids)))))))
 
 (html
   (head
@@ -46,7 +46,7 @@
   (body
     (h3 clicks " words")
     (h3 "$" money " income")
-    (h5 "Creativity boost of " add-every " words every second")
+    (h5 "Creativity boost of " add-every-fmt " words every second")
 
     (button :click #(e/click state) "Write a word")
 
@@ -58,18 +58,18 @@
 
     (div :class "wrapper"
 
-      ; (div :class "upgrade"
-      ;   (table
-      ;     (caption "Upgrade your tools")
-      ;     (thead
-      ;       (tr
-      ;         (th "Thing")
-      ;         (th "Cost")
-      ;         (th "Boost")
-      ;         (th "# Bought")
-      ;         (th "")))
-      ;         ;(upgrade-btn :level 1 :value 1)
-      ;         ))
+      (div :class "upgrade"
+        (table
+          (caption "Upgrade your tools")
+          (thead
+            (tr
+              (th "Thing")
+              (th "$ Cost")
+              (th "Boost")
+              (th "# Bought")
+              (th "")))
+          (rows :type :tool :btn-txt "Buy")))
+
 
       (div :class "sell"
         (table
@@ -78,7 +78,7 @@
             (tr
               (th "Thing")
               (th "Word cost")
-              (th "Income")
+              (th "$ Income")
               (th "# Sold")
               (th "")))
-          (sell-buttons))))))
+          (rows :type :product :btn-txt "Sell"))))))
