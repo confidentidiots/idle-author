@@ -2,6 +2,8 @@
   (:require [clicker.stateless :as s]
             [data.db :refer [data]]))
 
+; The engine knows which db to use.
+
 ; All engine functions accept a state atom as argument
 ; (amongst other things)
 ; The caller would initialise game state like this:
@@ -32,7 +34,7 @@
     (s/next-gain data @state thing-name)
     (s/next-gain data state thing-name)))
 
-(defn count [state thing-name]
+(defn thing-count [state thing-name]
   (if (instance? cljs.core.Atom state)
-    (s/count @state thing-name)
-    (s/count state thing-name)))
+    (s/thing-count @state thing-name)
+    (s/thing-count state thing-name)))

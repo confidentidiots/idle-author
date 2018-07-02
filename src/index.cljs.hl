@@ -7,8 +7,8 @@
     [goog.string :as gstring]
     [goog.string.format]))
 
-(defc state {})
-(defc god false)
+(defc state { :things {"Slogan" 0 "Notepad" 0}})
+(defc god true)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -29,16 +29,16 @@
       (let [name (thing :name)
             loss (thing :cost)
             gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
-            count (cell= (e/count state name))
+            count (cell= (e/thing-count state name))
             click-fn #(e/tap state name)
             disabled (cell= (not (e/can-tap? state name)))]
 
-       (tr
-         (td name)
-         (td loss)
-         (td gain)
-         (td count)
-         (td (button :disabled disabled :click click-fn btn-txt kids)))))))
+          (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
+            (td name)
+            (td loss)
+            (td gain)
+            (td count)
+            (td (button :disabled disabled :click click-fn btn-txt kids)))))))
 
 (html
   (head
