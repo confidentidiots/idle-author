@@ -1,7 +1,6 @@
 (ns clicker.engine
   (:require [clicker.stateless :as s]
-            [data.db :refer [data]]
-            [clicker.util :as u]))
+            [data.db :refer [data]]))
 
 ; All engine functions accept a state atom as argument
 ; (amongst other things)
@@ -17,17 +16,15 @@
 
 
 (defn tap [state thing-name]
-  "When tapping a thing, find its sub DB key, then call stateless/tap."
-  (let [sub-db-key (u/find-db-key data thing-name)]
-    (if (s/can-tap? data sub-db-key @state thing-name)
-      (reset! state (s/tap data sub-db-key @state thing-name))
-      state)))
+  (if (s/can-tap? data @state thing-name)
+    (reset! state (s/tap data @state thing-name))
+    state))
 
 ; check if atom, since it might have already been dereferenced
 ; at the call-site e.g. via formula cell `(cell= the-atom)`
 (defn can-tap? [state thing-name]
-  (let [sub-db-key (u/find-db-key data thing-name)
-        is-atom? (instance? cljs.core.Atom state)]
-    (if is-atom?
-      (s/can-tap? data sub-db-key @state thing-name)
-      (s/can-tap? data sub-db-key state thing-name))))
+  (if (instance? cljs.core.Atom state)
+    (s/can-tap? data @state thing-name)
+    (s/can-tap? data state thing-name)))
+
+; TODO next-gain
