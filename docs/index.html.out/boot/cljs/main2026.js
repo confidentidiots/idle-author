@@ -1,7 +1,5 @@
 // Compiled by ClojureScript 1.10.329 {:static-fns true, :optimize-constants true}
-goog.provide('process.env');
+goog.provide('boot.cljs.main2026');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
-
-/** @define {string} */
-goog.define("process.env.NODE_ENV","development");
+goog.require('hoplon.app_pages._index_DOT_html');

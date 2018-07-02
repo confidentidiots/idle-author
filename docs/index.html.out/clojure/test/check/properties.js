@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.238 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.329 {:static-fns true, :optimize-constants true}
 goog.provide('clojure.test.check.properties');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
@@ -6,7 +6,7 @@ goog.require('clojure.test.check.generators');
 clojure.test.check.properties.apply_gen = (function clojure$test$check$properties$apply_gen(function$){
 return (function (args){
 var result = (function (){try{return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(function$,args);
-}catch (e9369){var t = e9369;
+}catch (e9430){var t = e9430;
 return t;
 }})();
 return new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$result,result,cljs.core.cst$kw$function,function$,cljs.core.cst$kw$args,args], null);
@@ -32,7 +32,7 @@ return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.first,cljs.core.par
 clojure.test.check.properties.binding_gens = (function clojure$test$check$properties$binding_gens(bindings){
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.second,cljs.core.partition.cljs$core$IFn$_invoke$arity$2((2),bindings));
 });
-var ret__4533__auto___9374 = (function (){
+var ret__4552__auto___9435 = (function (){
 /**
  * Macro sugar for `for-all*`. `for-all` lets you name the parameter
  *   and use them in expression, without wrapping them in a lambda. Like
@@ -46,23 +46,23 @@ var ret__4533__auto___9374 = (function (){
  *   
  */
 clojure.test.check.properties.for_all = (function clojure$test$check$properties$for_all(var_args){
-var args__4502__auto__ = [];
-var len__4499__auto___9375 = arguments.length;
-var i__4500__auto___9376 = (0);
+var args__4521__auto__ = [];
+var len__4518__auto___9436 = arguments.length;
+var i__4519__auto___9437 = (0);
 while(true){
-if((i__4500__auto___9376 < len__4499__auto___9375)){
-args__4502__auto__.push((arguments[i__4500__auto___9376]));
+if((i__4519__auto___9437 < len__4518__auto___9436)){
+args__4521__auto__.push((arguments[i__4519__auto___9437]));
 
-var G__9377 = (i__4500__auto___9376 + (1));
-i__4500__auto___9376 = G__9377;
+var G__9438 = (i__4519__auto___9437 + (1));
+i__4519__auto___9437 = G__9438;
 continue;
 } else {
 }
 break;
 }
 
-var argseq__4503__auto__ = ((((3) < args__4502__auto__.length))?(new cljs.core.IndexedSeq(args__4502__auto__.slice((3)),(0),null)):null);
-return clojure.test.check.properties.for_all.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4503__auto__);
+var argseq__4522__auto__ = ((((3) < args__4521__auto__.length))?(new cljs.core.IndexedSeq(args__4521__auto__.slice((3)),(0),null)):null);
+return clojure.test.check.properties.for_all.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4522__auto__);
 });
 
 clojure.test.check.properties.for_all.cljs$core$IFn$_invoke$arity$variadic = (function (_AMPERSAND_form,_AMPERSAND_env,bindings,body){
@@ -72,15 +72,15 @@ return cljs.core.sequence.cljs$core$IFn$_invoke$arity$1(cljs.core.seq(cljs.core.
 clojure.test.check.properties.for_all.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clojure.test.check.properties.for_all.cljs$lang$applyTo = (function (seq9370){
-var G__9371 = cljs.core.first(seq9370);
-var seq9370__$1 = cljs.core.next(seq9370);
-var G__9372 = cljs.core.first(seq9370__$1);
-var seq9370__$2 = cljs.core.next(seq9370__$1);
-var G__9373 = cljs.core.first(seq9370__$2);
-var seq9370__$3 = cljs.core.next(seq9370__$2);
-var self__4486__auto__ = this;
-return self__4486__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9371,G__9372,G__9373,seq9370__$3);
+clojure.test.check.properties.for_all.cljs$lang$applyTo = (function (seq9431){
+var G__9432 = cljs.core.first(seq9431);
+var seq9431__$1 = cljs.core.next(seq9431);
+var G__9433 = cljs.core.first(seq9431__$1);
+var seq9431__$2 = cljs.core.next(seq9431__$1);
+var G__9434 = cljs.core.first(seq9431__$2);
+var seq9431__$3 = cljs.core.next(seq9431__$2);
+var self__4505__auto__ = this;
+return self__4505__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9432,G__9433,G__9434,seq9431__$3);
 });
 
 return null;

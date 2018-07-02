@@ -33,3 +33,13 @@ td {
     background-color: lightgray;
     padding: 5px;
 }
+
+.newitem:first-of-type {
+    display: table-row;
+}
+.newitem {
+    display: none;
+}
+.olditem + .newitem {
+    display: table-row;
+}

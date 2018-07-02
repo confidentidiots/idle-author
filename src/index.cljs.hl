@@ -8,7 +8,7 @@
     [goog.string.format]))
 
 (defc state { :things {"Slogan" 0 "Notepad" 0}})
-(defc god true)
+(defc god false)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
