@@ -23,6 +23,8 @@
       (reset! state (s/tap data sub-db-key @state thing-name))
       state)))
 
+; check if atom, since it might have already been dereferenced
+; at the call-site e.g. via formula cell `(cell= the-atom)`
 (defn can-tap? [state thing-name]
   (let [sub-db-key (u/find-db-key data thing-name)
         is-atom? (instance? cljs.core.Atom state)]

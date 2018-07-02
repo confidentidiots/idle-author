@@ -33,14 +33,14 @@
         _2 (tap state "Slogan")
         _3 (tap state "Slogan")
         _4 (tap state "Notepad")]
-        (is
-          (=
-            @state
-            {
-              :clicks 80
-              :things {"Slogan" 2 "Notepad" 1}
-              :money 52.17831369176747
-              :add-every 1}))))
+       (is
+         (=
+           @state
+           {
+             :clicks 80
+             :things {"Slogan" 2 "Notepad" 1}
+             :money 52.17831369176747
+             :add-every 1}))))
 ;
 (deftest test-product-can-tap?
   (is (= false (can-tap? (atom {}) "Slogan")))
