@@ -17,38 +17,18 @@
 ; sentinels
 (defc= clicks (:clicks state))
 (defc= add-every (:add-every state))
-(defc= money (:money state))
+(defc= money (gstring/format "%.2f" (:money state 0)))
 ; (defc= sell-log (:things state))
 ; (defc= upgrade-log (:things state)) ; TODO maybe just a single log
 
 ; (js/setInterval #(e/click (fn [m] (+ m @add-every))) 1000)
 
-; upgrade: add-every go up by value in upgrade lookup
-;       money go down by the value of the key in the upgrade lookup
-; (defelem upgrade-btn
-;   [{:keys [level value]} kids]
-;   (let [text (d/tools level)
-;       count 1 ;(cell= (upgrade-log level))
-;       func-all (fn [] nil)
-;       button-text (str text " ($" value ")")]
-
-;       (tr
-;         (td text)
-;         (td "$" value)
-;         (td level " words per second")
-;         (td count)
-;         (td
-;           (button :disabled (cell= (> value money)) :click func-all "Buy" kids)))))
-
-; sell: money go up by value in money lookup
-;       words go down by the value of the key in the money lookup
 (defelem sell-buttons [kids]
   (for [product (get-in d/data [:product :items])]
     (do
       (let [name (product :name)
             loss (product :cost)
-            gain (e/next-gain state name)
-            gain-fmt (gstring/format "%.2f" gain)
+            gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
             count (cell= (e/count state name))
             click-fn #(e/tap state name)
             disabled (cell= (not (e/can-tap? state name)))]
@@ -56,7 +36,7 @@
        (tr
          (td name)
          (td loss)
-         (td "$" gain-fmt)
+         (td "$" gain)
          (td count)
          (td (button :disabled disabled :click click-fn "Sell" kids)))))))
 
@@ -65,8 +45,8 @@
     (link :href "app.css" :rel "stylesheet" :type "text/css"))
   (body
     (h3 clicks " words")
-    ; (h3 "$" money " income")
-    ; (h5 "Creativity boost of " add-every " words every second")
+    (h3 "$" money " income")
+    (h5 "Creativity boost of " add-every " words every second")
 
     (button :click #(e/click state) "Write a word")
 
