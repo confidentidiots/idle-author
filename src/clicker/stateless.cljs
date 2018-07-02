@@ -52,3 +52,14 @@
         future-loser (- current-loser thing-loss)]
 
     (<= 0 future-loser)))
+
+(defn next-gain [db key state thing-name]
+  "What is the next gain going to be if I tap something?"
+  (let [sub-db (db key)
+        thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
+        gain-key (sub-db :gain)
+        loss-key (sub-db :loss)
+        current-count (get-in state [:things thing-name] 0)
+        future-count (inc current-count)
+        thing-gain (gain db key thing-name future-count)]
+    thing-gain))
