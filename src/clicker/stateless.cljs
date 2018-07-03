@@ -44,15 +44,15 @@
       ; you lose some
       (update-in [loss-key] (fnil loss-amount 0)))))
 
-(defn can-tap? [db state thing-name]
-  "Can I tap a thing? Not if its loss goes below zero."
+(defn can-tap? [db state thing-name & {:keys [n] :or {n 1}}]
+  "Can I tap a thing n times? Not if its loss goes below zero."
   (let [key (u/find-db-key db thing-name)
         sub-db (db key)
         thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
         loss-key (sub-db :loss)
         thing-loss (thing :cost)
         current-loser (state loss-key 0)
-        future-loser (- current-loser thing-loss)]
+        future-loser (- current-loser (* n thing-loss))]
 
     (<= 0 future-loser)))
 

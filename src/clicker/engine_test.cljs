@@ -1,18 +1,18 @@
 (ns clicker.engine-test
   (:require [cljs.test :refer-macros [deftest is use-fixtures]]
-            [clicker.engine :refer [click tap can-tap?]]))
+            [clicker.engine :as e]))
 
 (deftest test-click
   (let [state (atom {})]
-    (is (= (click state) {:clicks 1}))))
+    (is (= (e/click state) {:clicks 1}))))
 
 (deftest test-click-change-fn
   (let [state (atom {})]
-    (is (= (click state :change-fn inc) {:clicks 1}))))
+    (is (= (e/click state :change-fn inc) {:clicks 1}))))
 
 (deftest test-tap
   (let [state (atom { :clicks 30000})
-        _ (tap state "Novella")]
+        _ (e/tap state "Novella")]
     (is
       (=
         @state
@@ -20,8 +20,8 @@
 
 (deftest test-taptap
   (let [state (atom { :clicks 60000})
-        _ (tap state "Novella")
-        _2 (tap state "Novella")]
+        _ (e/tap state "Novella")
+        _2 (e/tap state "Novella")]
     (is
       (=
         @state
@@ -29,10 +29,10 @@
 
 (deftest test-all
   (let [state (atom {})
-        _1 (doseq [i (range 100)] (click state))
-        _2 (tap state "Slogan")
-        _3 (tap state "Slogan")
-        _4 (tap state "Notepad")]
+        _1 (doseq [i (range 100)] (e/click state))
+        _2 (e/tap state "Slogan")
+        _3 (e/tap state "Slogan")
+        _4 (e/tap state "Notepad")]
        (is
          (=
            @state
@@ -42,8 +42,13 @@
              :money 52.17831369176747
              :add-every 1}))))
 ;
-(deftest test-product-can-tap?
-  (is (= false (can-tap? (atom {}) "Slogan")))
-  (is (= false (can-tap? (atom { :clicks 9}) "Slogan")))
-  (is (= true (can-tap? (atom { :clicks 10}) "Slogan")))
-  (is (= true (can-tap? (atom { :clicks 999}) "Slogan"))))
+(deftest test-can-tap?
+  (is (= false (e/can-tap? (atom {}) "Slogan")))
+  (is (= false (e/can-tap? (atom { :clicks 9}) "Slogan")))
+  (is (= true (e/can-tap? (atom { :clicks 10}) "Slogan")))
+  (is (= true (e/can-tap? (atom { :clicks 999}) "Slogan"))))
+;
+; Notepad cost 2 money
+(deftest test-many-can-tap?
+  (is (= true (e/can-tap? (atom { :money 20}) "Notepad" :n 10)))
+  (is (= false (e/can-tap? (atom { :money 20}) "Notepad" :n 11))))

@@ -24,10 +24,10 @@
 
 ; check if atom, since it might have already been dereferenced
 ; at the call-site e.g. via formula cell `(cell= the-atom)`
-(defn can-tap? [state thing-name]
+(defn can-tap? [state thing-name & {:keys [n] :or {n 1}}]
   (if (instance? cljs.core.Atom state)
-    (s/can-tap? data @state thing-name)
-    (s/can-tap? data state thing-name)))
+    (s/can-tap? data @state thing-name :n n)
+    (s/can-tap? data state thing-name :n n)))
 
 (defn next-gain [state thing-name]
   (if (instance? cljs.core.Atom state)

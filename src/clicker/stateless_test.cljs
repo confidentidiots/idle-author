@@ -33,18 +33,16 @@
     (is (= (state3 :money) 386.37112318050373))))
 
 ; Slogan is 10 clicks
-(deftest test-product-can-tap?
+(deftest test-can-tap?
   (is (= false (s/can-tap? data {} "Slogan")))
   (is (= false (s/can-tap? data { :clicks 9} "Slogan")))
   (is (= true (s/can-tap? data { :clicks 10} "Slogan")))
   (is (= true (s/can-tap? data { :clicks 999} "Slogan"))))
 
 ; Notepad cost 2 money
-(deftest test-tool-can-tap?
-  (is (= false (s/can-tap? data {} "Notepad")))
-  (is (= false (s/can-tap? data { :money 1} "Notepad")))
-  (is (= true (s/can-tap? data { :money 2} "Notepad")))
-  (is (= true (s/can-tap? data { :money 999} "Notepad"))))
+(deftest test-many-can-tap?
+  (is (= true (s/can-tap? data { :money 20} "Notepad" :n 10)))
+  (is (= false (s/can-tap? data { :money 20} "Notepad" :n 11))))
 
 (deftest test-next-gain-product
   (is (= (s/next-gain data {} "Slogan") 33.219280948873624))
