@@ -24,22 +24,28 @@
 (js/setInterval
   #(e/click state :change-fn (fn [m] (+ m @add-every))) 1000)
 
+(defelem tap-button [{:keys [name btn-txt]} kids]
+  (let [disabled (cell= (not (e/can-tap? state name)))
+        click-fn #(e/tap state name)]
+    (button :disabled disabled :click click-fn btn-txt kids)))
+
+(defelem tap-buttons [{:keys [name btn-txt]} kids]
+  (tap-button :name name :btn-txt btn-txt))
+
 (defelem rows [{:keys [type btn-txt]} kids]
   (for [thing (get-in d/data [type :items])]
     (do
       (let [name (thing :name)
             loss (thing :cost)
             gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
-            count (cell= (e/thing-count state name))
-            click-fn #(e/tap state name)
-            disabled (cell= (not (e/can-tap? state name)))]
+            count (cell= (e/thing-count state name))]
 
           (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
             (td name)
             (td loss)
             (td gain)
             (td count)
-            (td (button :disabled disabled :click click-fn btn-txt kids)))))))
+            (td (tap-buttons :name name :btn-txt btn-txt)))))))
 
 (html
   (head
