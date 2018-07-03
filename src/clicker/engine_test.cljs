@@ -27,6 +27,15 @@
         @state
         {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
 
+; like test-taptap, but with :n 2
+(deftest test-tap-twice
+  (let [state (atom { :clicks 60000})
+        _ (e/tap state "Novella" :n 2)]
+    (is
+      (=
+        @state
+        {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
+
 (deftest test-all
   (let [state (atom {})
         _1 (doseq [i (range 100)] (e/click state))

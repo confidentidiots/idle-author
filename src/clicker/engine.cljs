@@ -17,9 +17,9 @@
   (swap! state update-in [:clicks] (fnil change-fn 0)))
 
 
-(defn tap [state thing-name]
-  (if (s/can-tap? data @state thing-name)
-    (reset! state (s/tap data @state thing-name))
+(defn tap [state thing-name & {:keys [n] :or {n 1}}]
+  (if (s/can-tap? data @state thing-name :n n)
+    (reset! state (s/tap data @state thing-name :n n))
     state))
 
 ; check if atom, since it might have already been dereferenced
