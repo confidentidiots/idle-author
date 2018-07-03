@@ -8,7 +8,7 @@
     [goog.string.format]))
 
 (defc state { :things {"Slogan" 0 "Notepad" 0}})
-(defc god true)
+(defc god false)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -53,10 +53,10 @@
     (link :href "app.css" :rel "stylesheet" :type "text/css"))
   (body
     (h3 clicks " words")
-    (h3 "$" money " income")
-    (h5 "Creativity boost of " add-every-fmt " words every second")
-
     (button :click #(e/click state) "Write a word")
+
+    (h5 "$" money " income")
+    (h5 "Creativity boost of " add-every-fmt " words every second")
 
     (if-tpl god
       (div
