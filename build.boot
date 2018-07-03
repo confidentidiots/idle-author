@@ -1,22 +1,22 @@
 ; reference https://github.com/adzerk-oss/boot-cljs-example
 (set-env!
   :dependencies '[
-    [adzerk/boot-cljs "2.1.4"]
-    [adzerk/boot-cljs-repl "0.3.3"]
-    [adzerk/boot-reload "0.5.2"]
-    [hoplon "7.2.0"]
-    [org.clojure/clojure "1.9.0"]
-    [org.clojure/clojurescript "1.10.329"]
-    [tailrecursion/boot-jetty  "0.1.3"]
-    [onetom/boot-lein-generate "0.1.3" :scope "test"]
+                  [adzerk/boot-cljs "2.1.4"]
+                  [adzerk/boot-cljs-repl "0.3.3"]
+                  [adzerk/boot-reload "0.5.2"]
+                  [hoplon "7.2.0"]
+                  [org.clojure/clojure "1.9.0"]
+                  [org.clojure/clojurescript "1.10.329"]
+                  [tailrecursion/boot-jetty  "0.1.3"]
+                  [onetom/boot-lein-generate "0.1.3" :scope "test"]
     ;[adzerk/boot-test "1.2.0" :scope "test"]
-    [crisptrutski/boot-cljs-test "0.3.5-SNAPSHOT"]
+                  [crisptrutski/boot-cljs-test "0.3.5-SNAPSHOT"]
 
-    [com.cemerick/piggieback "0.2.2"  :scope "test"]
-    [weasel                  "0.7.0"  :scope "test"]
-    [org.clojure/tools.nrepl "0.2.13" :scope "test"]
-    [funcool/cuerdas "2.0.5"]
-    ]
+                  [com.cemerick/piggieback "0.2.2"  :scope "test"]
+                  [weasel                  "0.7.0"  :scope "test"]
+                  [org.clojure/tools.nrepl "0.2.13" :scope "test"]
+                  [funcool/cuerdas "2.0.5"]]
+
   :source-paths #{"src"}
   :asset-paths  #{"assets"})
 
