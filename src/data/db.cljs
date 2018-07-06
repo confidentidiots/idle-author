@@ -9,16 +9,16 @@
       :loss :clicks
       :items
       [
-        {:name "Slogan" :cost 10}
-        {:name "Copy" :cost 100}
-        {:name "Blog post" :cost 600}
-        {:name "Newspaper article" :cost 1000}
-        {:name "Magazine article" :cost 3500}
-        {:name "Short story" :cost 7500}
-        {:name "Novella" :cost 30000}
+        {:name "Slogan" :cost 10 :ticker "Writing slogans don't seem to pay too well."}
+        {:name "Copy" :cost 100 :ticker "You now realise that nothing pays well."}
+        {:name "Blog post" :cost 600 :ticker "Remember to write some catchy link-bait for that."}
+        {:name "Newspaper article" :cost 1000 :ticker "You're glad you did that journalism course in college."}
+        {:name "Magazine article" :cost 3500 :ticker "This is a bit more glamorous now, isn't it?"}
+        {:name "Short story" :cost 7500 :ticker "Ah, the life of an author."}
+        {:name "Novella" :cost 30000 :ticker "Yes, let's publish now. Might as well get one in before the Big Work."}
         {:name "Novel" :cost 80000}
-        {:name "English Wikipedia" :cost 3500000000}
-        {:name "Wikipedia" :cost 30000000000}]}
+        {:name "Trilogy" :cost 240000}
+        {:name "Encyclopædia Insipida" :cost 44000000}]}
 
     :tool
     {
@@ -27,8 +27,19 @@
       :loss :money
       :items
       [
+        {:name "Pencil grip" :cost 1 :ticker "Ah, isn't that more comfortable."}
         {:name "Notepad" :cost 2}
         {:name "Moleskine" :cost 10}
+        {:name "Standing desk" :cost 500}
         {:name "iPad" :cost 600}
         {:name "Laptop" :cost 1200}
-        {:name "Amanuensis" :cost 3000}]}})
+        {:name "Amanuensis" :cost 3000}
+        {:name "Country escape" :cost 6000}]}
+    :story
+    {
+      :items
+      [
+        {:text "You sit in front of a ream of papyrus with a piece of charcoal in your hand..." :when :genesis}]}})
+
+
+

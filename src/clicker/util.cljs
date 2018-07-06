@@ -13,3 +13,10 @@
 
 (defn find-db-key [data thing-name]
   (first (find-db-key-no-nils data thing-name)))
+
+(defn log [v & text]
+  (let [vs (if (string? v)
+              (apply str v text)
+              v)]
+    (. js/console (log vs))
+    v))

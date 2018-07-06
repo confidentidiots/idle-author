@@ -2,12 +2,31 @@
   (:import [goog.string.format])
   (:require
     [clicker.engine :as e]
+    [clicker.util :as u]
     [data.db :as d]
     [clojure.string :as string]
     [goog.string :as gstring]
-    [goog.string.format]))
+    [goog.string.format]
+    [db.dao :as dao]))
 
-(defc state { :things {"Slogan" 0 "Notepad" 0}})
+(defc state { :key "init" :things {"Slogan" 0 "Notepad" 0}})
+(defc= add-every (:add-every state 0))
+
+(dosync
+  (dao/init-db)
+  (js/setTimeout
+    (fn []
+      (do
+        (dao/get-state "init" #(reset! state %))))
+    500)
+  (js/setInterval
+    (fn []
+      (do
+        (e/click state :change-fn (fn [m] (+ m @add-every)))
+        (dao/put-state @state #())))
+    1000))
+
+
 (defc god false)
 (defn level-value-fn [n]
   (+
@@ -16,13 +35,9 @@
 
 ; sentinels
 (defc= clicks (gstring/format "%.0f" (:clicks state 0)))
-(defc= add-every (:add-every state 0))
 (defc= add-every-fmt (gstring/format "%.2f" add-every))
 (defc= money (gstring/format "%.2f" (:money state 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
-
-(js/setInterval
-  #(e/click state :change-fn (fn [m] (+ m @add-every))) 1000)
 
 (defelem tap-button [{:keys [name btn-txt n]} kids]
   (let [disabled (cell= (not (e/can-tap? state name :n n)))
@@ -54,6 +69,7 @@
   (body
     (h3 clicks " words")
     (button :click #(e/click state) "Write a word")
+    ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
 
     (h5 "$" money " income")
     (h5 "Creativity boost of " add-every-fmt " words every second")
