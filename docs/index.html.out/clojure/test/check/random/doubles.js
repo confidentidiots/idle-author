@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.329 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.339 {:static-fns true, :optimize-constants true}
 goog.provide('clojure.test.check.random.doubles');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
@@ -9,10 +9,10 @@ while(true){
 if((i === (0))){
 return x;
 } else {
-var G__7540 = (i - (1));
-var G__7541 = (x / (2));
-i = G__7540;
-x = G__7541;
+var G__11416 = (i - (1));
+var G__11417 = (x / (2));
+i = G__11416;
+x = G__11417;
 continue;
 }
 break;

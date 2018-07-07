@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.329 {:static-fns true, :optimize-constants true}
+// Compiled by ClojureScript 1.10.339 {:static-fns true, :optimize-constants true}
 goog.provide('cljs.tools.reader.impl.commons');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
@@ -133,23 +133,23 @@ return null;
 }
 });
 cljs.tools.reader.impl.commons.read_comment = (function cljs$tools$reader$impl$commons$read_comment(var_args){
-var args__4521__auto__ = [];
-var len__4518__auto___5338 = arguments.length;
-var i__4519__auto___5339 = (0);
+var args__4534__auto__ = [];
+var len__4531__auto___5338 = arguments.length;
+var i__4532__auto___5339 = (0);
 while(true){
-if((i__4519__auto___5339 < len__4518__auto___5338)){
-args__4521__auto__.push((arguments[i__4519__auto___5339]));
+if((i__4532__auto___5339 < len__4531__auto___5338)){
+args__4534__auto__.push((arguments[i__4532__auto___5339]));
 
-var G__5340 = (i__4519__auto___5339 + (1));
-i__4519__auto___5339 = G__5340;
+var G__5340 = (i__4532__auto___5339 + (1));
+i__4532__auto___5339 = G__5340;
 continue;
 } else {
 }
 break;
 }
 
-var argseq__4522__auto__ = ((((1) < args__4521__auto__.length))?(new cljs.core.IndexedSeq(args__4521__auto__.slice((1)),(0),null)):null);
-return cljs.tools.reader.impl.commons.read_comment.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),argseq__4522__auto__);
+var argseq__4535__auto__ = ((((1) < args__4534__auto__.length))?(new cljs.core.IndexedSeq(args__4534__auto__.slice((1)),(0),null)):null);
+return cljs.tools.reader.impl.commons.read_comment.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),argseq__4535__auto__);
 });
 
 cljs.tools.reader.impl.commons.read_comment.cljs$core$IFn$_invoke$arity$variadic = (function (rdr,_){
@@ -162,8 +162,8 @@ cljs.tools.reader.impl.commons.read_comment.cljs$lang$maxFixedArity = (1);
 cljs.tools.reader.impl.commons.read_comment.cljs$lang$applyTo = (function (seq5336){
 var G__5337 = cljs.core.first(seq5336);
 var seq5336__$1 = cljs.core.next(seq5336);
-var self__4505__auto__ = this;
-return self__4505__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5337,seq5336__$1);
+var self__4518__auto__ = this;
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5337,seq5336__$1);
 });
 
 cljs.tools.reader.impl.commons.throwing_reader = (function cljs$tools$reader$impl$commons$throwing_reader(msg){
