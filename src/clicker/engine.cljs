@@ -34,7 +34,7 @@
     (s/next-gain data @state thing-name)
     (s/next-gain data state thing-name)))
 
-(defn thing-count [state thing-name]
+(defn thing-count [state thing-key]
   (if (instance? cljs.core.Atom state)
-    (s/thing-count @state thing-name)
-    (s/thing-count state thing-name)))
+    (s/thing-count @state thing-key)
+    (s/thing-count state thing-key)))

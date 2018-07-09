@@ -9,7 +9,7 @@
     [goog.string.format]
     [db.dao :as dao]))
 
-(defc state { :key "init" :things {"Slogan" 0 "Notepad" 0}})
+(defc state { :key "init" :things { :slogan 0 :notepad 0}})
 (defc= add-every (:add-every state 0))
 
 (dosync
@@ -27,7 +27,7 @@
     1000))
 
 
-(defc god false)
+(defc god true)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -52,9 +52,10 @@
   (for [thing (get-in d/data [type :items])]
     (do
       (let [name (thing :name)
+            key (thing :key)
             loss (thing :cost)
             gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
-            count (cell= (e/thing-count state name))]
+            count (cell= (e/thing-count state key))]
 
           (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
             (td name)

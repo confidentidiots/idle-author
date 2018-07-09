@@ -16,7 +16,7 @@
     (is
       (=
         @state
-        {:things { "Novella" 1}, :money 99657.84284662087, :clicks 0}))))
+        {:things { :novella 1}, :money 99657.84284662087, :clicks 0}))))
 
 (deftest test-taptap
   (let [state (atom { :clicks 60000})
@@ -25,7 +25,7 @@
     (is
       (=
         @state
-        {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
+        {:things { :novella 2}, :money 162534.94107530243, :clicks 0}))))
 
 ; like test-taptap, but with :n 2
 (deftest test-tap-twice
@@ -34,7 +34,7 @@
     (is
       (=
         @state
-        {:things { "Novella" 2}, :money 162534.94107530243, :clicks 0}))))
+        {:things { :novella 2}, :money 162534.94107530243, :clicks 0}))))
 
 (deftest test-all
   (let [state (atom {})
@@ -47,7 +47,7 @@
            @state
            {
              :clicks 80
-             :things {"Slogan" 2 "Notepad" 1}
+             :things { :slogan 2 :notepad 1}
              :money 52.17831369176747
              :add-every 1}))))
 ;

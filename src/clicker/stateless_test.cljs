@@ -9,11 +9,11 @@
         state2 (s/tap data state "Slogan" :n 2)
         state3 (s/tap data state2 "Copy")]
 
-    (is (= (get-in state2 [:things "Slogan"]) 2))
+    (is (= (get-in state2 [:things :slogan]) 2))
     (is (= (state2 :money) 54.17831369176747))
 
-    (is (= (get-in state3 [:things "Slogan"]) 2))
-    (is (= (get-in state3 [:things "Copy"]) 1))
+    (is (= (get-in state3 [:things :slogan]) 2))
+    (is (= (get-in state3 [:things :copy]) 1))
     (is (= (state3 :money) 386.37112318050373))))
 
 ; Slogan is 10 clicks
@@ -30,9 +30,9 @@
 
 (deftest test-next-gain
   (is (= (s/next-gain data {} "Slogan") 33.219280948873624))
-  (is (= (s/next-gain data { :things {"Slogan" 1} } "Slogan") 20.959032742893847))
-  (is (= (s/next-gain data { :things {"Slogan" 2} } "Slogan") 16.609640474436812)))
+  (is (= (s/next-gain data { :things {:slogan 1} } "Slogan") 20.959032742893847))
+  (is (= (s/next-gain data { :things {:slogan 2} } "Slogan") 16.609640474436812)))
 
 (deftest test-count
-  (is (= (s/thing-count {} "Slogan") 0))
-  (is (= (s/thing-count { :things {"Slogan" 1}} "Slogan") 1)))
+  (is (= (s/thing-count {} :slogan) 0))
+  (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))
