@@ -40,5 +40,5 @@
 
 ; get
 (defn get-state [key fn]
-  (let [result-ch (idxdb/get-by-key db db-store key :keywordize-keys true)]
+  (let [result-ch (idxdb/get-by-key db db-store key u/default-state :keywordize-keys true)]
     (go (fn (<! result-ch)))))

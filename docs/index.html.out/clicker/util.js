@@ -119,3 +119,4 @@ var self__4518__auto__ = this;
 return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9250,seq9249__$1);
 });
 
+clicker.util.default_state = new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$key,"init",cljs.core.cst$kw$things,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$slogan,(0),cljs.core.cst$kw$notepad,(0)], null)], null);

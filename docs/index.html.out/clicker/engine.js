@@ -6,14 +6,14 @@ goog.require('clicker.stateless');
 goog.require('data.db');
 clicker.engine.click = (function clicker$engine$click(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___9477 = arguments.length;
-var i__4532__auto___9478 = (0);
+var len__4531__auto___9480 = arguments.length;
+var i__4532__auto___9481 = (0);
 while(true){
-if((i__4532__auto___9478 < len__4531__auto___9477)){
-args__4534__auto__.push((arguments[i__4532__auto___9478]));
+if((i__4532__auto___9481 < len__4531__auto___9480)){
+args__4534__auto__.push((arguments[i__4532__auto___9481]));
 
-var G__9479 = (i__4532__auto___9478 + (1));
-i__4532__auto___9478 = G__9479;
+var G__9482 = (i__4532__auto___9481 + (1));
+i__4532__auto___9481 = G__9482;
 continue;
 } else {
 }
@@ -24,33 +24,33 @@ var argseq__4535__auto__ = ((((1) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.engine.click.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),argseq__4535__auto__);
 });
 
-clicker.engine.click.cljs$core$IFn$_invoke$arity$variadic = (function (state,p__9474){
-var map__9475 = p__9474;
-var map__9475__$1 = ((((!((map__9475 == null)))?(((((map__9475.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9475.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9475):map__9475);
-var change_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9475__$1,cljs.core.cst$kw$change_DASH_fn,cljs.core.inc);
+clicker.engine.click.cljs$core$IFn$_invoke$arity$variadic = (function (state,p__9477){
+var map__9478 = p__9477;
+var map__9478__$1 = ((((!((map__9478 == null)))?(((((map__9478.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9478.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9478):map__9478);
+var change_fn = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9478__$1,cljs.core.cst$kw$change_DASH_fn,cljs.core.inc);
 return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$clicks], null),cljs.core.fnil.cljs$core$IFn$_invoke$arity$2(change_fn,(0)));
 });
 
 clicker.engine.click.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-clicker.engine.click.cljs$lang$applyTo = (function (seq9472){
-var G__9473 = cljs.core.first(seq9472);
-var seq9472__$1 = cljs.core.next(seq9472);
+clicker.engine.click.cljs$lang$applyTo = (function (seq9475){
+var G__9476 = cljs.core.first(seq9475);
+var seq9475__$1 = cljs.core.next(seq9475);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9473,seq9472__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9476,seq9475__$1);
 });
 
 clicker.engine.tap = (function clicker$engine$tap(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___9486 = arguments.length;
-var i__4532__auto___9487 = (0);
+var len__4531__auto___9489 = arguments.length;
+var i__4532__auto___9490 = (0);
 while(true){
-if((i__4532__auto___9487 < len__4531__auto___9486)){
-args__4534__auto__.push((arguments[i__4532__auto___9487]));
+if((i__4532__auto___9490 < len__4531__auto___9489)){
+args__4534__auto__.push((arguments[i__4532__auto___9490]));
 
-var G__9488 = (i__4532__auto___9487 + (1));
-i__4532__auto___9487 = G__9488;
+var G__9491 = (i__4532__auto___9490 + (1));
+i__4532__auto___9490 = G__9491;
 continue;
 } else {
 }
@@ -61,10 +61,10 @@ var argseq__4535__auto__ = ((((2) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.engine.tap.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__4535__auto__);
 });
 
-clicker.engine.tap.cljs$core$IFn$_invoke$arity$variadic = (function (state,thing_name,p__9483){
-var map__9484 = p__9483;
-var map__9484__$1 = ((((!((map__9484 == null)))?(((((map__9484.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9484.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9484):map__9484);
-var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9484__$1,cljs.core.cst$kw$n,(1));
+clicker.engine.tap.cljs$core$IFn$_invoke$arity$variadic = (function (state,thing_name,p__9486){
+var map__9487 = p__9486;
+var map__9487__$1 = ((((!((map__9487 == null)))?(((((map__9487.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9487.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9487):map__9487);
+var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9487__$1,cljs.core.cst$kw$n,(1));
 if(cljs.core.truth_(clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic(data.db.data,cljs.core.deref(state),thing_name,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$n,n], 0)))){
 return cljs.core.reset_BANG_(state,clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic(data.db.data,cljs.core.deref(state),thing_name,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$n,n], 0)));
 } else {
@@ -75,25 +75,25 @@ return state;
 clicker.engine.tap.cljs$lang$maxFixedArity = (2);
 
 /** @this {Function} */
-clicker.engine.tap.cljs$lang$applyTo = (function (seq9480){
-var G__9481 = cljs.core.first(seq9480);
-var seq9480__$1 = cljs.core.next(seq9480);
-var G__9482 = cljs.core.first(seq9480__$1);
-var seq9480__$2 = cljs.core.next(seq9480__$1);
+clicker.engine.tap.cljs$lang$applyTo = (function (seq9483){
+var G__9484 = cljs.core.first(seq9483);
+var seq9483__$1 = cljs.core.next(seq9483);
+var G__9485 = cljs.core.first(seq9483__$1);
+var seq9483__$2 = cljs.core.next(seq9483__$1);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9481,G__9482,seq9480__$2);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9484,G__9485,seq9483__$2);
 });
 
 clicker.engine.can_tap_QMARK_ = (function clicker$engine$can_tap_QMARK_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___9495 = arguments.length;
-var i__4532__auto___9496 = (0);
+var len__4531__auto___9498 = arguments.length;
+var i__4532__auto___9499 = (0);
 while(true){
-if((i__4532__auto___9496 < len__4531__auto___9495)){
-args__4534__auto__.push((arguments[i__4532__auto___9496]));
+if((i__4532__auto___9499 < len__4531__auto___9498)){
+args__4534__auto__.push((arguments[i__4532__auto___9499]));
 
-var G__9497 = (i__4532__auto___9496 + (1));
-i__4532__auto___9496 = G__9497;
+var G__9500 = (i__4532__auto___9499 + (1));
+i__4532__auto___9499 = G__9500;
 continue;
 } else {
 }
@@ -104,10 +104,10 @@ var argseq__4535__auto__ = ((((2) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.engine.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__4535__auto__);
 });
 
-clicker.engine.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,thing_name,p__9492){
-var map__9493 = p__9492;
-var map__9493__$1 = ((((!((map__9493 == null)))?(((((map__9493.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9493.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9493):map__9493);
-var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9493__$1,cljs.core.cst$kw$n,(1));
+clicker.engine.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,thing_name,p__9495){
+var map__9496 = p__9495;
+var map__9496__$1 = ((((!((map__9496 == null)))?(((((map__9496.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__9496.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__9496):map__9496);
+var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__9496__$1,cljs.core.cst$kw$n,(1));
 if((state instanceof cljs.core.Atom)){
 return clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic(data.db.data,cljs.core.deref(state),thing_name,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$n,n], 0));
 } else {
@@ -118,13 +118,13 @@ return clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic(dat
 clicker.engine.can_tap_QMARK_.cljs$lang$maxFixedArity = (2);
 
 /** @this {Function} */
-clicker.engine.can_tap_QMARK_.cljs$lang$applyTo = (function (seq9489){
-var G__9490 = cljs.core.first(seq9489);
-var seq9489__$1 = cljs.core.next(seq9489);
-var G__9491 = cljs.core.first(seq9489__$1);
-var seq9489__$2 = cljs.core.next(seq9489__$1);
+clicker.engine.can_tap_QMARK_.cljs$lang$applyTo = (function (seq9492){
+var G__9493 = cljs.core.first(seq9492);
+var seq9492__$1 = cljs.core.next(seq9492);
+var G__9494 = cljs.core.first(seq9492__$1);
+var seq9492__$2 = cljs.core.next(seq9492__$1);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9490,G__9491,seq9489__$2);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__9493,G__9494,seq9492__$2);
 });
 
 clicker.engine.next_gain = (function clicker$engine$next_gain(state,thing_name){
@@ -134,10 +134,10 @@ return clicker.stateless.next_gain(data.db.data,cljs.core.deref(state),thing_nam
 return clicker.stateless.next_gain(data.db.data,state,thing_name);
 }
 });
-clicker.engine.thing_count = (function clicker$engine$thing_count(state,thing_name){
+clicker.engine.thing_count = (function clicker$engine$thing_count(state,thing_key){
 if((state instanceof cljs.core.Atom)){
-return clicker.stateless.thing_count(cljs.core.deref(state),thing_name);
+return clicker.stateless.thing_count(cljs.core.deref(state),thing_key);
 } else {
-return clicker.stateless.thing_count(state,thing_name);
+return clicker.stateless.thing_count(state,thing_key);
 }
 });

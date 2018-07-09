@@ -6,7 +6,7 @@ goog.require('clojure.test.check.generators');
 clojure.test.check.properties.apply_gen = (function clojure$test$check$properties$apply_gen(function$){
 return (function (args){
 var result = (function (){try{return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(function$,args);
-}catch (e13345){var t = e13345;
+}catch (e13348){var t = e13348;
 return t;
 }})();
 return new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$result,result,cljs.core.cst$kw$function,function$,cljs.core.cst$kw$args,args], null);
@@ -32,7 +32,7 @@ return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.first,cljs.core.par
 clojure.test.check.properties.binding_gens = (function clojure$test$check$properties$binding_gens(bindings){
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2(cljs.core.second,cljs.core.partition.cljs$core$IFn$_invoke$arity$2((2),bindings));
 });
-var ret__4565__auto___13350 = (function (){
+var ret__4565__auto___13353 = (function (){
 /**
  * Macro sugar for `for-all*`. `for-all` lets you name the parameter
  *   and use them in expression, without wrapping them in a lambda. Like
@@ -47,14 +47,14 @@ var ret__4565__auto___13350 = (function (){
  */
 clojure.test.check.properties.for_all = (function clojure$test$check$properties$for_all(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___13351 = arguments.length;
-var i__4532__auto___13352 = (0);
+var len__4531__auto___13354 = arguments.length;
+var i__4532__auto___13355 = (0);
 while(true){
-if((i__4532__auto___13352 < len__4531__auto___13351)){
-args__4534__auto__.push((arguments[i__4532__auto___13352]));
+if((i__4532__auto___13355 < len__4531__auto___13354)){
+args__4534__auto__.push((arguments[i__4532__auto___13355]));
 
-var G__13353 = (i__4532__auto___13352 + (1));
-i__4532__auto___13352 = G__13353;
+var G__13356 = (i__4532__auto___13355 + (1));
+i__4532__auto___13355 = G__13356;
 continue;
 } else {
 }
@@ -72,15 +72,15 @@ return cljs.core.sequence.cljs$core$IFn$_invoke$arity$1(cljs.core.seq(cljs.core.
 clojure.test.check.properties.for_all.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clojure.test.check.properties.for_all.cljs$lang$applyTo = (function (seq13346){
-var G__13347 = cljs.core.first(seq13346);
-var seq13346__$1 = cljs.core.next(seq13346);
-var G__13348 = cljs.core.first(seq13346__$1);
-var seq13346__$2 = cljs.core.next(seq13346__$1);
-var G__13349 = cljs.core.first(seq13346__$2);
-var seq13346__$3 = cljs.core.next(seq13346__$2);
+clojure.test.check.properties.for_all.cljs$lang$applyTo = (function (seq13349){
+var G__13350 = cljs.core.first(seq13349);
+var seq13349__$1 = cljs.core.next(seq13349);
+var G__13351 = cljs.core.first(seq13349__$1);
+var seq13349__$2 = cljs.core.next(seq13349__$1);
+var G__13352 = cljs.core.first(seq13349__$2);
+var seq13349__$3 = cljs.core.next(seq13349__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__13347,G__13348,G__13349,seq13346__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__13350,G__13351,G__13352,seq13349__$3);
 });
 
 return null;
