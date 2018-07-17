@@ -58,3 +58,21 @@
     (is (= (count items) 7))
     (is (= (:key (first items)) :sonnet))
     (is (= (:key (last items)) :encyclopedia))))
+
+(deftest test-levels
+  (let [state {}
+        reached (s/reached-levels data state :product)
+        unreached (s/unreached-levels data state :product)]
+    (is (= (count reached) 1))
+    (is (= reached [:genesis]))
+    (is (= (count unreached) 4))
+    (is (= (first unreached) :poem))))
+
+(deftest test-levels-state
+  (let [state {:levels {:product [:genesis :poem]}}
+        reached (s/reached-levels data state :product)
+        unreached (s/unreached-levels data state :product)]
+    (is (= (count reached) 2))
+    (is (= reached [:genesis :poem]))
+    (is (= (count unreached) 3))
+    (is (= (first unreached) :knowledge))))

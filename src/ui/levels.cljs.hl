@@ -1,0 +1,16 @@
+(ns ui.levels
+  (:require
+    [clicker.engine :as e]))
+
+(defelem product [{:keys [state]} kids]
+  (do
+    (for [reached (e/reached-levels state :product)]
+      (span "Reached " (:name (e/get-level :product reached))))))
+
+
+;
+(defelem levels-for [{:keys [state type]} kids]
+  (do
+    (for [reached (e/reached-levels state :product)]
+      (span "Reached " (:ticker (e/get-level :product reached))))))
+

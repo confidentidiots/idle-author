@@ -8,7 +8,8 @@
     [goog.string :as gstring]
     [goog.string.format]
     [db.dao :as dao]
-    [ui.buttons :as buttons]))
+    [ui.buttons :as buttons]
+    [ui.levels :as levels]))
 
 (defc state u/default-state)
 (defc= add-every (:add-every state 0))
@@ -83,7 +84,7 @@
               (th "")))
           (buttons/as-list :state state :type :product :btn-txt "Sell"))))
 
-    ;(div :class "levels" (levels))
+    (div :class "levels" (levels/product :state state))
 
     (if-tpl god
       (div :class "debug"

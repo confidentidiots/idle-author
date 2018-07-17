@@ -45,7 +45,16 @@
     (s/reached-levels data @state type)
     (s/reached-levels data state type)))
 
+(defn unreached-levels [state type]
+  (if (instance? cljs.core.Atom state)
+    (s/unreached-levels data @state type)
+    (s/unreached-levels data state type)))
+
 (defn items [state type]
   (if (instance? cljs.core.Atom state)
     (s/items data @state type)
     (s/items data state type)))
+
+; see the TODO in stateless. then delete this.
+(defn get-level [type level-key]
+  (s/get-level data type level-key))
