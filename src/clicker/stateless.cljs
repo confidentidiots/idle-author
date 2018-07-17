@@ -57,3 +57,13 @@
 
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
+
+(defn items [data state type]
+  "get items by type (:product or :tool) for the current researched level."
+  (let [items (get-in data [type :items])
+        levels (get-in data [type :levels :items])
+        default-level (:key (first levels))
+        reached-levels (get-in state [:levels type] [default-level])
+        items-for-level (filter #(some (set reached-levels) (% :level) ) (get-in data [type :items]))
+        sorted (sort-by :cost items-for-level)]
+    sorted))

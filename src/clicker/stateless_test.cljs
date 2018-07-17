@@ -36,3 +36,25 @@
 (deftest test-count
   (is (= (s/thing-count {} :slogan) 0))
   (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))
+
+(deftest test-items
+  (let [state {:levels {:product [:poem]}}
+        items (s/items data state :product)]
+    (is (= (count items) 5))
+    (is (= (:key (first items)) :sonnet))
+    (is (= (:key (last items)) :elegy))))
+
+; first research level just so happens to be poem
+(deftest test-items-default
+  (let [state {}
+        items (s/items data state :product)]
+    (is (= (count items) 1))
+    (is (= (:key (first items)) :gibberish))
+    (is (= (:key (last items)) :gibberish))))
+
+(deftest test-items-many-levels
+  (let [state {:levels {:product [:poem :knowledge]}}
+        items (s/items data state :product)]
+    (is (= (count items) 7))
+    (is (= (:key (first items)) :sonnet))
+    (is (= (:key (last items)) :encyclopedia))))

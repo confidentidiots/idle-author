@@ -8,6 +8,7 @@ Write a word.
 
 - [dev](readme/dev.md)
 - [notes](readme/notes.md)
+- [references](readme/references.md)
 
 ## License
 

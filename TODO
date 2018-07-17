@@ -1,3 +1,20 @@
+
+for all the stuff below...
+
+make layers.
+
+make a layer underneath the current data.
+The current data has "money" but the layer underneath can re-define what money is.
+It can be age-defined:
+- prehistory age, money = shells
+- mercantile age, money = IOUs
+- agricultural age, money = trade
+
+Each age is unlocked by the pinacle research item of the previous age.
+
+--------
+
+
 - show :ticker entries as events happen
 - introduce research.
 
@@ -11,3 +28,47 @@ a category could be:
 - bourgeoisie life (for country cottage)
 
 there are just ideas.
+
+
+College (like research)
+List courses. Worse to better. Cheaper to more expensive.
+With every new course:
+- write better quality words
+- unlock the ability to write lengthier pieces
+- reset the log decay on a certain type
+
+Materials
+- pencil
+- pen
+- ink
+- paper
+- typewriter ink
+- battery for laptop
+- sustenance for amanuensis
+- nuclear core for MarkovWriter™
+
+Research
+One starts with primitive writing implements:
+- stick in the sand
+- rock scratches on bark
+- ochre on cave walls
+Upgrades/levels:
+For writing:
+- stick
+- rock
+- ochre
+- charcoal
+- pencil
+- plume
+- pen
+- mechanical pencil
+- typewriter
+- laptop
+- MarkovWriter (which just comes up with the words now)
+For duplication/printing:
+- an army of writers/duplicators
+- printing press
+- printers
+- ... A way for your words to just appear on other media
+The printing can go from small-scale to large-scale. E.g. 1xprinter, 2xprinters. One book at a time printing press, 5 books at a time, etc.
+-

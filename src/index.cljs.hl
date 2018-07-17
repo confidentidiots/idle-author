@@ -49,7 +49,7 @@
     (tap-button :name name :btn-txt btn-txt :n n)))
 
 (defelem rows [{:keys [type btn-txt]} kids]
-  (for [thing (get-in d/data [type :items])]
+  (for [thing (e/items state type)]
     (do
       (let [name (thing :name)
             key (thing :key)

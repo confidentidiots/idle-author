@@ -1,6 +1,6 @@
 (ns clicker.engine
   (:require [clicker.stateless :as s]
-            [data.db :refer [data]]))
+            [data.db :as db]))
 
 ; The engine knows which db to use.
 
@@ -13,9 +13,10 @@
 ;   (-> state
 ;     (update-in [:clicks] inc)))
 
+(def data db/data)
+
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:clicks] (fnil change-fn 0)))
-
 
 (defn tap [state thing-name & {:keys [n] :or {n 1}}]
   (if (s/can-tap? data @state thing-name :n n)
@@ -38,3 +39,8 @@
   (if (instance? cljs.core.Atom state)
     (s/thing-count @state thing-key)
     (s/thing-count state thing-key)))
+
+(defn items [state type]
+  (if (instance? cljs.core.Atom state)
+    (s/items data @state type)
+    (s/items data state type)))
