@@ -7,7 +7,8 @@
     [clojure.string :as string]
     [goog.string :as gstring]
     [goog.string.format]
-    [db.dao :as dao]))
+    [db.dao :as dao]
+    [ui.buttons :as buttons]))
 
 (defc state u/default-state)
 (defc= add-every (:add-every state 0))
@@ -26,7 +27,6 @@
         (dao/put-state @state #())))
     1000))
 
-
 (defc god false)
 (defn level-value-fn [n]
   (+
@@ -38,31 +38,6 @@
 (defc= add-every-fmt (gstring/format "%.2f" add-every))
 (defc= money (gstring/format "%.2f" (:money state 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
-
-(defelem tap-button [{:keys [name btn-txt n]} kids]
-  (let [disabled (cell= (not (e/can-tap? state name :n n)))
-        click-fn #(e/tap state name :n n)]
-    (button :disabled disabled :click click-fn n kids)))
-
-(defelem tap-buttons [{:keys [name btn-txt]} kids]
-  (for [n [1 10 100 1000]]
-    (tap-button :name name :btn-txt btn-txt :n n)))
-
-(defelem rows [{:keys [type btn-txt]} kids]
-  (for [thing (e/items state type)]
-    (do
-      (let [name (thing :name)
-            key (thing :key)
-            loss (thing :cost)
-            gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
-            count (cell= (e/thing-count state key))]
-
-          (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
-            (td name)
-            (td loss)
-            (td gain)
-            (td count)
-            (td (tap-buttons :name name :btn-txt btn-txt)))))))
 
 (html
   (head
@@ -93,7 +68,7 @@
               (th "Boost")
               (th "# Bought")
               (th "")))
-          (rows :type :tool :btn-txt "Buy")))
+          (buttons/as-list :state state :type :tool :btn-txt "Buy")))
 
 
       (div :class "sell"
@@ -106,7 +81,9 @@
               (th "$ Income")
               (th "# Sold")
               (th "")))
-          (rows :type :product :btn-txt "Sell"))))
+          (buttons/as-list :state state :type :product :btn-txt "Sell"))))
+
+    ;(div :class "levels" (levels))
 
     (if-tpl god
       (div :class "debug"

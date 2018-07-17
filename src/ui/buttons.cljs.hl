@@ -1,0 +1,31 @@
+(ns ui.buttons
+  (:import [goog.string.format])
+  (:require
+    [clicker.engine :as e]
+    [goog.string :as gstring]
+    [goog.string.format]))
+
+(defelem ^:private tap-button [{:keys [state name btn-txt n]} kids]
+  (let [disabled (cell= (not (e/can-tap? state name :n n)))
+        click-fn #(e/tap state name :n n)]
+    (button :disabled disabled :click click-fn n kids)))
+
+(defelem ^:private tap-buttons [{:keys [state name btn-txt]} kids]
+  (for [n [1 10 100 1000]]
+    (tap-button :state state :name name :btn-txt btn-txt :n n)))
+
+(defelem as-list [{:keys [state type btn-txt]} kids]
+  (for [thing (e/items state type)]
+    (do
+      (let [name (thing :name)
+            key (thing :key)
+            loss (thing :cost)
+            gain (cell= (gstring/format "%.2f" (e/next-gain state name)))
+            count (cell= (e/thing-count state key))]
+
+          (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
+            (td name)
+            (td loss)
+            (td gain)
+            (td count)
+            (td (tap-buttons :state state :name name :btn-txt btn-txt)))))))

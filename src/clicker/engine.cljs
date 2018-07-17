@@ -40,6 +40,11 @@
     (s/thing-count @state thing-key)
     (s/thing-count state thing-key)))
 
+(defn reached-levels [state type]
+  (if (instance? cljs.core.Atom state)
+    (s/reached-levels data @state type)
+    (s/reached-levels data state type)))
+
 (defn items [state type]
   (if (instance? cljs.core.Atom state)
     (s/items data @state type)
