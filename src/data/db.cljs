@@ -18,7 +18,8 @@
           {:key :modern :cost 50000 :ticker "You've entered the modern era."}]}
       :items
       [
-        {:key :gibberish :level [:genesis] :name "Gibberish" :cost 10 :ticker "Your first guttural utterance brings tears to your eyes."}
+        {:key :gibberish :level [:genesis] :name "Gibberish" :cost 5 :ticker "Your first guttural utterance brings tears to your eyes."}
+        {:key :chant :level [:genesis] :name "Chant" :cost 10 :ticker "You look up and see the moon, and the perfect circular form inspires you."}
         ;    idyll, haiku
         {:key :sonnet :level [:poem] :name "Sonnet" :cost 80 :ticker "The author looks on tempests and is never shaken."}
         {:key :ode :level [:poem] :name "Ode" :cost 110 :ticker "These words to me do seem apparelled in celestial light."}

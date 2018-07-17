@@ -48,9 +48,9 @@
 (deftest test-items-default
   (let [state {}
         items (s/items data state :product)]
-    (is (= (count items) 1))
+    (is (= (count items) 2))
     (is (= (:key (first items)) :gibberish))
-    (is (= (:key (last items)) :gibberish))))
+    (is (= (:key (last items)) :chant))))
 
 (deftest test-items-many-levels
   (let [state {:levels {:product [:poem :knowledge]}}
