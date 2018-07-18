@@ -55,6 +55,5 @@
     (s/items data @state type)
     (s/items data state type)))
 
-; see the TODO in stateless. then delete this.
 (defn get-level [type level-key]
   (s/get-level data type level-key))
