@@ -58,12 +58,12 @@
            (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
 
     (div :class "wrapper"
-
       (buttons/tool-list :state state)
+      (buttons/product-list :state state))
 
-      (buttons/product-list :state state)
-
-      (levels/product-levels :state state))
+    (div :class "wrapper"
+      (levels/product-levels :state state)
+      (levels/tool-levels :state state))
 
     (if-tpl god
       (div :class "debug"

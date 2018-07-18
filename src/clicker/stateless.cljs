@@ -90,5 +90,4 @@
 (defn get-level [data type level-key]
   (let [levels (get-in data [type :levels :items])
         the-level (first (filter #(= level-key (% :key)) levels))]
-      (println "found level >> " the-level)
       the-level))

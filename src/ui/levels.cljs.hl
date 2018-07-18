@@ -12,6 +12,7 @@
     (let [level (e/get-level type level-key)]
       (tr :class (str :old)
         (td (:name level))
+        (td (:clicks level))
         (td (:cost level))
         (td (level-button :level level :type type :status :old))))))
 ;
@@ -21,6 +22,7 @@
         level (e/get-level type level-key)]
     (tr :class (str :new)
       (td (:name level))
+      (td (:clicks level))
       (td (:cost level))
       (td (level-button :level level :type type :status :new)))))
 ;
@@ -32,6 +34,21 @@
         (tr
           (th "Name")
           (th "Available after N words")
+          (th "Cost (clicks)")
           (th "")))
       (reached-list :state state :type :product) kids
       (unreached-list :state state :type :product) kids)))
+
+;
+(defelem tool-levels [{:keys [state]} kids]
+  (div :class "levels"
+    (table
+      (caption "Tool research")
+      (thead
+        (tr
+          (th "Name")
+          (th "Available after N words")
+          (th "$ Cost")
+          (th "")))
+      (reached-list :state state :type :tool) kids
+      (unreached-list :state state :type :tool) kids)))

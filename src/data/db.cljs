@@ -11,11 +11,11 @@
       {
         :items
         [
-          {:key :genesis :name "Genesis" :cost 0}
-          {:key :poem :name "Poem" :cost 500 :ticker "You've invented the poem."}
-          {:key :knowledge :name "Knowledge" :cost 5000 :ticker "After all these words, you're suddenly concerned with preserving knowledge."}
-          {:key :journalism :name "Journalism" :cost 5000000 :ticker "You've invented Journalism. Bring your own soapbox!"}
-          {:key :modern :name "Modern" :cost 50000 :ticker "You've entered the modern era."}]}
+          {:key :genesis :name "Genesis" :clicks 0 :cost 0}
+          {:key :poem :name "Poem" :clicks 1000 :cost 500 :ticker "You've invented the poem."}
+          {:key :knowledge :name "Knowledge" :clicks 10000 :cost 5000 :ticker "After all these words, you're suddenly concerned with preserving knowledge."}
+          {:key :journalism :name "Journalism" :clicks 1000000 :cost 500000 :ticker "You've invented Journalism. Bring your own soapbox!"}
+          {:key :modern :name "Modern" :clicks 10000000 :cost 5000000 :ticker "You've entered the modern era."}]}
       :items
       [
         {:key :gibberish :level [:genesis] :name "Gibberish" :cost 5 :ticker "Your first guttural utterance brings tears to your eyes."}
@@ -56,9 +56,9 @@
       {
         :items
         [
-          {:key :genesis :name "Genesis" :cost 0 :ticker "You've just crawled out of the ocean and find a stick. Something urges you to draw in the sand..."}
-          {:key :stone-age :name "Stone Age" :cost 500 :ticker "Sand washes away quickly. Good thing you've discovered the walls in your little cave."}
-          {:key :modern :name "Modern" :cost 5000 :ticker "Ah, the modern age."}]}
+          {:key :genesis :name "Genesis" :clicks 0 :cost 0 :ticker "You've just crawled out of the ocean and find a stick. Something urges you to draw in the sand..."}
+          {:key :stone-age :name "Stone Age" :clicks 1000 :cost 500 :ticker "Sand washes away quickly. Good thing you've discovered the walls in your little cave."}
+          {:key :modern :name "Modern" :clicks 10000 :cost 5000 :ticker "Ah, the modern age."}]}
 
       :items
       [
