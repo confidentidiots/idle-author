@@ -2,15 +2,36 @@
   (:require
     [clicker.engine :as e]))
 
-(defelem product [{:keys [state]} kids]
-  (do
-    (for [reached (e/reached-levels state :product)]
-      (span "Reached " (:name (e/get-level :product reached))))))
-
-
+(defelem level-button [{:keys [level type status]} kids]
+  (if (= status :old)
+    (span "✓")
+    (button :class (str status) "Start researching...")))
 ;
-(defelem levels-for [{:keys [state type]} kids]
-  (do
-    (for [reached (e/reached-levels state :product)]
-      (span "Reached " (:ticker (e/get-level :product reached))))))
-
+(defelem ^:private reached-list [{:keys [state type]} kids]
+  (for [level-key (e/reached-levels state type)]
+    (let [level (e/get-level type level-key)]
+      (tr :class (str :old)
+        (td (:name level))
+        (td (:cost level))
+        (td (level-button :level level :type type :status :old))))))
+;
+(defelem ^:private unreached-list [{:keys [state type]} kids]
+  ; only show one unreached research level
+  (let [level-key (first (e/unreached-levels state type))
+        level (e/get-level type level-key)]
+    (tr :class (str :new)
+      (td (:name level))
+      (td (:cost level))
+      (td (level-button :level level :type type :status :new)))))
+;
+(defelem product-levels [{:keys [state]} kids]
+  (div :class "levels"
+    (table
+      (caption "Product research")
+      (thead
+        (tr
+          (th "Name")
+          (th "Available after N words")
+          (th "")))
+      (reached-list :state state :type :product) kids
+      (unreached-list :state state :type :product) kids)))

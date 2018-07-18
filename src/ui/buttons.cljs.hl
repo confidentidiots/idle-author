@@ -14,7 +14,7 @@
   (for [n [1 10 100 1000]]
     (tap-button :state state :name name :btn-txt btn-txt :n n)))
 
-(defelem as-list [{:keys [state type btn-txt]} kids]
+(defelem ^:private as-list [{:keys [state type btn-txt]} kids]
   (for [thing (e/items state type)]
     (do
       (let [name (thing :name)
@@ -29,3 +29,31 @@
             (td gain)
             (td count)
             (td (tap-buttons :state state :name name :btn-txt btn-txt)))))))
+
+;
+(defelem tool-list [{:keys [state]} kids]
+  (div :class "upgrade"
+    (table
+      (caption "Upgrade your tools")
+      (thead
+        (tr
+          (th "Thing")
+          (th "$ Cost")
+          (th "Boost")
+          (th "# Bought")
+          (th "")))
+      (as-list :state state :type :tool :btn-txt "Buy"))))
+
+;
+(defelem product-list [{:keys [state]} kids]
+  (div :class "sell"
+    (table
+      (caption "Sell your words")
+      (thead
+        (tr
+          (th "Thing")
+          (th "Word cost")
+          (th "$ Income")
+          (th "# Sold")
+          (th "")))
+      (as-list :state state :type :product :btn-txt "Sell"))))

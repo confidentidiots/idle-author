@@ -59,32 +59,11 @@
 
     (div :class "wrapper"
 
-      (div :class "upgrade"
-        (table
-          (caption "Upgrade your tools")
-          (thead
-            (tr
-              (th "Thing")
-              (th "$ Cost")
-              (th "Boost")
-              (th "# Bought")
-              (th "")))
-          (buttons/as-list :state state :type :tool :btn-txt "Buy")))
+      (buttons/tool-list :state state)
 
+      (buttons/product-list :state state)
 
-      (div :class "sell"
-        (table
-          (caption "Sell your words")
-          (thead
-            (tr
-              (th "Thing")
-              (th "Word cost")
-              (th "$ Income")
-              (th "# Sold")
-              (th "")))
-          (buttons/as-list :state state :type :product :btn-txt "Sell"))))
-
-    (div :class "levels" (levels/product :state state))
+      (levels/product-levels :state state))
 
     (if-tpl god
       (div :class "debug"
