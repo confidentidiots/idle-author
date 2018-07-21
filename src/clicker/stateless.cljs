@@ -66,14 +66,14 @@
 ; Ditto for unreached-levels
 (defn reached-levels [data state type]
   "Get current reached levels (research) and default to first."
-  (let [levels (get-in data [type :levels :items])
+  (let [levels (get-in data [type :levels])
         default-level (:key (first levels))
         reached-levels (get-in state [:levels type] [default-level])]
       reached-levels))
 
 (defn unreached-levels [data state type]
   "Get current un-reached levels (research)."
-  (let [levels (get-in data [type :levels :items])
+  (let [levels (get-in data [type :levels])
         levels-keys (map :key levels)
         reached-levels (reached-levels data state type)
         unreached-levels (clojure.set/difference (set levels-keys) (set reached-levels))]

@@ -5,7 +5,7 @@
 (defelem level-button [{:keys [level type status]} kids]
   (if (= status :old)
     (span "✓")
-    (button :class (str status) "Start researching...")))
+    (button :click #(js/alert "impl me") :class (str status) "Start researching...")))
 ;
 (defelem ^:private reached-list [{:keys [state type]} kids]
   (for [level-key (e/reached-levels state type)]

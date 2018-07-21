@@ -8,14 +8,12 @@
       :gain-fn (fn [n word-cost] (/ word-cost (js/Math.log10 (+ 1 n))))
       :loss :clicks
       :levels
-      {
-        :items
-        [
-          {:key :genesis :name "Genesis" :clicks 0 :cost 0}
-          {:key :poem :name "Poem" :clicks 1000 :cost 500 :ticker "You've invented the poem."}
-          {:key :knowledge :name "Knowledge" :clicks 10000 :cost 5000 :ticker "After all these words, you're suddenly concerned with preserving knowledge."}
-          {:key :journalism :name "Journalism" :clicks 1000000 :cost 500000 :ticker "You've invented Journalism. Bring your own soapbox!"}
-          {:key :modern :name "Modern" :clicks 10000000 :cost 5000000 :ticker "You've entered the modern era."}]}
+      [
+        {:key :genesis :name "Genesis" :clicks 0 :cost 0}
+        {:key :poem :name "Poem" :clicks 1000 :cost 500 :ticker "You've invented the poem."}
+        {:key :knowledge :name "Knowledge" :clicks 10000 :cost 5000 :ticker "After all these words, you're suddenly concerned with preserving knowledge."}
+        {:key :journalism :name "Journalism" :clicks 1000000 :cost 500000 :ticker "You've invented Journalism. Bring your own soapbox!"}
+        {:key :modern :name "Modern" :clicks 10000000 :cost 5000000 :ticker "You've entered the modern era."}]
       :items
       [
         {:key :gibberish :level [:genesis] :name "Gibberish" :cost 5 :ticker "Your first guttural utterance brings tears to your eyes."}
@@ -53,19 +51,17 @@
       :gain-fn (fn [n money-cost] (/ (js/Math.log money-cost) (js/Math.log (+ n 1))))
       :loss :money
       :levels
-      {
-        :items
-        [
-          {:key :genesis :name "Genesis" :clicks 0 :cost 0 :ticker "You've just crawled out of the ocean and find a stick. Something urges you to draw in the sand..."}
-          {:key :stone-age :name "Stone Age" :clicks 1000 :cost 500 :ticker "Sand washes away quickly. Good thing you've discovered the walls in your little cave."}
-          {:key :modern :name "Modern" :clicks 10000 :cost 5000 :ticker "Ah, the modern age."}]}
+      [
+        {:key :genesis :name "Genesis" :clicks 0 :cost 0 :ticker "You've just crawled out of the ocean and find a stick. Something urges you to draw in the sand..."}
+        {:key :stone-age :name "Stone Age" :clicks 1000 :cost 500 :ticker "Sand washes away quickly. Good thing you've discovered the walls in your little cave."}
+        {:key :modern :name "Modern" :clicks 10000 :cost 5000 :ticker "Ah, the modern age."}]
 
       :items
       [
         {:key :stick :level [:genesis] :name "Stick" :cost 1.1}
         {:key :sand :level [:genesis] :name "Sand" :cost 1.1}
         {:key :flint :level [:stone-age] :name "Flint" :cost 1.2}
-        {:key :pencil-grip :level [:modern] :name "Pencil grip" :cost 1.5 :ticker "Ah, isn't that more comfortable."}
+        {:key :pencil-grip :level [:modern] :name "Pencil grip" :cost 1.5 :ticker "Ah, isn't that more comfortable?"}
         {:key :notepad :level [:modern] :name "Notepad" :cost 2}
         {:key :leather-bound-notepad :level [:modern] :name "Leather-bound notepad" :cost 10}
         {:key :standing-desk :level [:modern] :name "Standing desk" :cost 500}
