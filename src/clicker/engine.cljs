@@ -11,10 +11,8 @@
 
 (def data db/data)
 
-(defn items [state type]
-  (if (instance? cljs.core.Atom state)
-    (s/items data @state type)
-    (s/items data state type)))
+(defn items [group]
+  (s/items db/group group))
 
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:clicks] (fnil change-fn 0)))
