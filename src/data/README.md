@@ -8,10 +8,11 @@ Spread over many CLJS files, each serving a purpose:
 
 - `loss.cljs` shows which key in the state is **decremented** and by how much when an item is tapped.
 - `gain.cljs` shows which key in the state is **incremented** and by how much when an item is tapped.
-- `names.cljs` is a name lookup which can be i18nised.
+- `name.cljs` is a name lookup which can be i18nised.
+- `group.cljs` items grouped.
 - `ticker.cljs` is shown in the ticker when you tap something for the first time.
-- `dependencies.cljs` is like "research" and shows which item(s) higher up in the tree unlocks this item.
-- `functions.cljs` gain and loss isn't always constant, and can be a function of some other parameters, like item quantity (i.e. the number of times you tapped an item).
+- `dependency.cljs` is like "research" and shows which item(s) higher up in the tree unlocks this item.
+- `function.cljs` gain and loss isn't always constant, and can be a function of some other parameters, like item quantity (i.e. the number of times you tapped an item).
 
 # Ideas
 

@@ -1,4 +1,4 @@
-(ns data.functions)
+(ns data.function)
 
 (def data)
 "When selling an item, its `:decay-fn` determines the sales income and it is a function of

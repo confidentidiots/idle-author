@@ -1,18 +1,17 @@
-(ns data.dependencies)
+(ns data.dependency)
 
 (def data
   {
     ;:genesis [nil]
+    :modern [:journalism :stone-age]
 
     ; product research
     :poem [:genesis]
     :knowledge [:poem]
     :journalism [:knowledge]
-    :modern [:journalism]
 
     ; tool research
     :stone-age [:genesis]
-    :modern [:stone-age]
 
     ; product
     :gibberish [:genesis]

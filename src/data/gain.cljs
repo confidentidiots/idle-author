@@ -29,9 +29,9 @@
 
       ; tool
       :stick { :add-every :decay-fn-tools}
-      :sand { :add-every :decay-fn-tools}.1
-      :flint { :add-every :decay-fn-tools}.2
-      :pencil-grip { :add-every :decay-fn-tools}.5
+      :sand { :add-every :decay-fn-tools}
+      :flint { :add-every :decay-fn-tools}
+      :pencil-grip { :add-every :decay-fn-tools}
       :notepad { :add-every :decay-fn-tools}
       :leather-bound-notepad { :add-every :decay-fn-tools}
       :standing-desk { :add-every :decay-fn-tools}

@@ -3,16 +3,15 @@
 (def data
   {
     ;:genesis      { :clicks 0 :money 0}
+    :modern       { :clicks 10000000 :money 5000000}
 
     ; product research
     :poem         { :clicks 1000 :money 500}
     :knowledge    { :clicks 10000 :money 5000}
     :journalism    { :clicks 1000000 :money 500000}
-    :modern       { :clicks 10000000 :money 5000000}
 
     ; tool research
     :stone-age    { :clicks 1000 :money 500}
-    :modern       { :clicks 10000 :money 5000}
 
     ; product
     :gibberish   { :clicks 5}

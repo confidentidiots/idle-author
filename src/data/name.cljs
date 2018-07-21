@@ -1,19 +1,18 @@
-(ns data.names)
+(ns data.name)
 
 ; this can be i18nised
 (def data
   {
     :genesis "Genesis"
+    :modern "Modern"
 
     ; product research
     :poem "Poem"
     :knowledge "Knowledge"
     :journalism "Journalism"
-    :modern "Modern"
 
     ; tool research
     :stone-age "Stone Age"
-    :modern "Modern"
 
     ; product
     :gibberish "Gibberish"

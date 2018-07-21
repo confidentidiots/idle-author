@@ -9,11 +9,12 @@
 ; The caller would initialise game state like this:
 ; (def state (atom {}))
 
-; (defn click [state]
-;   (-> state
-;     (update-in [:clicks] inc)))
-
 (def data db/data)
+
+(defn items [state type]
+  (if (instance? cljs.core.Atom state)
+    (s/items data @state type)
+    (s/items data state type)))
 
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:clicks] (fnil change-fn 0)))
@@ -49,11 +50,6 @@
   (if (instance? cljs.core.Atom state)
     (s/unreached-levels data @state type)
     (s/unreached-levels data state type)))
-
-(defn items [state type]
-  (if (instance? cljs.core.Atom state)
-    (s/items data @state type)
-    (s/items data state type)))
 
 (defn get-level [type level-key]
   (s/get-level data type level-key))

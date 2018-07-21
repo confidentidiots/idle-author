@@ -1,18 +1,17 @@
-(ns data.db)
+(ns data.ticker)
 
 (def data
  {
   :genesis "You've just crawled out of the ocean and find a stick. Something urges you to draw in the sand..."
+  :modern "Ah, the modern age."
 
   ; product research
   :poem "You've invented the poem."
   :knowledge "After all these words, you're suddenly concerned with preserving knowledge."
   :journalism "You've invented Journalism. Bring your own soapbox!"
-  :modern "You've entered the modern era."
 
   ; tool research
   :stone-age "Sand washes away quickly. Good thing you've discovered the walls in your little cave."
-  :modern "Ah, the modern age."
 
   ; product
   :gibberish "Your first guttural utterance brings tears to your eyes."

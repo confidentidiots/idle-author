@@ -3,7 +3,6 @@
   (:require
     [clicker.engine :as e]
     [clicker.util :as u]
-    [data.db :as d]
     [clojure.string :as string]
     [goog.string :as gstring]
     [goog.string.format]
@@ -14,6 +13,11 @@
 (defc state u/default-state)
 (defc= add-every (:add-every state 0))
 
+(defn game-loop []
+  (do
+    (e/click state :change-fn (fn [m] (+ m @add-every)))
+    (dao/put-state @state #())))
+
 (dosync
   (dao/init-db)
   (js/setTimeout
@@ -21,12 +25,7 @@
       (do
         (dao/get-state "init" #(reset! state %))))
     500)
-  (js/setInterval
-    (fn []
-      (do
-        (e/click state :change-fn (fn [m] (+ m @add-every)))
-        (dao/put-state @state #())))
-    1000))
+  (js/setInterval game-loop 1000))
 
 (defc god false)
 (defn level-value-fn [n]
