@@ -2,12 +2,6 @@
   (:require [cljs.test :refer-macros [deftest is use-fixtures]]
             [clicker.engine :as e]))
 
-;
-(deftest test-items
-  (let [items (e/items :product-level)]
-    (is (= (count items) 5))
-    (is (= (first items)) :genesis)
-    (is (= (last items)) :modern)))
 
 ; (deftest test-click
 ;   (let [state (atom {})]

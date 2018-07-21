@@ -2,6 +2,7 @@
   (:import [goog.string.format])
   (:require
     [clicker.engine :as e]
+    [data.db :as db]
     [goog.string :as gstring]
     [goog.string.format]))
 
@@ -14,8 +15,8 @@
   (for [n [1 10 100 1000]]
     (tap-button :state state :name name :btn-txt btn-txt :n n)))
 
-(defelem ^:private as-list [{:keys [state type btn-txt]} kids]
-  (for [thing (e/items state type)]
+(defelem ^:private as-list [{:keys [state group btn-txt]} kids]
+  (for [thing (db/items group)]
     (do
       (let [name (thing :name)
             key (thing :key)
@@ -42,7 +43,7 @@
           (th "Boost")
           (th "# Bought")
           (th "")))
-      (as-list :state state :type :tool :btn-txt "Buy"))))
+      (as-list :state state :group :tool :btn-txt "Buy"))))
 
 ;
 (defelem product-list [{:keys [state]} kids]
@@ -56,4 +57,4 @@
           (th "$ Income")
           (th "# Sold")
           (th "")))
-      (as-list :state state :type :product :btn-txt "Sell"))))
+      (as-list :state state :group :product :btn-txt "Sell"))))

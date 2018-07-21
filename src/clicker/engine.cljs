@@ -9,10 +9,7 @@
 ; The caller would initialise game state like this:
 ; (def state (atom {}))
 
-(def data db/data)
-
-(defn items [group]
-  (s/items db/group group))
+(def data {})
 
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:clicks] (fnil change-fn 0)))

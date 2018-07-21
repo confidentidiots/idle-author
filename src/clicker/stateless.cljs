@@ -3,9 +3,6 @@
     [clicker.util :as u]
     [clojure.set]))
 
-(defn items [data group]
-  (map #(first %) (filter (fn [[k v]] (some (partial = group) v)) data)))
-
 ; TODO fix below
 (defn tap [db state thing-name & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state

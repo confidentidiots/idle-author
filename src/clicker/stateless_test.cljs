@@ -4,11 +4,7 @@
             [data.db :as db]))
 
 ;
-(deftest test-items
-  (let [items (s/items db/group :product-level)]
-    (is (= (count items) 5))
-    (is (= (first items)) :genesis)
-    (is (= (last items)) :modern)))
+
 
 ; (deftest test-items
 ;   (let [state {:levels {:product [:poem]}}
