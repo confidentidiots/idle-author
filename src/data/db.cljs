@@ -19,8 +19,23 @@
 (defn items [group-key]
   (map #(first %) (filter (fn [[k v]] (some (partial = group-key) v)) group/data)))
 
-; (defn item-dependency [item]
-;   (db/dependency item))
+(defn item-dependency [item]
+  (dependency/data item))
 
-; (defn item-function [item]
-;   (db/function item))
+(defn item-function [item]
+  (function/data item))
+;
+(defn item-gain [item]
+  (gain/data item))
+;
+(defn item-group [item]
+  (group/data item))
+;
+(defn item-loss [item]
+  (loss/data item))
+;
+(defn item-name [item]
+  (name/data item))
+;
+(defn item-ticker [item]
+  (ticker/data item))
