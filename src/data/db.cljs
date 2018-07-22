@@ -1,7 +1,7 @@
 (ns data.db
   (:require
     [data.dependency :as dependency]
-    [data.function :as function]
+    [data.funs :as funs]
     [data.gain :as gain]
     [data.group :as group]
     [data.loss :as loss]
@@ -23,7 +23,7 @@
   (dependency/data item))
 
 (defn item-function [item]
-  (function/data item))
+  (funs/data item))
 ;
 (defn item-gain [item]
   (gain/data item))
