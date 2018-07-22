@@ -1,22 +1,18 @@
 (ns clicker.stateless-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [clicker.stateless :as s]
-            [data.db :as db]))
+            [clicker.stateless :as s]))
 
-;
-
-
-; (deftest test-items
-;   (let [state {:levels {:product [:poem]}}
-;         items (s/items data state :product)]
-;     (is (= (count items) 5))
-;     (is (= (:key (first items)) :sonnet))
-;     (is (= (:key (last items)) :elegy))))
+(deftest test-apply-gain
+  (let [state {}
+        state2 (s/apply-gain state :slogan 2)
+        state3 (s/apply-gain state2 :copy)]
+    (is (= (state2 :money) 54.17831369176747))
+    (is (= (state3 :money) 386.37112318050373))))
 
 ; (deftest test-tap
 ;   (let [state {}
-;         state2 (s/tap data state "Slogan" :n 2)
-;         state3 (s/tap data state2 "Copy")]
+;         state2 (s/tap state :slogan :n 2)
+;         state3 (s/tap state2 :copy)]
 
 ;     (is (= (get-in state2 [:things :slogan]) 2))
 ;     (is (= (state2 :money) 54.17831369176747))

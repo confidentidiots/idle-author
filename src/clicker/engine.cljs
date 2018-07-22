@@ -19,34 +19,38 @@
     (reset! state (s/tap data @state thing-name :n n))
     state))
 
-; check if atom, since it might have already been dereferenced
-; at the call-site e.g. via formula cell `(cell= the-atom)`
-(defn x-can-tap? [state thing-name & {:keys [n] :or {n 1}}]
-  (if (instance? cljs.core.Atom state)
-    (s/can-tap? data @state thing-name :n n)
-    (s/can-tap? data state thing-name :n n)))
-(defn can-tap? [state thing-name & {:keys [n] :or {n 1}}]
-  true)
-
-(defn next-gain [state thing-name]
-  (if (instance? cljs.core.Atom state)
-    (s/next-gain data @state thing-name)
-    (s/next-gain data state thing-name)))
-
+;
 (defn thing-count [state thing-key]
   (if (instance? cljs.core.Atom state)
     (s/thing-count @state thing-key)
     (s/thing-count state thing-key)))
+;
+(defn can-tap? [state thing-name & {:keys [n] :or {n 1}}]
+  true)
 
-(defn reached-levels [state type]
-  (if (instance? cljs.core.Atom state)
-    (s/reached-levels data @state type)
-    (s/reached-levels data state type)))
+; check if atom, since it might have already been dereferenced
+; at the call-site e.g. via formula cell `(cell= the-atom)`
+; (defn can-tap? [state thing-name & {:keys [n] :or {n 1}}]
+;   (if (instance? cljs.core.Atom state)
+;     (s/can-tap? data @state thing-name :n n)
+;     (s/can-tap? data state thing-name :n n)))
 
-(defn unreached-levels [state type]
-  (if (instance? cljs.core.Atom state)
-    (s/unreached-levels data @state type)
-    (s/unreached-levels data state type)))
+; (defn next-gain [state thing-name]
+;   (if (instance? cljs.core.Atom state)
+;     (s/next-gain data @state thing-name)
+;     (s/next-gain data state thing-name)))
 
-(defn get-level [type level-key]
-  (s/get-level data type level-key))
+
+
+; (defn reached-levels [state type]
+;   (if (instance? cljs.core.Atom state)
+;     (s/reached-levels data @state type)
+;     (s/reached-levels data state type)))
+
+; (defn unreached-levels [state type]
+;   (if (instance? cljs.core.Atom state)
+;     (s/unreached-levels data @state type)
+;     (s/unreached-levels data state type)))
+
+; (defn get-level [type level-key]
+;   (s/get-level data type level-key))

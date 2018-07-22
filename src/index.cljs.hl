@@ -60,9 +60,11 @@
       (buttons/tool-list :state state)
       (buttons/product-list :state state))
 
-    (div :class "wrapper"
-      (levels/product-levels :state state)
-      (levels/tool-levels :state state))
+
+    (buttons/item-list :state state :group :product-level)
+    (buttons/item-list :state state :group :tool-level)
+      ; (levels/product-levels :state state)
+      ; (levels/tool-levels :state state))
 
     (if-tpl god
       (div :class "debug"

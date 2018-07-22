@@ -58,3 +58,16 @@
           (th "# Sold")
           (th "")))
       (as-list :state state :group :product :btn-txt "Sell"))))
+;
+(defelem item-list [{:keys [state group]} kids]
+  (div :class "sell"
+    (table
+      (caption (str group))
+      (thead
+        (tr
+          (th (str group))
+          (th "Loss")
+          (th "Gain")
+          (th "# tapped")
+          (th "")))
+      (as-list :state state :group group :btn-txt "Sell"))))
