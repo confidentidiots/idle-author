@@ -29,7 +29,7 @@
       (update-in state [k] (fnil gain-amount 0)))))
 
 
-(defn apply-gain [state thing quantity]
+(defn apply-gain [state thing & {:keys [quantity] :or {quantity 1}}]
   "Get the :gain data for thing, and apply it to the state :quantity times"
   (let [gain (data.db/item-gain thing)
         ; gain = { :money :gain-fn-products}
@@ -45,7 +45,8 @@
 (number? :gain-fn-products)
 (data.db/item-function :gain-fn-products)
 (apply-gain1 :money :gain-fn-products {} :slogan 1)
-(reduce (fn [state [k v]] (apply-gain1 k v state :slogan 1)) {} (data.gain/data :slogan))
+(reduce (fn [state [k v]] (apply-gain1 k v state :slogan 2)) {} (data.gain/data :slogan))
+(reduce (fn [state [k v]] (apply-gain1 k v state :copy 1)) {:money 54.17831369176747} (data.gain/data :slogan))
 
 ; TODO fix below
 (defn tap [state thing & {:keys [n] :or {n 1}}]
