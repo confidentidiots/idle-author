@@ -4,8 +4,8 @@
 
 (deftest test-apply-gains
   (let [state {}
-        state2 (s/apply-gains state :slogan :quantity 2)
-        state3 (s/apply-gains state2 :copy)]
+        state2 (s/apply-gains state data.db :slogan :quantity 2)
+        state3 (s/apply-gains state2 data.db :copy)]
     (is (= (state2 :money) 54.17831369176747))
     (is (= (state3 :money) 386.37112318050373))))
 

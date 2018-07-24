@@ -1,8 +1,7 @@
 (ns clicker.stateless
   (:require
     [clicker.util :as u]
-    [clojure.set]
-    [data.db :as db]))
+    [clojure.set]))
 
 
 (defn thing-count [state thing-key]
@@ -17,36 +16,36 @@
         future-spread (map #(+ current-count %) spread)]
       future-spread))
 ;
-(defn apply-gain-or-loss [k v state thing quantity op]
+(defn apply-gain-or-loss [k v state db thing quantity op]
   "k the key is the item being increased/decreased, e.g. :money or :gold
   v the value is either a number of a funtion key that can be looked up in the funs db."
   (if (number? v)
     (update-in state [k] (fnil (* quantity v) 0))
     (let [quantities (future-quantities state thing quantity)
-          thing-loss (val (first (data.db/item-loss thing)))
-          gain-fn (data.db/item-function v)
+          thing-loss (val (first (db/item-loss thing)))
+          gain-fn (db/item-function v)
           thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
           gain-amount (partial + thing-gain)]
       (update-in state [k] (fnil gain-amount 0)))))
 ;
-(defn apply-gain [k v state thing quantity]
+(defn apply-gain [k v state db thing quantity]
   "k the key is the item being increased, e.g. :money or :gold
   v the value is either a number of a funtion key that can be looked up in the funs db."
   (if (number? v)
     (update-in state [k] (fnil (* quantity v) 0))
     (let [quantities (future-quantities state thing quantity)
-          thing-loss (val (first (data.db/item-loss thing)))
-          gain-fn (data.db/item-function v)
+          thing-loss (val (first (db/item-loss thing)))
+          gain-fn (db/item-function v)
           thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
           gain-amount (partial + thing-gain)]
       (update-in state [k] (fnil gain-amount 0)))))
 
 ; TODO apply-gain-or-loss with :op +/- ?
-(defn apply-gains [state thing & {:keys [quantity] :or {quantity 1}}]
+(defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
   "Get the :gain data for thing, and apply it to the state :quantity times"
-  (let [gain (data.db/item-gain thing)
+  (let [gain (db/item-gain thing)
         ; gain = { :money :gain-fn-products }
-        states (reduce (fn [st [k v]] (apply-gain k v st thing quantity)) state gain)]
+        states (reduce (fn [st [k v]] (apply-gain k v st db thing quantity)) state gain)]
     states))
 
 ;
