@@ -2,10 +2,10 @@
   (:require [cljs.test :refer-macros [deftest is]]
             [clicker.stateless :as s]))
 
-(deftest test-apply-gain
+(deftest test-apply-gains
   (let [state {}
-        state2 (s/apply-gain state :slogan :quantity 2)
-        state3 (s/apply-gain state2 :copy)]
+        state2 (s/apply-gains state :slogan :quantity 2)
+        state3 (s/apply-gains state2 :copy)]
     (is (= (state2 :money) 54.17831369176747))
     (is (= (state3 :money) 386.37112318050373))))
 
