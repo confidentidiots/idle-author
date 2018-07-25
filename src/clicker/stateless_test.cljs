@@ -1,17 +1,17 @@
 (ns clicker.stateless-test
   (:require [cljs.test :refer-macros [deftest is]]
-            [clicker.stateless :as s]))
-            ; [data.db :as db]))
+            [clicker.stateless :as s]
+            [testdata.db :refer [DB]]))
 
-(def the-db (data.db.DB.))
+(def the-db (DB.))
 
 (deftest test-gains-simple
   (is (= (s/apply-gains {} the-db :simple) {:money 10})))
 
 ; (deftest test-apply-gains
 ;   (let [state {}
-;         state2 (s/apply-gains state data.foo :slogan :quantity 2)
-;         state3 (s/apply-gains state2 data.foo :copy)]
+;         state2 (s/apply-gains state the-db :slogan :quantity 2)
+;         state3 (s/apply-gains state2 the-db :copy)]
 ;     (is (= (state2 :money) 54.17831369176747))
 ;     (is (= (state3 :money) 386.37112318050373))))
 

@@ -1,7 +1,8 @@
 (ns clicker.stateless
   (:require
     [clicker.util :as u]
-    [clojure.set]))
+    [clojure.set]
+    [data.idb :refer [item-gain item-loss item-function]]))
 
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
@@ -21,8 +22,8 @@
   (if (number? v)
     (update-in state [k] (fnil (* quantity v) 0))
     (let [quantities (future-quantities state thing quantity)
-          thing-loss (val (first (db/item-loss thing)))
-          gain-fn (db/item-function v)
+          thing-loss (val (first (item-loss db thing)))
+          gain-fn (item-function db v)
           thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
           gain-amount (partial + thing-gain)]
       (update-in state [k] (fnil gain-amount 0)))))
@@ -31,10 +32,10 @@
   "k the key is the item being increased, e.g. :money or :gold
   v the value is either a number of a funtion key that can be looked up in the funs db."
   (if (number? v)
-    (update-in state [k] (fnil (* quantity v) 0))
+    (assoc-in state [k] (* quantity v))
     (let [quantities (future-quantities state thing quantity)
-          thing-loss (val (first (db/item-loss thing)))
-          gain-fn (db/item-function v)
+          thing-loss (val (first (item-loss db thing)))
+          gain-fn (item-function db v)
           thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
           gain-amount (partial + thing-gain)]
       (update-in state [k] (fnil gain-amount 0)))))
@@ -42,10 +43,17 @@
 ; TODO apply-gain-or-loss with :op +/- ?
 (defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
   "Get the :gain data for thing, and apply it to the state :quantity times"
-  (let [gain (db/item-gain thing)
+  (let [gain (item-gain db thing)
         ; gain = { :money :gain-fn-products }
         states (reduce (fn [st [k v]] (apply-gain k v st db thing quantity)) state gain)]
     states))
+;
+; (defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
+;   "Get the :gain data for thing, and apply it to the state :quantity times"
+;   (let [gain (item-gain db thing)
+;         ; gain = { :money :gain-fn-products }
+;         states (reduce (fn [st [k v]] (println "> k " k " > v " v )) state gain)]
+;     {:money 10}))
 
 
 ; (data.gain/data :slogan)
@@ -64,8 +72,8 @@
   "Given I tap a thing, make changes to the current game state
   and return the game state.
   It's up to the caller to wrap this with 'can-tap?'"
-  (let [gain (db/item-gain thing) ; e.g. { :money :gain-fn-products}
-        loss (db/item-loss thing)] ; e.g. { :clicks 1000 :money 500}
+  (let [gain (item-gain db thing) ; e.g. { :money :gain-fn-products}
+        loss (item-loss db thing)] ; e.g. { :clicks 1000 :money 500}
         ; is :gain a function or a number?
         ; gains (map (fn [[k v]] (xxx k v)) gain)]
 
