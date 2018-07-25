@@ -1,8 +1,8 @@
-(ns db.dao
+(ns dao.dao
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require
    [cljs.core.async :refer [chan <! sub]]
-   [db.indexdb :as idxdb]
+   [dao.indexdb :as idxdb]
    [clicker.util :as u]))
 
 (def db-name "idle-author")

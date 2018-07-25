@@ -1,4 +1,4 @@
-(ns db.indexdb
+(ns dao.indexdb
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs.core.async :as async :refer [chan <! >! put! sub pub]]
             [clojure.string :as string]

@@ -6,7 +6,7 @@
     [clojure.string :as string]
     [goog.string :as gstring]
     [goog.string.format]
-    [db.dao :as dao]
+    [dao.dao :as dao]
     [ui.buttons :as buttons]
     [ui.levels :as levels]))
 

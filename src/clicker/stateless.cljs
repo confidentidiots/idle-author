@@ -3,7 +3,6 @@
     [clicker.util :as u]
     [clojure.set]))
 
-
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
 
@@ -48,20 +47,20 @@
         states (reduce (fn [st [k v]] (apply-gain k v st db thing quantity)) state gain)]
     states))
 
-;
+
 ; (data.gain/data :slogan)
 ; (future-quantities {} :slogan 1)
-; (data.db/item-loss :slogan)
+; (db/item-loss :slogan)
 ; (val (first {:clicks 10}))
 ; (map val {:clicks 10})
 ; (number? :gain-fn-products)
-; (data.db/item-function :gain-fn-products)
+; (db/item-function :gain-fn-products)
 ; (apply-gain :money :gain-fn-products {} :slogan 1)
 ; (reduce (fn [state [k v]] (apply-gain k v state :slogan 2)) {} (data.gain/data :slogan))
 ; (reduce (fn [state [k v]] (apply-gain k v state :copy 1)) {:money 54.17831369176747} (data.gain/data :slogan))
 
 ; TODO fix below
-(defn tap [state thing & {:keys [n] :or {n 1}}]
+(defn tap [state db thing & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state
   and return the game state.
   It's up to the caller to wrap this with 'can-tap?'"
