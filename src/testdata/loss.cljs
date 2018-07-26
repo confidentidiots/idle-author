@@ -2,6 +2,6 @@
 
 (def data
   {
-    :simple       { :effort 5}
-    :complex   { :effort :loss-fn}
-    :multi { :effort :loss-fn :gold 1}})
+    :simple       { :effort 10}
+    :complex   { :effort 20}
+    :multi { :effort 30 :gold 1}})

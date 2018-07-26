@@ -12,7 +12,7 @@ Spread over many CLJS files, each serving a purpose:
 - `group.cljs` items grouped.
 - `ticker.cljs` is shown in the ticker when you tap something for the first time.
 - `dependency.cljs` is like "research" and shows which item(s) higher up in the tree unlocks this item.
-- `function.cljs` gain and loss isn't always constant, and can be a function of some other parameters, like item quantity (i.e. the number of times you tapped an item).
+- `funcs.cljs` gain and loss isn't always constant, and can be a function of some other parameters, like item quantity (i.e. the number of times you tapped an item).
 
 # Ideas
 

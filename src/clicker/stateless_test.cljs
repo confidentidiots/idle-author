@@ -10,7 +10,12 @@
   (is (= (s/apply-gains {} the-db :simple :quantity 2) {:money 20}))
   (is (= (s/apply-gains {:money 1} the-db :simple) {:money 11}))
   (is (= (s/apply-gains {:money 1} the-db :simple :quantity 2) {:money 21})))
-
+;
+(deftest test-gains-complex
+  (is (= (s/apply-gains {} the-db :complex) {:money 20}))
+  (is (= (s/apply-gains {} the-db :complex :quantity 2) {:money 60}))
+  (is (= (s/apply-gains {:money 1} the-db :complex) {:money 21}))
+  (is (= (s/apply-gains {:money 1} the-db :complex :quantity 2) {:money 61})))
 ; (deftest test-apply-gains
 ;   (let [state {}
 ;         state2 (s/apply-gains state the-db :slogan :quantity 2)

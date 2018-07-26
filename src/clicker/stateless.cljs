@@ -16,18 +16,6 @@
         future-spread (map #(+ current-count %) spread)]
       future-spread))
 ;
-(defn apply-gain-or-loss [k v state db thing quantity op]
-  "k the key is the item being increased/decreased, e.g. :money or :gold
-  v the value is either a number of a funtion key that can be looked up in the funs db."
-  (if (number? v)
-    (update-in state [k] (fnil (* quantity v) 0))
-    (let [quantities (future-quantities state thing quantity)
-          thing-loss (val (first (item-loss db thing)))
-          gain-fn (item-function db v)
-          thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
-          gain-amount (partial + thing-gain)]
-      (update-in state [k] (fnil gain-amount 0)))))
-;
 (defn apply-gain [k v state db thing quantity]
   "k the key is the item being increased, e.g. :money or :gold
   v the value is either a number of a funtion key that can be looked up in the funs db."
@@ -40,15 +28,33 @@
           thing-gain (reduce + (map #(gain-fn % thing-loss) quantities))
           gain-amount (partial + thing-gain)]
       (update-in state [k] (fnil gain-amount 0)))))
-
-; TODO apply-gain-or-loss with :op +/- ?
+;
+(defn apply-gain-or-loss [k v state db thing quantity op fun]
+  "k the key is the item being increased/decreased, e.g. :money or :gold
+  v the value is either a number of a funtion key that can be looked up in the funs db."
+  (if (number? v)
+    (let [amount (partial op (* quantity v))]
+      (update-in state [k] amount))
+    (let [quantities (future-quantities state thing quantity)
+          opposite (val (first (fun db thing)))
+          gain-fn (item-function db v)
+          value (reduce op (map #(gain-fn % opposite) quantities))
+          value-fn (partial op value)]
+      (update-in state [k] (fnil value-fn 0)))))
+;
 (defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
   "Get the :gain data for thing, and apply it to the state :quantity times"
   (let [gain (item-gain db thing)
         ; gain = { :money :gain-fn-products }
-        states (reduce (fn [st [k v]] (apply-gain k v st db thing quantity)) state gain)]
+        states (reduce (fn [st [k v]] (apply-gain-or-loss k v st db thing quantity + item-loss)) state gain)]
     states))
 ;
+(defn apply-losses [state db thing & {:keys [quantity] :or {quantity 1}}]
+  "Get the :gain data for thing, and apply it to the state :quantity times"
+  (let [gain (item-loss db thing)
+        ; gain = { :money :gain-fn-products }
+        states (reduce (fn [st [k v]] (apply-gain-or-loss k v st db thing quantity - item-gain)) state gain)]
+    states))
 ; (defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
 ;   "Get the :gain data for thing, and apply it to the state :quantity times"
 ;   (let [gain (item-gain db thing)
