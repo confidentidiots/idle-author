@@ -32,7 +32,8 @@
   "k the key is the item being increased, e.g. :money or :gold
   v the value is either a number of a funtion key that can be looked up in the funs db."
   (if (number? v)
-    (assoc-in state [k] (* quantity v))
+    (let [gain-amount (partial + (* quantity v))]
+      (update-in state [k] gain-amount))
     (let [quantities (future-quantities state thing quantity)
           thing-loss (val (first (item-loss db thing)))
           gain-fn (item-function db v)

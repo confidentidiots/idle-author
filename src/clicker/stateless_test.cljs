@@ -6,7 +6,10 @@
 (def the-db (DB.))
 
 (deftest test-gains-simple
-  (is (= (s/apply-gains {} the-db :simple) {:money 10})))
+  (is (= (s/apply-gains {} the-db :simple) {:money 10}))
+  (is (= (s/apply-gains {} the-db :simple :quantity 2) {:money 20}))
+  (is (= (s/apply-gains {:money 1} the-db :simple) {:money 11}))
+  (is (= (s/apply-gains {:money 1} the-db :simple :quantity 2) {:money 21})))
 
 ; (deftest test-apply-gains
 ;   (let [state {}
