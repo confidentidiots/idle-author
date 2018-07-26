@@ -16,6 +16,20 @@
   (is (= (s/apply-gains {} the-db :complex :quantity 2) {:money 60}))
   (is (= (s/apply-gains {:money 1} the-db :complex) {:money 21}))
   (is (= (s/apply-gains {:money 1} the-db :complex :quantity 2) {:money 61})))
+
+;
+(deftest test-loss-simple
+  (is (= (s/apply-losses {} the-db :simple) {:effort -10}))
+  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:effort -5}))
+  (is (= (s/apply-losses {:effort 1} the-db :simple) {:effort -9}))
+  (is (= (s/apply-losses {:effort 1} the-db :simple :quantity 2) {:effort -4})))
+;
+(deftest test-loss-complex
+  (is (= (s/apply-losses {} the-db :complex) {:effort -20}))
+  (is (= (s/apply-losses {} the-db :complex :quantity 2) {:effort -40}))
+  (is (= (s/apply-losses {:effort 1} the-db :complex) {:effort -19}))
+  (is (= (s/apply-losses {:effort 1} the-db :complex :quantity 2) {:effort -39})))
+
 ; (deftest test-apply-gains
 ;   (let [state {}
 ;         state2 (s/apply-gains state the-db :slogan :quantity 2)
