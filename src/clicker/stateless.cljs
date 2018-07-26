@@ -49,51 +49,18 @@
 (defn apply-losses [state db thing & {:keys [quantity] :or {quantity 1}}]
   (apply-gains-or-losses state db thing item-loss apply-loss quantity))
 
-; (defn apply-gains [state db thing & {:keys [quantity] :or {quantity 1}}]
-;   "Get the :gain data for thing, and apply it to the state :quantity times"
-;   (let [gain (item-gain db thing)
-;         ; gain = { :money :gain-fn-products }
-;         states (reduce (fn [st [k v]] (println "> k " k " > v " v )) state gain)]
-;     {:money 10}))
-
-
-; (data.gain/data :slogan)
-; (future-quantities {} :slogan 1)
-; (db/item-loss :slogan)
-; (val (first {:clicks 10}))
-; (map val {:clicks 10})
-; (number? :gain-fn-products)
-; (db/item-function :gain-fn-products)
-; (apply-gain :money :gain-fn-products {} :slogan 1)
-; (reduce (fn [state [k v]] (apply-gain k v state :slogan 2)) {} (data.gain/data :slogan))
-; (reduce (fn [state [k v]] (apply-gain k v state :copy 1)) {:money 54.17831369176747} (data.gain/data :slogan))
-
-; TODO fix below
 (defn tap [state db thing & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state
   and return the game state.
   It's up to the caller to wrap this with 'can-tap?'"
-  (let [gain (item-gain db thing) ; e.g. { :money :gain-fn-products}
-        loss (item-loss db thing)] ; e.g. { :clicks 1000 :money 500}
-        ; is :gain a function or a number?
-        ; gains (map (fn [[k v]] (xxx k v)) gain)]
-
-        ; thing-loss (thing :cost)
-
-        ; thing-gain (reduce + (map #(gain-fn % thing-loss) future-spread))
-        ; gain-amount (partial + thing-gain)]
-        ; loss-amount (partial + (- (* n thing-loss)))]))
-      (println (str " >>> " loss))))
-
-    ; (-> state
-    ;   ; record that we've tapped one more of this thing
-    ;   (update-in [:things thing] (fnil #(+ % n) 0))
-    ;   ; you gain some
-    ;   (update-in [gain-key] (fnil gain-amount 0))
-    ;   ; you lose some
-    ;   (update-in [loss-key] (fnil loss-amount 0)))))
-
-
+    (-> state
+      ; you gain some
+      (apply-gains db thing :quantity n)
+      ; you lose some
+      (apply-losses db thing :quantity n)
+      ; record that we've tapped one more of this thing.
+      ; This must come last, as apply-* depends on "current-count"
+      (update-in [:things thing] (fnil #(+ % n) 0))))
 
 ;
 

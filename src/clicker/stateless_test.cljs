@@ -30,24 +30,30 @@
   (is (= (s/apply-losses {:effort 1} the-db :complex) {:effort -19}))
   (is (= (s/apply-losses {:effort 1} the-db :complex :quantity 2) {:effort -39})))
 
-; (deftest test-apply-gains
-;   (let [state {}
-;         state2 (s/apply-gains state the-db :slogan :quantity 2)
-;         state3 (s/apply-gains state2 the-db :copy)]
-;     (is (= (state2 :money) 54.17831369176747))
-;     (is (= (state3 :money) 386.37112318050373))))
+(deftest test-tap
+  (let [state {}
+        state2 (s/tap state the-db :simple :n 2)
+        state3 (s/tap state2 the-db :complex)]
 
+    (is (= (get-in state2 [:things :simple]) 2))
+    (is (= (state2 :money) 20))
+
+    (is (= (get-in state3 [:things :simple]) 2))
+    (is (= (get-in state3 [:things :complex]) 1))
+    (is (= (state3 :money) 40))))
+
+
+; ; check this against the real DB:
 ; (deftest test-tap
 ;   (let [state {}
-;         state2 (s/tap state :slogan :n 2)
-;         state3 (s/tap state2 :copy)]
-
+;         state2 (s/tap state the-db :slogan :n 2)
+;         state3 (s/tap state2 the-db :copy)]
 ;     (is (= (get-in state2 [:things :slogan]) 2))
 ;     (is (= (state2 :money) 54.17831369176747))
-
 ;     (is (= (get-in state3 [:things :slogan]) 2))
 ;     (is (= (get-in state3 [:things :copy]) 1))
 ;     (is (= (state3 :money) 386.37112318050373))))
+
 
 ; ; Slogan is 10 clicks
 ; (deftest test-can-tap?
