@@ -6,29 +6,29 @@
 (def the-db (DB.))
 
 (deftest test-gains-simple
-  (is (= (s/apply-gains {} the-db :simple) {:money 10}))
-  (is (= (s/apply-gains {} the-db :simple :quantity 2) {:money 20}))
-  (is (= (s/apply-gains {:money 1} the-db :simple) {:money 11}))
-  (is (= (s/apply-gains {:money 1} the-db :simple :quantity 2) {:money 21})))
+  (is (= (s/apply-gains {} the-db :simple) {:values {:money 10}}))
+  (is (= (s/apply-gains {} the-db :simple :quantity 2) {:values {:money 20}}))
+  (is (= (s/apply-gains {:values {:money 1}} the-db :simple) {:values {:money 11}}))
+  (is (= (s/apply-gains {:values {:money 1}} the-db :simple :quantity 2) {:values {:money 21}})))
 ;
 (deftest test-gains-complex
-  (is (= (s/apply-gains {} the-db :complex) {:money 20}))
-  (is (= (s/apply-gains {} the-db :complex :quantity 2) {:money 60}))
-  (is (= (s/apply-gains {:money 1} the-db :complex) {:money 21}))
-  (is (= (s/apply-gains {:money 1} the-db :complex :quantity 2) {:money 61})))
+  (is (= (s/apply-gains {} the-db :complex) {:values {:money 20}}))
+  (is (= (s/apply-gains {} the-db :complex :quantity 2) {:values {:money 60}}))
+  (is (= (s/apply-gains {:values {:money 1}} the-db :complex) {:values {:money 21}}))
+  (is (= (s/apply-gains {:values {:money 1}} the-db :complex :quantity 2) {:values {:money 61}})))
 
 ;
 (deftest test-loss-simple
-  (is (= (s/apply-losses {} the-db :simple) {:effort -10}))
-  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:effort -5}))
-  (is (= (s/apply-losses {:effort 1} the-db :simple) {:effort -9}))
-  (is (= (s/apply-losses {:effort 1} the-db :simple :quantity 2) {:effort -4})))
+  (is (= (s/apply-losses {} the-db :simple) {:values {:effort -10}}))
+  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:values {:effort -5}}))
+  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple) {:values {:effort -9}}))
+  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple :quantity 2) {:values {:effort -4}})))
 ;
 (deftest test-loss-complex
-  (is (= (s/apply-losses {} the-db :complex) {:effort -20}))
-  (is (= (s/apply-losses {} the-db :complex :quantity 2) {:effort -40}))
-  (is (= (s/apply-losses {:effort 1} the-db :complex) {:effort -19}))
-  (is (= (s/apply-losses {:effort 1} the-db :complex :quantity 2) {:effort -39})))
+  (is (= (s/apply-losses {} the-db :complex) {:values {:effort -20}}))
+  (is (= (s/apply-losses {} the-db :complex :quantity 2) {:values {:effort -40}}))
+  (is (= (s/apply-losses {:values {:effort 1}} the-db :complex) {:values {:effort -19}}))
+  (is (= (s/apply-losses {:values {:effort 1}} the-db :complex :quantity 2) {:values {:effort -39}})))
 
 (deftest test-tap
   (let [state {}
@@ -36,11 +36,11 @@
         state3 (s/tap state2 the-db :complex)]
 
     (is (= (get-in state2 [:things :simple]) 2))
-    (is (= (state2 :money) 20))
+    (is (= (get-in state2 [:values :money]) 20))
 
     (is (= (get-in state3 [:things :simple]) 2))
     (is (= (get-in state3 [:things :complex]) 1))
-    (is (= (state3 :money) 40))))
+    (is (= (get-in state3 [:values :money]) 40))))
 
 
 ; ; check this against the real DB:
@@ -55,12 +55,12 @@
 ;     (is (= (state3 :money) 386.37112318050373))))
 
 
-; ; Slogan is 10 clicks
-; (deftest test-can-tap?
-;   (is (= false (s/can-tap? data {} "Slogan")))
-;   (is (= false (s/can-tap? data { :clicks 9} "Slogan")))
-;   (is (= true (s/can-tap? data { :clicks 10} "Slogan")))
-;   (is (= true (s/can-tap? data { :clicks 999} "Slogan"))))
+; :simple is 10 :effort
+(deftest test-can-tap?
+  (is (= false (s/can-tap? the-db {} :simple)))
+  (is (= false (s/can-tap? the-db {:values {:effort 9}} :simple)))
+  (is (= true (s/can-tap? the-db {:values {:effort 10}} :simple)))
+  (is (= true (s/can-tap? the-db {:values {:effort 999}} :simple))))
 
 ; ; Notepad cost 2 money
 ; (deftest test-many-can-tap?
@@ -68,9 +68,9 @@
 ;   (is (= false (s/can-tap? data { :money 20} "Notepad" :n 11))))
 
 ; (deftest test-next-gain
-;   (is (= (s/next-gain data {} "Slogan") 33.219280948873624))
-;   (is (= (s/next-gain data { :things {:slogan 1} } "Slogan") 20.959032742893847))
-;   (is (= (s/next-gain data { :things {:slogan 2} } "Slogan") 16.609640474436812)))
+;   (is (= (s/next-gain data {} :simple) 33.219280948873624))
+;   (is (= (s/next-gain data { :things {:slogan 1} } :simple) 20.959032742893847))
+;   (is (= (s/next-gain data { :things {:slogan 2} } :simple) 16.609640474436812)))
 
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))

@@ -23,13 +23,13 @@
   (if (number? v)
     (let [value (* quantity v)
           value-fn (partial + (op value))]
-      (update-in state [k] (fnil value-fn 0)))
+      (update-in state [:values k] (fnil value-fn 0)))
     (let [quantities (future-quantities state thing quantity)
           opposite (val (first (fun db thing)))
           gain-fn (item-function db v)
           value (reduce op (map #(gain-fn % opposite) quantities))
           value-fn (partial + (op value))]
-      (update-in state [k] (fnil value-fn 0)))))
+      (update-in state [:values k] (fnil value-fn 0)))))
 ;
 (defn ^:private apply-gain [k v state db thing quantity]
   (apply-gain-or-loss k v state db thing quantity + item-loss))
@@ -61,23 +61,12 @@
       ; record that we've tapped one more of this thing.
       ; This must come last, as apply-* depends on "current-count"
       (update-in [:things thing] (fnil #(+ % n) 0))))
-
 ;
 
-(defn can-tap? [db state thing-name & {:keys [n] :or {n 1}}]
-  true)
-
-; (defn can-tap? [db state thing-name & {:keys [n] :or {n 1}}]
-;   "Can I tap a thing n times? Not if its loss goes below zero."
-;   (let [db-key (u/find-db-key db thing-name)
-;         sub-db (db db-key)
-;         thing (first (filter #(= thing-name (% :name)) (sub-db :items)))
-;         loss-key (sub-db :loss)
-;         thing-loss (thing :cost)
-;         current-loser (state loss-key 0)
-;         future-loser (- current-loser (* n thing-loss))]
-
-;     (<= 0 future-loser)))
+(defn can-tap? [db state thing & {:keys [n] :or {n 1}}]
+  "Can I tap a thing n times? Not if its loss goes below zero."
+  (let [tapped (tap state db thing :n n)]
+    (nil? (some neg? (vals (:values tapped))))))
 
 ; (defn next-gain [db state thing]
 ;   "What is the next gain going to be if I tap something?"
