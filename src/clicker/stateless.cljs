@@ -27,7 +27,7 @@
     (let [quantities (future-quantities state thing quantity)
           opposite (val (first (fun db thing)))
           gain-fn (item-function db v)
-          value (reduce op (map #(gain-fn % opposite) quantities))
+          value (reduce + (map #(gain-fn % opposite) quantities))
           value-fn (partial + (op value))]
       (update-in state [:values k] (fnil value-fn 0)))))
 ;

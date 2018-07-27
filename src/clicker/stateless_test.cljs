@@ -5,6 +5,17 @@
 
 (def the-db (DB.))
 
+; check this against the real DB:
+; (deftest test-tap
+;   (let [state {}
+;         state2 (s/tap state the-db :slogan :n 2)
+;         state3 (s/tap state2 the-db :copy)]
+;     (is (= (get-in state2 [:things :slogan]) 2))
+;     (is (= (get-in state2 [:values :money]) 54.17831369176747))
+;     (is (= (get-in state3 [:things :slogan]) 2))
+;     (is (= (get-in state3 [:things :copy]) 1))
+;     (is (= (get-in state3 [:values :money]) 386.37112318050373))))
+
 (deftest test-gains-simple
   (is (= (s/apply-gains {} the-db :simple) {:values {:money 10}}))
   (is (= (s/apply-gains {} the-db :simple :quantity 2) {:values {:money 20}}))
@@ -20,9 +31,9 @@
 ;
 (deftest test-loss-simple
   (is (= (s/apply-losses {} the-db :simple) {:values {:effort -10}}))
-  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:values {:effort -5}}))
+  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:values {:effort -30}}))
   (is (= (s/apply-losses {:values {:effort 1}} the-db :simple) {:values {:effort -9}}))
-  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple :quantity 2) {:values {:effort -4}})))
+  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple :quantity 2) {:values {:effort -29}})))
 ;
 (deftest test-loss-complex
   (is (= (s/apply-losses {} the-db :complex) {:values {:effort -20}}))
@@ -42,30 +53,16 @@
     (is (= (get-in state3 [:things :complex]) 1))
     (is (= (get-in state3 [:values :money]) 40))))
 
-
-; ; check this against the real DB:
-; (deftest test-tap
-;   (let [state {}
-;         state2 (s/tap state the-db :slogan :n 2)
-;         state3 (s/tap state2 the-db :copy)]
-;     (is (= (get-in state2 [:things :slogan]) 2))
-;     (is (= (state2 :money) 54.17831369176747))
-;     (is (= (get-in state3 [:things :slogan]) 2))
-;     (is (= (get-in state3 [:things :copy]) 1))
-;     (is (= (state3 :money) 386.37112318050373))))
-
-
-; :simple is 10 :effort
+:simple is 10 :effort
 (deftest test-can-tap?
   (is (= false (s/can-tap? the-db {} :simple)))
   (is (= false (s/can-tap? the-db {:values {:effort 9}} :simple)))
   (is (= true (s/can-tap? the-db {:values {:effort 10}} :simple)))
   (is (= true (s/can-tap? the-db {:values {:effort 999}} :simple))))
 
-; ; Notepad cost 2 money
-; (deftest test-many-can-tap?
-;   (is (= true (s/can-tap? data { :money 20} "Notepad" :n 10)))
-;   (is (= false (s/can-tap? data { :money 20} "Notepad" :n 11))))
+(deftest test-many-can-tap?
+  (is (= true (s/can-tap? the-db {:values {:effort 10}} :simple :n 1)))
+  (is (= false (s/can-tap? the-db {:values {:effort 10}} :simple :n 2))))
 
 ; (deftest test-next-gain
 ;   (is (= (s/next-gain data {} :simple) 33.219280948873624))
