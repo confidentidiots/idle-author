@@ -68,18 +68,16 @@
   (let [tapped (tap state db thing :n n)]
     (nil? (some neg? (vals (:values tapped))))))
 
-; (defn next-gain [db state thing]
-;   "What is the next gain going to be if I tap something?"
-;   (let [gain-key (sub-db :gain)
-;         loss-key (sub-db :loss)
-;         thing-loss (thing :cost)
-;         gain-fn (sub-db :gain-fn)
-;         current-count (get-in state [:things thing-key] 0)
-;         future-count (inc current-count)
-;         thing-gain (gain-fn future-count thing-loss)]
-;     thing-gain))
-
-
+(defn next-gain [db state thing]
+  "What is the next gain going to be if I tap something?"
+  (let [gain (item-gain db thing)
+        loss (item-loss db thing)
+        thing-loss (thing :cost)
+        gain-fn (sub-db :gain-fn)
+        current-count (get-in state [:things thing-key] 0)
+        future-count (inc current-count)
+        thing-gain (gain-fn future-count thing-loss)]
+    thing-gain))
 
 ; TODO call this reached-levels-keys
 ; and make reached-levels the list with the full objects.

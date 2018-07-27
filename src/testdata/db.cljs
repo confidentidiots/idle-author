@@ -10,7 +10,7 @@
     [data.idb :refer [IDB]]))
 
 
-(defrecord DB [] IDB
+(defrecord TestDB [] IDB
 
   (items [_ group-key]
     (map #(first %) (filter (fn [[k v]] (some (partial = group-key) v)) group/data)))

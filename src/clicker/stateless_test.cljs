@@ -1,50 +1,58 @@
 (ns clicker.stateless-test
   (:require [cljs.test :refer-macros [deftest is]]
             [clicker.stateless :as s]
-            [testdata.db :refer [DB]]))
+            [data.db :refer [DB]]
+            [testdata.db :refer [TestDB]]))
 
-(def the-db (DB.))
+(def test-db (TestDB.))
+(def real-db (DB.))
 
 ; check this against the real DB:
-; (deftest test-tap
-;   (let [state {}
-;         state2 (s/tap state the-db :slogan :n 2)
-;         state3 (s/tap state2 the-db :copy)]
-;     (is (= (get-in state2 [:things :slogan]) 2))
-;     (is (= (get-in state2 [:values :money]) 54.17831369176747))
-;     (is (= (get-in state3 [:things :slogan]) 2))
-;     (is (= (get-in state3 [:things :copy]) 1))
-;     (is (= (get-in state3 [:values :money]) 386.37112318050373))))
+(deftest test-tap
+  (let [state {}
+        state2 (s/tap state real-db :slogan :n 2)
+        state3 (s/tap state2 real-db :copy)]
+    (is (= (get-in state2 [:things :slogan]) 2))
+    (is (= (get-in state2 [:values :money]) 54.17831369176747))
+    (is (= (get-in state3 [:things :slogan]) 2))
+    (is (= (get-in state3 [:things :copy]) 1))
+    (is (= (get-in state3 [:values :money]) 386.37112318050373))))
 
+; (deftest test-next-gain
+;   (is (= (s/next-gain real-db {} :copy) 33.219280948873624))
+;   (is (= (s/next-gain real-db { :things {:slogan 1} } :simple) 20.959032742893847))
+;   (is (= (s/next-gain real-db { :things {:slogan 2} } :simple) 16.609640474436812)))
+
+; test DB
 (deftest test-gains-simple
-  (is (= (s/apply-gains {} the-db :simple) {:values {:money 10}}))
-  (is (= (s/apply-gains {} the-db :simple :quantity 2) {:values {:money 20}}))
-  (is (= (s/apply-gains {:values {:money 1}} the-db :simple) {:values {:money 11}}))
-  (is (= (s/apply-gains {:values {:money 1}} the-db :simple :quantity 2) {:values {:money 21}})))
+  (is (= (s/apply-gains {} test-db :simple) {:values {:money 10}}))
+  (is (= (s/apply-gains {} test-db :simple :quantity 2) {:values {:money 20}}))
+  (is (= (s/apply-gains {:values {:money 1}} test-db :simple) {:values {:money 11}}))
+  (is (= (s/apply-gains {:values {:money 1}} test-db :simple :quantity 2) {:values {:money 21}})))
 ;
 (deftest test-gains-complex
-  (is (= (s/apply-gains {} the-db :complex) {:values {:money 20}}))
-  (is (= (s/apply-gains {} the-db :complex :quantity 2) {:values {:money 60}}))
-  (is (= (s/apply-gains {:values {:money 1}} the-db :complex) {:values {:money 21}}))
-  (is (= (s/apply-gains {:values {:money 1}} the-db :complex :quantity 2) {:values {:money 61}})))
+  (is (= (s/apply-gains {} test-db :complex) {:values {:money 20}}))
+  (is (= (s/apply-gains {} test-db :complex :quantity 2) {:values {:money 60}}))
+  (is (= (s/apply-gains {:values {:money 1}} test-db :complex) {:values {:money 21}}))
+  (is (= (s/apply-gains {:values {:money 1}} test-db :complex :quantity 2) {:values {:money 61}})))
 
 ;
 (deftest test-loss-simple
-  (is (= (s/apply-losses {} the-db :simple) {:values {:effort -10}}))
-  (is (= (s/apply-losses {} the-db :simple :quantity 2) {:values {:effort -30}}))
-  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple) {:values {:effort -9}}))
-  (is (= (s/apply-losses {:values {:effort 1}} the-db :simple :quantity 2) {:values {:effort -29}})))
+  (is (= (s/apply-losses {} test-db :simple) {:values {:effort -10}}))
+  (is (= (s/apply-losses {} test-db :simple :quantity 2) {:values {:effort -30}}))
+  (is (= (s/apply-losses {:values {:effort 1}} test-db :simple) {:values {:effort -9}}))
+  (is (= (s/apply-losses {:values {:effort 1}} test-db :simple :quantity 2) {:values {:effort -29}})))
 ;
 (deftest test-loss-complex
-  (is (= (s/apply-losses {} the-db :complex) {:values {:effort -20}}))
-  (is (= (s/apply-losses {} the-db :complex :quantity 2) {:values {:effort -40}}))
-  (is (= (s/apply-losses {:values {:effort 1}} the-db :complex) {:values {:effort -19}}))
-  (is (= (s/apply-losses {:values {:effort 1}} the-db :complex :quantity 2) {:values {:effort -39}})))
+  (is (= (s/apply-losses {} test-db :complex) {:values {:effort -20}}))
+  (is (= (s/apply-losses {} test-db :complex :quantity 2) {:values {:effort -40}}))
+  (is (= (s/apply-losses {:values {:effort 1}} test-db :complex) {:values {:effort -19}}))
+  (is (= (s/apply-losses {:values {:effort 1}} test-db :complex :quantity 2) {:values {:effort -39}})))
 
 (deftest test-tap
   (let [state {}
-        state2 (s/tap state the-db :simple :n 2)
-        state3 (s/tap state2 the-db :complex)]
+        state2 (s/tap state test-db :simple :n 2)
+        state3 (s/tap state2 test-db :complex)]
 
     (is (= (get-in state2 [:things :simple]) 2))
     (is (= (get-in state2 [:values :money]) 20))
@@ -53,21 +61,16 @@
     (is (= (get-in state3 [:things :complex]) 1))
     (is (= (get-in state3 [:values :money]) 40))))
 
-:simple is 10 :effort
+; :simple is 10 :effort
 (deftest test-can-tap?
-  (is (= false (s/can-tap? the-db {} :simple)))
-  (is (= false (s/can-tap? the-db {:values {:effort 9}} :simple)))
-  (is (= true (s/can-tap? the-db {:values {:effort 10}} :simple)))
-  (is (= true (s/can-tap? the-db {:values {:effort 999}} :simple))))
+  (is (= false (s/can-tap? test-db {} :simple)))
+  (is (= false (s/can-tap? test-db {:values {:effort 9}} :simple)))
+  (is (= true (s/can-tap? test-db {:values {:effort 10}} :simple)))
+  (is (= true (s/can-tap? test-db {:values {:effort 999}} :simple))))
 
 (deftest test-many-can-tap?
-  (is (= true (s/can-tap? the-db {:values {:effort 10}} :simple :n 1)))
-  (is (= false (s/can-tap? the-db {:values {:effort 10}} :simple :n 2))))
-
-; (deftest test-next-gain
-;   (is (= (s/next-gain data {} :simple) 33.219280948873624))
-;   (is (= (s/next-gain data { :things {:slogan 1} } :simple) 20.959032742893847))
-;   (is (= (s/next-gain data { :things {:slogan 2} } :simple) 16.609640474436812)))
+  (is (= true (s/can-tap? test-db {:values {:effort 10}} :simple :n 1)))
+  (is (= false (s/can-tap? test-db {:values {:effort 10}} :simple :n 2))))
 
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
