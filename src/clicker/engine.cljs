@@ -1,6 +1,7 @@
 (ns clicker.engine
   (:require [clicker.stateless :as s]
-            [data.db :refer [DB]]))
+            [data.db :refer [DB]]
+            [data.idb :refer [item-name item-group]]))
 
 ; The engine knows which db to use.
 (def db (DB.))
@@ -32,3 +33,11 @@
 (defn next-gain [state* thing-name]
   (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
     (s/next-gain state db thing-name)))
+
+; DAO stuff ------------------------------------------------------
+(defn db-item-name [thing]
+  (item-name db thing))
+
+(defn db-items-by-group [group]
+  (let [items-groups (item-group db thing)]
+    (map #(first %) (filter (fn [[k v]] (some (partial = group) v)) items-groups))))

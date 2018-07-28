@@ -75,8 +75,14 @@
 (deftest test-next-gain
   (let [state {}
         state2 (s/tap state test-db :simple)
-        next-gain (s/next-gain state test-db :simple)]
-    (is (= (get-in state2 [:values :money]) next-gain))))
+        next (s/next-gain state test-db :simple)]
+    (is (= (get-in state2 [:values :money]) next))))
+;
+(deftest test-next-loss
+  (let [state {}
+        state2 (s/tap state test-db :simple)
+        next (s/next-loss state test-db :simple)]
+    (is (= (get-in state2 [:values :effort]) next))))
 
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))

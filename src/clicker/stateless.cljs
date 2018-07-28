@@ -73,3 +73,12 @@
         next-state (apply-gains state db thing)
         new-value (get-in next-state [:values gain-key])]
     (- new-value old-value)))
+;
+(defn next-loss [state db thing]
+  "What is the next loss going to be if I tap something?"
+  (let [gain-key (first (map key (item-loss db thing)))
+        old-value-maybe-nil (get-in state [:values gain-key])
+        old-value (if (nil? old-value-maybe-nil) 0 old-value-maybe-nil)
+        next-state (apply-losses state db thing)
+        new-value (get-in next-state [:values gain-key])]
+    (- new-value old-value)))
