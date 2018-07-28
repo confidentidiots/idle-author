@@ -12,26 +12,23 @@
 
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:clicks] (fnil change-fn 0)))
-
-(defn tap [state thing-name & {:keys [n] :or {n 1}}]
-  (if (s/can-tap? @state db thing-name :n n)
-    (reset! state (s/tap @state db thing-name :n n))
-    state))
-
 ;
-(defn thing-count [state thing-key]
-  (let [the-state (if (instance? cljs.core.Atom state) @state state)]
-    (s/thing-count the-state thing-key)))
+(defn tap [state* thing-name & {:keys [n] :or {n 1}}]
+  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
+    (if (s/can-tap? @state db thing-name :n n)
+      (reset! state (s/tap @state db thing-name :n n))
+      state)))
 ;
-
+(defn thing-count [state* thing-key]
+  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
+    (s/thing-count state thing-key)))
+;
 ; check if atom, since it might have already been dereferenced
 ; at the call-site e.g. via formula cell `(cell= the-atom)`
-(defn can-tap? [state thing-name & {:keys [n] :or {n 1}}]
-  (if (instance? cljs.core.Atom state)
-    (s/can-tap? @state db thing-name :n n)
+(defn can-tap? [state* thing-name & {:keys [n] :or {n 1}}]
+  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
     (s/can-tap? state db thing-name :n n)))
-
-(defn next-gain [state thing-name]
-  (if (instance? cljs.core.Atom state)
-    (s/next-gain @state db thing-name)
+;
+(defn next-gain [state* thing-name]
+  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
     (s/next-gain state db thing-name)))
