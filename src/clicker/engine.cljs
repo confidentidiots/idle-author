@@ -1,7 +1,10 @@
 (ns clicker.engine
   (:require [clicker.stateless :as s]
+            [clicker.util :as u]
             [data.db :refer [DB]]
-            [data.idb :refer [item-name item-group]]))
+            [data.idb :refer [item-name item-group item-group-data]]))
+; Everything in this file is in stateless.cljs, which is testable.
+; This file isn't testable, as it hard-codes the games database.
 
 ; The engine knows which db to use.
 (def db (DB.))
@@ -33,11 +36,14 @@
 (defn next-gain [state* thing-name]
   (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
     (s/next-gain state db thing-name)))
+;
+(defn next-loss [state* thing-name]
+  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
+    (s/next-loss state db thing-name)))
 
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [thing]
-  (item-name db thing))
-
+  (s/db-item-name db thing))
+;
 (defn db-items-by-group [group]
-  (let [items-groups (item-group db thing)]
-    (map #(first %) (filter (fn [[k v]] (some (partial = group) v)) items-groups))))
+  (s/db-items-by-group db group))

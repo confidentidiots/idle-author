@@ -2,6 +2,7 @@
   (:require [cljs.test :refer-macros [deftest is use-fixtures]]
             [clicker.engine :as e]))
 
+; TODO tests here are a bit useless, as the engine DB is hard-coded to game data.
 
 ; (deftest test-click
 ;   (let [state (atom {})]

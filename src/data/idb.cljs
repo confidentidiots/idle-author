@@ -6,6 +6,7 @@
   (item-function [this item])
   (item-gain [this item])
   (item-group [this item])
+  (item-group-data [this])
   (item-loss [this item])
   (item-name [this item])
   (item-ticker [this item]))

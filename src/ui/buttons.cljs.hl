@@ -1,6 +1,7 @@
 (ns ui.buttons
   (:import [goog.string.format])
   (:require
+    [clicker.util :as u]
     [clicker.engine :as e]
     [data.db :as db]
     [goog.string :as gstring]
@@ -16,11 +17,14 @@
     (tap-button :state state :key key :btn-txt btn-txt :n n)))
 
 (defelem ^:private as-list [{:keys [state group btn-txt]} kids]
+  (u/log ">> " (e/db-items-by-group group))
   (for [key (e/db-items-by-group group)]
     (do
+      (u/log ">> " key)
       (let [name (e/db-item-name key)
-            loss (:clicks (db/item-loss key))
-            next-gain 77 ; (e/next-gain state name)
+            next-loss (e/next-loss state name)
+            loss (cell= (gstring/format "%.2f" next-loss))
+            next-gain (e/next-gain state name)
             gain (cell= (gstring/format "%.2f" next-gain))
             count (cell= (e/thing-count state key))]
 

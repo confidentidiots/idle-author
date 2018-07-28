@@ -84,6 +84,12 @@
         next (s/next-loss state test-db :simple)]
     (is (= (get-in state2 [:values :effort]) next))))
 
+; DAO stuff ------------------------------------------------------
+(deftest test-db-item-name
+  (is (= "Simple" (s/db-item-name test-db :simple))))
+;
+(deftest test-db-items-by-group
+  (is (= [:simple :multi] (s/db-items-by-group test-db :simple-group))))
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
 ;   (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))

@@ -2,7 +2,7 @@
   (:require
     [clicker.util :as u]
     [clojure.set]
-    [data.idb :refer [item-gain item-loss item-function]]))
+    [data.idb :refer [item-gain item-loss item-function item-name item-group item-group-data]]))
 
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
@@ -83,3 +83,13 @@
 (defn next-loss [state db thing]
   "What is the next loss going to be if I tap something?"
   (next-gain-or-loss state db thing item-loss apply-losses))
+
+;
+; DAO stuff ------------------------------------------------------
+(defn db-item-name [db thing]
+  (item-name db thing))
+;
+(defn db-items-by-group [db group]
+  (let [items-groups (item-group-data db)
+        items (map #(first %) (filter (fn [[k v]] (some (partial = group) v)) items-groups))]
+    items))

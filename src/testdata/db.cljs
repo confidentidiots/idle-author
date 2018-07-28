@@ -26,7 +26,10 @@
     ;
   (item-group [_ item]
     (group/data item))
-    ;
+  ;
+  (item-group-data [_]
+    group/data)
+  ;
   (item-loss [_ item]
     (loss/data item))
     ;
