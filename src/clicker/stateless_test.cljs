@@ -8,7 +8,7 @@
 (def real-db (DB.))
 
 ; check this against the real DB:
-(deftest test-tap
+(deftest test-tap-real-db
   (let [state {}
         state2 (s/tap state real-db :slogan :n 2)
         state3 (s/tap state2 real-db :copy)]
@@ -20,8 +20,8 @@
 
 ; (deftest test-next-gain
 ;   (is (= (s/next-gain real-db {} :copy) 33.219280948873624))
-;   (is (= (s/next-gain real-db { :things {:slogan 1} } :simple) 20.959032742893847))
-;   (is (= (s/next-gain real-db { :things {:slogan 2} } :simple) 16.609640474436812)))
+;   (is (= (s/next-gain real-db { :things {:slogan 1} } :copy) 20.959032742893847))
+;   (is (= (s/next-gain real-db { :things {:slogan 2} } :copy) 16.609640474436812)))
 
 ; test DB
 (deftest test-gains-simple
@@ -63,14 +63,20 @@
 
 ; :simple is 10 :effort
 (deftest test-can-tap?
-  (is (= false (s/can-tap? test-db {} :simple)))
-  (is (= false (s/can-tap? test-db {:values {:effort 9}} :simple)))
-  (is (= true (s/can-tap? test-db {:values {:effort 10}} :simple)))
-  (is (= true (s/can-tap? test-db {:values {:effort 999}} :simple))))
+  (is (= false (s/can-tap? {} test-db :simple)))
+  (is (= false (s/can-tap? {:values {:effort 9}} test-db :simple)))
+  (is (= true (s/can-tap? {:values {:effort 10}} test-db :simple)))
+  (is (= true (s/can-tap? {:values {:effort 999}} test-db :simple))))
 
 (deftest test-many-can-tap?
-  (is (= true (s/can-tap? test-db {:values {:effort 10}} :simple :n 1)))
-  (is (= false (s/can-tap? test-db {:values {:effort 10}} :simple :n 2))))
+  (is (= true (s/can-tap? {:values {:effort 10}} test-db :simple :n 1)))
+  (is (= false (s/can-tap? {:values {:effort 10}} test-db :simple :n 2))))
+;
+(deftest test-next-gain
+  (let [state {}
+        state2 (s/tap state test-db :simple)
+        next-gain (s/next-gain state test-db :simple)]
+    (is (= (get-in state2 [:values :money]) next-gain))))
 
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
