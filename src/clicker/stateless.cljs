@@ -6,7 +6,6 @@
 
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
-
 ;
 (defn future-quantities [state thing quantity]
   "Given a quantity X, and a state which has N things, return N+1, N+2, ... , N+X
@@ -15,7 +14,6 @@
         spread (range 1 (+ 1 quantity))
         future-spread (map #(+ current-count %) spread)]
       future-spread))
-;
 ;
 (defn ^:private apply-gain-or-loss [k v state db thing quantity op fun]
   "k the key is the item being increased/decreased, e.g. :money or :gold
@@ -62,12 +60,11 @@
       ; This must come last, as apply-* depends on "current-count"
       (update-in [:things thing] (fnil #(+ % n) 0))))
 ;
-
 (defn can-tap? [state db thing & {:keys [n] :or {n 1}}]
   "Can I tap a thing n times? Not if its loss goes below zero."
   (let [tapped (tap state db thing :n n)]
     (nil? (some neg? (vals (:values tapped))))))
-
+;
 (defn next-gain [state db thing]
   "What is the next gain going to be if I tap something?"
   (let [gain-key (first (map key (item-gain db thing)))
@@ -76,26 +73,3 @@
         next-state (apply-gains state db thing)
         new-value (get-in next-state [:values gain-key])]
     (- new-value old-value)))
-
-; TODO call this reached-levels-keys
-; and make reached-levels the list with the full objects.
-; Ditto for unreached-levels
-; (defn reached-levels [data state group]
-;   "Get current reached levels (research) and default to first."
-;   (let [levels (get-in data [group :levels])
-;         default-level (:key (first levels))
-;         reached-levels (get-in state [:levels group] [default-level])]
-;       reached-levels))
-
-; (defn unreached-levels [data state group]
-;   "Get current un-reached levels (research)."
-;   (let [levels (get-in data [group :levels])
-;         levels-keys (map :key levels)
-;         reached-levels (reached-levels data state group)
-;         unreached-levels (clojure.set/difference (set levels-keys) (set reached-levels))]
-;       (vec unreached-levels)))
-
-; (defn get-level [data group level-key]
-;   (let [levels (get-in data [group :levels :items])
-;         the-level (first (filter #(= level-key (% :key)) levels))]
-;       the-level))
