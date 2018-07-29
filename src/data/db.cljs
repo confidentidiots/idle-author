@@ -35,7 +35,7 @@
     (group/data item))
   ;
   (item-group-data [_]
-    (group/data))
+    group/data)
   ;
   (item-loss [_ item]
     (loss/data item))
