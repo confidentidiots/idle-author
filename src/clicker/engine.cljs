@@ -2,12 +2,20 @@
   (:require [clicker.stateless :as s]
             [clicker.util :as u]
             [data.db :refer [DB]]
-            [data.idb :refer [item-name item-group item-group-data]]))
+            [data.idb :refer [item-name item-group item-group-data]]
+            [javelin.core]))
 ; Everything in this file is in stateless.cljs, which is testable.
 ; This file isn't testable, as it hard-codes the games database.
 
 ; The engine knows which db to use.
 (def db (DB.))
+
+(defn get-state [state]
+  (if (or
+        (instance? cljs.core.Atom state)
+        (instance? javelin.core/Cell state))
+    @state
+    state))
 
 ; All engine functions accept a state atom as argument
 ; (amongst other things)
@@ -18,28 +26,24 @@
   (swap! state update-in [:clicks] (fnil change-fn 0)))
 ;
 (defn tap [state* thing & {:keys [n] :or {n 1}}]
-  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
-    (if (s/can-tap? @state db thing :n n)
-      (reset! state (s/tap @state db thing :n n))
+  (let [state (get-state state*)]
+    (if (s/can-tap? state db thing :n n)
+      (reset! state (s/tap state db thing :n n))
       state)))
 ;
-(defn thing-count [state* thing]
-  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
-    (s/thing-count state thing)))
+(defn thing-count [state thing]
+    (s/thing-count (get-state state) thing))
 ;
 ; check if atom, since it might have already been dereferenced
 ; at the call-site e.g. via formula cell `(cell= the-atom)`
-(defn can-tap? [state* thing & {:keys [n] :or {n 1}}]
-  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
-    (s/can-tap? state db thing :n n)))
+(defn can-tap? [state thing & {:keys [n] :or {n 1}}]
+  (s/can-tap? (get-state state) db thing :n n))
 ;
-(defn next-gain [state* thing]
-  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
-    (s/next-gain state db thing)))
+(defn next-gain [state thing]
+  (s/next-gain (get-state state) db thing))
 ;
-(defn next-loss [state* thing]
-  (let [state (if (instance? cljs.core.Atom state*) @state* state*)]
-    (s/next-loss state db thing)))
+(defn next-loss [state thing]
+  (s/next-loss (get-state state) db thing))
 
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [thing]

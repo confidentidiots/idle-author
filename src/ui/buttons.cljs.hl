@@ -21,7 +21,7 @@
     (do
       (let [name (e/db-item-name key)
             next-loss (e/next-loss state key)
-            loss (cell= (gstring/format "%.2f" next-loss))
+            loss (cell= (gstring/format "%.2f" (Math/abs next-loss)))
             next-gain (e/next-gain state key)
             gain (cell= (gstring/format "%.2f" next-gain))
             count (cell= (e/thing-count state key))]
