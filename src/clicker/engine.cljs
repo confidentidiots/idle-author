@@ -2,7 +2,7 @@
   (:require [clicker.stateless :as s]
             [clicker.util :as u]
             [data.db :refer [DB]]
-            [data.idb :refer [item-name item-group item-group-data]]
+            [data.idb :refer [item-name item-group]]
             [javelin.core]))
 ; Everything in this file is in stateless.cljs, which is testable.
 ; This file isn't testable, as it hard-codes the games database.
