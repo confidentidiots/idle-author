@@ -90,7 +90,4 @@
   (item-name db thing))
 ;
 (defn db-items-by-group [db group]
-  (let [items-groups (item-group-data db)
-        items (map #(first %) (filter (fn [[k v]] (some (partial = group) v)) items-groups))]
-    ; (println ">> " items-groups)
-    items))
+  (item-group db group))

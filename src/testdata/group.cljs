@@ -2,6 +2,5 @@
 
 (def data
   {
-    :simple [:simple-group]
-    :complex [:complex-group]
-    :multi [:simple-group :complex-group]})
+    :simple-group [:simple :multi]
+    :complex-group [:complex :multi]})
