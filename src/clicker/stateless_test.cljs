@@ -73,17 +73,40 @@
   (is (= false (s/can-tap? {:values {:effort 10}} test-db :simple :n 2))))
 ;
 (deftest test-next-gain
-  (let [state {}
-        state2 (s/tap state test-db :simple)
-        next (s/next-gain state test-db :simple)]
-    (is (= (get-in state2 [:values :money]) next))))
+  (let [state0 {}
+        state1 (s/tap state0 test-db :simple)
+        next1 (s/next-gain state0 test-db :simple)
+        state2 (s/tap state1 test-db :simple)
+        next2 (s/next-gain state1 test-db :simple)]
+    (is (= (get-in state1 [:values :money]) next1))
+    (is (= (get-in state2 [:values :money]) (+ next1 next2)))))
+;
+(deftest test-next-gain-complex
+  (let [state0 {}
+        state1 (s/tap state0 test-db :complex)
+        next1 (s/next-gain state0 test-db :complex)
+        state2 (s/tap state1 test-db :complex)
+        next2 (s/next-gain state1 test-db :complex)]
+    (is (= (get-in state1 [:values :money]) next1))
+    (is (= (get-in state2 [:values :money]) (+ next1 next2)))))
 ;
 (deftest test-next-loss
-  (let [state {}
-        state2 (s/tap state test-db :simple)
-        next (s/next-loss state test-db :simple)]
-    (is (= (get-in state2 [:values :effort]) next))))
-
+  (let [state0 {}
+        state1 (s/tap state0 test-db :simple)
+        next1 (s/next-loss state0 test-db :simple)
+        state2 (s/tap state1 test-db :simple)
+        next2 (s/next-loss state1 test-db :simple)]
+    (is (= (get-in state1 [:values :effort]) next1))
+    (is (= (get-in state2 [:values :effort]) (+ next1 next2)))))
+;
+(deftest test-next-loss-complex
+  (let [state0 {}
+        state1 (s/tap state0 test-db :complex)
+        next1 (s/next-loss state0 test-db :complex)
+        state2 (s/tap state1 test-db :complex)
+        next2 (s/next-loss state1 test-db :complex)]
+    (is (= (get-in state1 [:values :effort]) next1))
+    (is (= (get-in state2 [:values :effort]) (+ next1 next2)))))
 ; DAO stuff ------------------------------------------------------
 (deftest test-db-item-name
   (is (= "Simple" (s/db-item-name test-db :simple))))

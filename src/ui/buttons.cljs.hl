@@ -20,12 +20,11 @@
   (for [key (e/db-items-by-group group)]
     (do
       (let [name (e/db-item-name key)
-            next-loss (e/next-loss state key)
+            next-loss (cell= (e/next-loss state key))
             loss (cell= (gstring/format "%.2f" (Math/abs next-loss)))
-            next-gain (e/next-gain state key)
+            next-gain (cell= (e/next-gain state key))
             gain (cell= (gstring/format "%.2f" next-gain))
             count (cell= (e/thing-count state key))]
-
           (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
             (td name)
             (td loss)
