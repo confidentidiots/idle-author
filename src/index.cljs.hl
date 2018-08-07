@@ -27,16 +27,16 @@
     500)
   (js/setInterval game-loop 1000))
 
-(defc god false)
+(defc god true)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
     (* 10 n)))
 
 ; sentinels
-(defc= clicks (gstring/format "%.0f" (:clicks state 0)))
+(defc= clicks (gstring/format "%.0f" (get-in state [:values :clicks] 0)))
 (defc= add-every-fmt (gstring/format "%.2f" add-every))
-(defc= money (gstring/format "%.2f" (:money state 0)))
+(defc= money (gstring/format "%.2f" (get-in state [:values :money] 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
 
 (html

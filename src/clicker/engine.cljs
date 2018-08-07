@@ -23,13 +23,13 @@
 ; (def state (atom {}))
 
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
-  (swap! state update-in [:clicks] (fnil change-fn 0)))
+  (swap! state update-in [:values :clicks] (fnil change-fn 0)))
 ;
 (defn tap [state* thing & {:keys [n] :or {n 1}}]
   (let [state (get-state state*)]
     (if (s/can-tap? state db thing :n n)
-      (reset! state (s/tap state db thing :n n))
-      state)))
+      (reset! state* (s/tap state db thing :n n))
+      state*)))
 ;
 (defn thing-count [state thing]
     (s/thing-count (get-state state) thing))
@@ -37,7 +37,8 @@
 ; check if atom, since it might have already been dereferenced
 ; at the call-site e.g. via formula cell `(cell= the-atom)`
 (defn can-tap? [state thing & {:keys [n] :or {n 1}}]
-  (s/can-tap? (get-state state) db thing :n n))
+  (let [can-tap (s/can-tap? (get-state state) db thing :n n)]
+    can-tap))
 ;
 (defn next-gain [state thing]
   (s/next-gain (get-state state) db thing))

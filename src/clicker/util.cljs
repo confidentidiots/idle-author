@@ -7,4 +7,4 @@
     (. js/console (log vs))
     v))
 
-(def default-state { :key "init" :things { :slogan 0 :notepad 0}})
+(def default-state { :key "init" })
