@@ -11,7 +11,7 @@
     [ui.levels :as levels]))
 
 (defc state u/default-state)
-(defc= add-every (:add-every state 0))
+(defc= add-every (get-in state [:values :add-every] 0))
 
 (defn game-loop []
   (do

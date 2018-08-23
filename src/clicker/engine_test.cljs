@@ -4,13 +4,13 @@
 
 ; TODO tests here are a bit useless, as the engine DB is hard-coded to game data.
 
-; (deftest test-click
-;   (let [state (atom {})]
-;     (is (= (e/click state) {:clicks 1}))))
+(deftest test-click
+  (let [state (atom {})]
+    (is (= (e/click state) {:values {:clicks 1}}))))
 
-; (deftest test-click-change-fn
-;   (let [state (atom {})]
-;     (is (= (e/click state :change-fn inc) {:clicks 1}))))
+(deftest test-click-change-fn
+  (let [state (atom {})]
+    (is (= (e/click state :change-fn inc) {:values {:clicks 1}}))))
 
 ; (deftest test-tap
 ;   (let [state (atom { :clicks 30000})
