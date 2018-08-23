@@ -25,11 +25,18 @@
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:values :clicks] (fnil change-fn 0)))
 ;
+; (defn tap [state* thing & {:keys [n] :or {n 1}}]
+;   (let [state (get-state state*)]
+;     (if (s/can-tap? state db thing :n n)
+;       (reset! state* (s/tap state db thing :n n))
+;       state*)))
+
+; a version of tap without can-tap? so that we can see the
+; side-effects of tapping regardless.
+; This puts the emphasis on the call-site to use can-tap?
 (defn tap [state* thing & {:keys [n] :or {n 1}}]
   (let [state (get-state state*)]
-    (if (s/can-tap? state db thing :n n)
-      (reset! state* (s/tap state db thing :n n))
-      state*)))
+    (reset! state* (s/tap state db thing :n n))))
 ;
 (defn thing-count [state thing]
     (s/thing-count (get-state state) thing))
