@@ -57,10 +57,15 @@
         (h5 "Creativity boost of " add-every-fmt " words every second")
 
         (if-tpl god
-          (div
-           (for [level (range 6)]
-             (let [n (level-value-fn level)]
-               (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
+          (div :class "debug"
+            (span "Words")
+            (for [level (range 6)]
+              (let [n (level-value-fn level)]
+                (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))
+            (span "Money")
+            (for [level (range 6)]
+              (let [n (level-value-fn level)]
+                (button :click #(swap! state update-in [:values :money] (fnil (fn [m] (+ m n)) 0)) n)))))
 
         (div :class "wrapper"
           (buttons/tool-list :state state)

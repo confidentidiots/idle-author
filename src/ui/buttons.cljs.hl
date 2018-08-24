@@ -11,7 +11,6 @@
   (let [disabled (cell= (not (e/can-tap? state key :n n)))
         click-fn #(e/tap state key :n n)]
     (button :disabled disabled :click click-fn n kids)))
-    ; (button :click click-fn n kids)))
 
 (defelem ^:private tap-buttons [{:keys [state key btn-txt]} kids]
   (for [n [1 10 100 1000]]
@@ -32,7 +31,8 @@
               next-gain (cell= (e/next-gain state key))
               count (cell= (e/thing-count state key))]
         :when (not (= key :genesis))
-        :when (e/has-dependency? state key)]
+        ; cell= here so dependency is re-checked when the state changes.
+        :when (cell= (e/has-dependency? state key))]
     (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
       (td name)
       (td (nexts :next next-loss))

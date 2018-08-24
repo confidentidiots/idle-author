@@ -60,10 +60,6 @@
       ; This must come last, as apply-* depends on "current-count"
       (update-in [:things thing] (fnil #(+ % n) 0))))
 ;
-(defn can-tap? [state db thing & {:keys [n] :or {n 1}}]
-  "Can I tap a thing n times? Not if its loss goes below zero."
-  (let [tapped (tap state db thing :n n)]
-    (nil? (some neg? (vals (:values tapped))))))
 ;
 (defn next-gain-or-loss [state db thing lookup-fn apply-fn]
   "What is the next gain/loss going to be if I tap something?
@@ -92,7 +88,13 @@
   (let [thing-deps (item-dependency db thing)
         has-deps (every? #(get-in state [:things %]) thing-deps)]
       has-deps))
-
+;
+(defn can-tap? [state db thing & {:keys [n] :or {n 1}}]
+  "Can I tap a thing n times? Not if its loss goes below zero."
+  (let [tapped (tap state db thing :n n)]
+    (and
+      (nil? (some neg? (vals (:values tapped))))
+      (has-dependency? state db thing))))
 ;
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [db thing]
