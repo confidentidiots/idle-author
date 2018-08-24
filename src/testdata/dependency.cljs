@@ -4,4 +4,4 @@
   {
     ; :simple nil
     :complex [:simple]
-    :multi [:complex]})
+    :multi [:complex :simple]})

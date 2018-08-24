@@ -128,12 +128,24 @@
         next2 (s/next-loss state1 test-db :complex)]
     (is (= (get-in state1 [:values :effort]) (:effort next1)))
     (is (= (get-in state2 [:values :effort]) (+ (:effort next1) (:effort next2))))))
+;
+(deftest test-has-dependency?
+  (let [state0 {}
+        state1 (s/tap state0 test-db :simple)
+        state2 (s/tap state1 test-db :complex)]
+    (is (= (s/has-dependency? state0 test-db :complex) false))
+    (is (= (s/has-dependency? state0 test-db :multi) false))
+    (is (= (s/has-dependency? state1 test-db :complex) true))
+    (is (= (s/has-dependency? state1 test-db :multi) false))
+    (is (= (s/has-dependency? state2 test-db :multi) true))))
+
 ; DAO stuff ------------------------------------------------------
 (deftest test-db-item-name
   (is (= "Simple" (s/db-item-name test-db :simple))))
 ;
 (deftest test-db-items-by-group
   (is (= [:simple :multi] (s/db-items-by-group test-db :simple-group))))
+
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
 ;   (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))

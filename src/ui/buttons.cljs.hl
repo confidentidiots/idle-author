@@ -20,9 +20,6 @@
 (defelem ^:private nexts [{:keys [next]} kids]
   (if (nil? (first next))
     (span "None")
-    ; (do
-    ;   (u/log ">> " (key (first next)))
-    ;   (span "x"))))
     (table :class "gain-loss"
       (for [it next
             :let [name (str (key it))
@@ -35,7 +32,9 @@
         :let [name (e/db-item-name key)
               next-loss (e/next-loss state key)
               next-gain (e/next-gain state key)
-              count (cell= (e/thing-count state key))]]
+              count (cell= (e/thing-count state key))]
+        :when (not (= key :genesis))
+        :when (e/has-dependency? state key)]
     (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
       (td name)
       (td (nexts :next next-loss))

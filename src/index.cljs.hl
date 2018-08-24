@@ -38,31 +38,39 @@
 (defc= add-every-fmt (gstring/format "%.2f" add-every))
 (defc= money (gstring/format "%.2f" (get-in state [:values :money] 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
+(defc= has-started (e/has-started? state))
 
 (html
   (head
     (link :href "app.css" :rel "stylesheet" :type "text/css"))
   (body
-    (h3 clicks " words")
-    (button :click #(e/click state) "Write a word")
-    ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
 
-    (h5 "$" money " income")
-    (h5 "Creativity boost of " add-every-fmt " words every second")
+    (if-tpl has-started
 
-    (if-tpl god
       (div
-       (for [level (range 6)]
-         (let [n (level-value-fn level)]
-           (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
 
-    (div :class "wrapper"
-      (buttons/tool-list :state state)
-      (buttons/product-list :state state))
+        (h3 clicks " words")
+        (button :click #(e/click state) "Write a word")
+        ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
 
+        (h5 "$" money " income")
+        (h5 "Creativity boost of " add-every-fmt " words every second")
 
-    (buttons/item-list :state state :group :product-level)
-    (buttons/item-list :state state :group :tool-level)
+        (if-tpl god
+          (div
+           (for [level (range 6)]
+             (let [n (level-value-fn level)]
+               (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))))
+
+        (div :class "wrapper"
+          (buttons/tool-list :state state)
+          (buttons/product-list :state state))
+        (buttons/item-list :state state :group :product-level)
+        (buttons/item-list :state state :group :tool-level))
+
+      (div
+        (button "Start" :click #(e/tap state :genesis))))
+
       ; (levels/product-levels :state state)
       ; (levels/tool-levels :state state))
 
