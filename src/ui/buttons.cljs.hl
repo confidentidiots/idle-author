@@ -18,20 +18,18 @@
     (tap-button :state state :key key :btn-txt btn-txt :n n)))
 
 (defelem ^:private nexts [{:keys [next]} kids]
-  (if (nil? (first next))
-    (span "None")
-    (table :class "gain-loss"
-      (for [it next
-            :let [name (str (key it))
-                  val-bare (val it)
-                  val (gstring/format "%.2f" (Math/abs val-bare))]]
+  (table :class "gain-loss"
+    (for-tpl [it next]
+      (let [name (cell= (str (key it)))
+            val-bare (cell= (val it))
+            val (cell= (gstring/format "%.2f" (Math/abs val-bare)))]
         (tr (td name) (td val))))))
 
 (defelem ^:private as-list [{:keys [state group btn-txt]} kids]
   (for [key (e/db-items-by-group group)
         :let [name (e/db-item-name key)
-              next-loss (e/next-loss state key)
-              next-gain (e/next-gain state key)
+              next-loss (cell= (e/next-loss state key))
+              next-gain (cell= (e/next-gain state key))
               count (cell= (e/thing-count state key))]
         :when (not (= key :genesis))
         :when (e/has-dependency? state key)]
