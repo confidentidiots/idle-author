@@ -38,9 +38,9 @@
 
     ; tool
     :stick   { :money 1.1}
-    :sand   { :money 1}
-    :flint   { :money 1}
-    :pencil-grip   { :money 1}
+    :sand   { :money 1.2}
+    :flint   { :money 1.3}
+    :pencil-grip   { :money 1.4}
     :notepad   { :money 2}
     :leather-bound-notepad   { :money 10}
     :standing-desk   { :money 500}

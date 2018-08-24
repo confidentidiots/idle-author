@@ -65,23 +65,27 @@
   (let [tapped (tap state db thing :n n)]
     (nil? (some neg? (vals (:values tapped))))))
 ;
-
-;
 (defn next-gain-or-loss [state db thing lookup-fn apply-fn]
-  "What is the next gain/loss going to be if I tap something?"
-  (let [gain-key (first (map key (lookup-fn db thing)))
-        old-value-maybe-nil (get-in state [:values gain-key])
-        old-value (if (nil? old-value-maybe-nil) 0 old-value-maybe-nil)
-        next-state (apply-fn state db thing)
-        new-value (get-in next-state [:values gain-key])]
-    (- new-value old-value)))
+  "What is the next gain/loss going to be if I tap something?
+  PS next is not the next state, but just the next values that
+  will be +/- from the state."
+  (into {}
+    (for [gain-key (map key (lookup-fn db thing))]
+      (let [old-value-maybe-nil (get-in state [:values gain-key])
+            old-value (if (nil? old-value-maybe-nil) 0 old-value-maybe-nil)
+            next-state (apply-fn state db thing)
+            new-value (get-in next-state [:values gain-key])
+            ret (- new-value old-value)]
+          {gain-key ret}))))
 ;
 (defn next-gain [state db thing]
-  "What is the next gain going to be if I tap something?"
+  "What is the next gain going to be if I tap something?
+  Returns {:thing 1 other 2} instead of just 1."
   (next-gain-or-loss state db thing item-gain apply-gains))
 ;
 (defn next-loss [state db thing]
-  "What is the next loss going to be if I tap something?"
+  "What is the next gain going to be if I tap something?
+  Returns {:thing 1 other 2} instead of just 1"
   (next-gain-or-loss state db thing item-loss apply-losses))
 
 ;

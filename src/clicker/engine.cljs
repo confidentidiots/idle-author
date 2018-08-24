@@ -52,7 +52,6 @@
 ;
 (defn next-loss [state thing]
   (s/next-loss (get-state state) db thing))
-
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [thing]
   (s/db-item-name db thing))

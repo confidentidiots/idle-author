@@ -35,7 +35,7 @@
 (deftask auto-test []
   (comp (testing)
         (watch)
-        (speak)
+        ; (speak)
         (test-cljs :js-env :slimer)))
 
 (deftask test []
@@ -47,7 +47,7 @@
   []
   (comp
     (watch)
-    (speak)
+    ; (speak)
     (hoplon)
     (reload)
     (cljs-repl)

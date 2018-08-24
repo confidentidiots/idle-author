@@ -18,7 +18,7 @@
     (is (= (get-in state3 [:things :copy]) 1))
     (is (= (get-in state3 [:values :money]) 386.37112318050373))))
 
-; (deftest test-next-gain
+; (deftest test-next-gain-real-db
 ;   (is (= (s/next-gain real-db {} :copy) 33.219280948873624))
 ;   (is (= (s/next-gain real-db { :things {:slogan 1} } :copy) 20.959032742893847))
 ;   (is (= (s/next-gain real-db { :things {:slogan 2} } :copy) 16.609640474436812)))
@@ -78,8 +78,29 @@
         next1 (s/next-gain state0 test-db :simple)
         state2 (s/tap state1 test-db :simple)
         next2 (s/next-gain state1 test-db :simple)]
-    (is (= (get-in state1 [:values :money]) next1))
-    (is (= (get-in state2 [:values :money]) (+ next1 next2)))))
+    (is (= (get-in state1 [:values :money]) (:money next1)))
+    (is (= (get-in state2 [:values :money]) (+ (:money next1) (:money next2))))))
+;
+(deftest test-next-gain-or-loss
+  (let [state0 {}
+        state1 (s/tap state0 test-db :multi)
+        next-gain1 (s/next-gain state0 test-db :multi)
+        next-loss1 (s/next-loss state0 test-db :multi)
+        state2 (s/tap state1 test-db :multi)
+        next-gain2 (s/next-gain state1 test-db :multi)
+        next-loss2 (s/next-loss state1 test-db :multi)]
+    (is (= (:values state1) {:money 30 :gold 1 :effort -30 :other -1}))
+    (is (= (get-in state1 [:values :money]) (:money next-gain1)))
+    (is (= (get-in state1 [:values :gold]) (:gold next-gain1)))
+    (is (= (get-in state1 [:values :effort]) (:effort next-loss1)))
+    (is (= (get-in state1 [:values :other]) (:other next-loss1)))
+
+    (is (= (:values state2) {:money 90 :gold 2 :effort -60 :other -2}))
+    (is (= (get-in state2 [:values :money]) (+ (:money next-gain1) (:money next-gain2))))
+    (is (= (get-in state2 [:values :gold]) (+ (:gold next-gain1) (:gold next-gain2))))
+    (is (= (get-in state2 [:values :effort]) (+ (:effort next-loss1) (:effort next-loss2))))
+    (is (= (get-in state2 [:values :other]) (+ (:other next-loss1) (:other next-loss2))))))
+
 ;
 (deftest test-next-gain-complex
   (let [state0 {}
@@ -87,8 +108,8 @@
         next1 (s/next-gain state0 test-db :complex)
         state2 (s/tap state1 test-db :complex)
         next2 (s/next-gain state1 test-db :complex)]
-    (is (= (get-in state1 [:values :money]) next1))
-    (is (= (get-in state2 [:values :money]) (+ next1 next2)))))
+    (is (= (get-in state1 [:values :money]) (:money next1)))
+    (is (= (get-in state2 [:values :money]) (+ (:money next1) (:money next2))))))
 ;
 (deftest test-next-loss
   (let [state0 {}
@@ -96,8 +117,8 @@
         next1 (s/next-loss state0 test-db :simple)
         state2 (s/tap state1 test-db :simple)
         next2 (s/next-loss state1 test-db :simple)]
-    (is (= (get-in state1 [:values :effort]) next1))
-    (is (= (get-in state2 [:values :effort]) (+ next1 next2)))))
+    (is (= (get-in state1 [:values :effort]) (:effort next1)))
+    (is (= (get-in state2 [:values :effort]) (+ (:effort next1) (:effort next2))))))
 ;
 (deftest test-next-loss-complex
   (let [state0 {}
@@ -105,8 +126,8 @@
         next1 (s/next-loss state0 test-db :complex)
         state2 (s/tap state1 test-db :complex)
         next2 (s/next-loss state1 test-db :complex)]
-    (is (= (get-in state1 [:values :effort]) next1))
-    (is (= (get-in state2 [:values :effort]) (+ next1 next2)))))
+    (is (= (get-in state1 [:values :effort]) (:effort next1)))
+    (is (= (get-in state2 [:values :effort]) (+ (:effort next1) (:effort next2))))))
 ; DAO stuff ------------------------------------------------------
 (deftest test-db-item-name
   (is (= "Simple" (s/db-item-name test-db :simple))))

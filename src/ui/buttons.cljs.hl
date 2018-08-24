@@ -17,22 +17,31 @@
   (for [n [1 10 100 1000]]
     (tap-button :state state :key key :btn-txt btn-txt :n n)))
 
-(defelem ^:private as-list [{:keys [state group btn-txt]} kids]
-  (for [key (e/db-items-by-group group)]
-    (do
-      (let [name (e/db-item-name key)
-            next-loss (cell= (e/next-loss state key))
-            loss (cell= (gstring/format "%.2f" (Math/abs next-loss)))
-            next-gain (cell= (e/next-gain state key))
-            gain (cell= (gstring/format "%.2f" next-gain))
-            count (cell= (e/thing-count state key))]
-          (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
-            (td name)
-            (td loss)
-            (td gain)
-            (td count)
-            (td (tap-buttons :state state :key key :btn-txt btn-txt)))))))
+(defelem ^:private nexts [{:keys [next]} kids]
+  (if (nil? (first next))
+    (span "None")
+    ; (do
+    ;   (u/log ">> " (key (first next)))
+    ;   (span "x"))))
+    (table :class "gain-loss"
+      (for [it next
+            :let [name (str (key it))
+                  val-bare (val it)
+                  val (gstring/format "%.2f" (Math/abs val-bare))]]
+        (tr (td name) (td val))))))
 
+(defelem ^:private as-list [{:keys [state group btn-txt]} kids]
+  (for [key (e/db-items-by-group group)
+        :let [name (e/db-item-name key)
+              next-loss (e/next-loss state key)
+              next-gain (e/next-gain state key)
+              count (cell= (e/thing-count state key))]]
+    (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
+      (td name)
+      (td (nexts :next next-loss))
+      (td (nexts :next next-gain))
+      (td count)
+      (td (tap-buttons :state state :key key :btn-txt btn-txt)))))
 ;
 (defelem tool-list [{:keys [state]} kids]
   (div :class "upgrade"
@@ -46,7 +55,6 @@
           (th "# Bought")
           (th "")))
       (as-list :state state :group :tool :btn-txt "Buy"))))
-
 ;
 (defelem product-list [{:keys [state]} kids]
   (div :class "sell"

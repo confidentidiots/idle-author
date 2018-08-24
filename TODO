@@ -1,3 +1,10 @@
+Put :money and :clicks in the name.cljs lookup.
+
+Simpler strings (that can be i18nised):
+before: Creativity boost of 2.26 words every second
+after: boost words/sec: 2.26
+
+----
 plugins:
 - :ticker stuff could come from a plugin
 - media could come from a plugin (showing images for each tool, product, etc)
@@ -22,7 +29,6 @@ Each age is unlocked by the pinacle research item of the previous age.
 
 
 - show :ticker entries as events happen
-- introduce research.
 
 research will complete after N seconds
 it will unlock a category
@@ -32,9 +38,6 @@ a category could be:
 - electronics (for laptop)
 - hire (for amanuensis)
 - bourgeoisie life (for country cottage)
-
-there are just ideas.
-
 
 College (like research)
 List courses. Worse to better. Cheaper to more expensive.
