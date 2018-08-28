@@ -8,7 +8,8 @@
     [goog.string.format]
     [dao.dao :as dao]
     [ui.buttons :as buttons]
-    [ui.levels :as levels]))
+    [ui.levels :as levels]
+    [ui.research :as research]))
 
 (defc state u/default-state)
 (defc= add-every (get-in state [:values :add-every] 0))
@@ -59,8 +60,7 @@
             (h5 "$" money " income")
             (h5 "Creativity boost of " add-every-fmt " words every second"))
 
-          (buttons/item-list :state state :group :product-level))
-          ;(buttons/item-list :state state :group :tool-level))
+          (research/item-list :state state :groups [:product-level :tool-level]))
 
         (if-tpl god
           (div :class "debug"

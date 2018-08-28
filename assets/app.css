@@ -56,6 +56,7 @@ td {
     background-color: white;
 }
 
+/* old/new */
 .newitem:first-of-type {
     display: table-row;
 }
@@ -63,5 +64,19 @@ td {
     display: none;
 }
 .olditem + .newitem {
+    display: table-row;
+}
+
+/* show/hide */
+.researched-item {
+    display: none;
+}
+.unresearched-item {
+    display: none;
+}
+.unresearched-item:first-of-type {
+    display: table-row;
+}
+.researched-item + .unresearched-item {
     display: table-row;
 }

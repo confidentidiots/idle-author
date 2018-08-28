@@ -1,0 +1,42 @@
+(ns ui.research
+  (:import [goog.string.format])
+  (:require
+    [clicker.util :as u]
+    [clicker.engine :as e]
+    [data.db :as db]
+    [goog.string :as gstring]
+    [goog.string.format]))
+
+(defelem ^:private tap-button [{:keys [state key btn-txt]} kids]
+  (let [disabled (cell= (not (e/can-tap? state key)))
+        click-fn #(e/tap state key)]
+    (button :disabled disabled :click click-fn btn-txt kids)))
+
+(defelem ^:private nexts [{:keys [next]} kids]
+  (table :class "gain-loss"
+    (for-tpl [it next]
+      (let [name (cell= (str (key it)))
+            val-bare (cell= (val it))
+            val (cell= (gstring/format "%.2f" (Math/abs val-bare)))]
+        (tr (td name) (td val))))))
+
+(defelem ^:private as-list [{:keys [state group btn-txt]} kids]
+  (for [key (e/db-items-by-group group)
+        :let [name (e/db-item-name key)
+              next-loss (cell= (e/next-loss state key))
+              count (cell= (e/thing-count state key))]
+        :when (not (= key :genesis))
+        ; cell= here so dependency is re-checked when the state changes.
+        :when (cell= (e/has-dependency? state key))]
+    (li :class (cell= {:unresearched-item (= count 0) :researched-item (> count 0)})
+      (span :class "research-name" (str name " (" group ")"))
+      (span :class "research-loss" (nexts :next next-loss))
+      (span :class "research-tap" (tap-button :state state :key key :btn-txt btn-txt)))))
+;
+
+;
+(defelem item-list [{:keys [state groups]} kids]
+  (div :class "research"
+    (for [group groups]
+      (ul
+        (as-list :state state :group group :btn-txt (str "Research " group))))))
