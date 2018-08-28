@@ -59,12 +59,16 @@ td {
 /* old/new */
 .newitem:first-of-type {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
 }
 .newitem {
     display: none;
 }
 .olditem + .newitem {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
 }
 
 /* show/hide */
@@ -76,7 +80,20 @@ td {
 }
 .unresearched-item:first-of-type {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
 }
 .researched-item + .unresearched-item {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

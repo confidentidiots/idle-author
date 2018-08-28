@@ -33,10 +33,9 @@
       (span :class "research-loss" (nexts :next next-loss))
       (span :class "research-tap" (tap-button :state state :key key :btn-txt btn-txt)))))
 ;
-
-;
 (defelem item-list [{:keys [state groups]} kids]
   (div :class "research"
+    (h3 "Research")
     (for [group groups]
       (ul
         (as-list :state state :group group :btn-txt (str "Research " group))))))
