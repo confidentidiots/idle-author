@@ -14,13 +14,26 @@ body {
 .upgrade {
     grid-area: upgrade;
 }
-
-.wrapper {
+.stuff {
     display: grid;
     grid-gap: 10px;
     grid-template-areas: "sell upgrade"
 }
 
+/* grid */
+.research {
+    grid-area: research;
+}
+.stats {
+    grid-area: stats;
+}
+.stats-and-research {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "stats research"
+}
+
+/* tables */
 caption {
     background-color: lightyellow;
     padding: 5px;

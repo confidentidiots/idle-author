@@ -67,7 +67,7 @@
       (as-list :state state :group :product :btn-txt "Sell"))))
 ;
 (defelem item-list [{:keys [state group]} kids]
-  (div :class "sell"
+  (div :class "research"
     (table
       (caption (str group))
       (thead

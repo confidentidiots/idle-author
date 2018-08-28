@@ -47,14 +47,20 @@
 
     (if-tpl has-started
 
-      (div
+      (div :class "start"
 
-        (h3 clicks " words")
-        (button :click #(e/click state) "Write a word")
-        ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
+        (div :class "stats-and-research"
 
-        (h5 "$" money " income")
-        (h5 "Creativity boost of " add-every-fmt " words every second")
+          (div :class "stats"
+            (h3 clicks " words")
+            (button :click #(e/click state) "Write a word")
+            ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
+
+            (h5 "$" money " income")
+            (h5 "Creativity boost of " add-every-fmt " words every second"))
+
+          (buttons/item-list :state state :group :product-level))
+          ;(buttons/item-list :state state :group :tool-level))
 
         (if-tpl god
           (div :class "debug"
@@ -67,17 +73,12 @@
               (let [n (level-value-fn level)]
                 (button :click #(swap! state update-in [:values :money] (fnil (fn [m] (+ m n)) 0)) n)))))
 
-        (div :class "wrapper"
+        (div :class "stuff"
           (buttons/tool-list :state state)
-          (buttons/product-list :state state))
-        (buttons/item-list :state state :group :product-level)
-        (buttons/item-list :state state :group :tool-level))
+          (buttons/product-list :state state)))
 
       (div
         (button "Start" :click #(e/tap state :genesis))))
-
-      ; (levels/product-levels :state state)
-      ; (levels/tool-levels :state state))
 
     (if-tpl god
       (div :class "debug"
