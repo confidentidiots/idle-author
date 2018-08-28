@@ -14,13 +14,26 @@ body {
 .upgrade {
     grid-area: upgrade;
 }
-
-.wrapper {
+.stuff {
     display: grid;
     grid-gap: 10px;
     grid-template-areas: "sell upgrade"
 }
 
+/* grid */
+.research {
+    grid-area: research;
+}
+.stats {
+    grid-area: stats;
+}
+.stats-and-research {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "stats research"
+}
+
+/* tables */
 caption {
     background-color: lightyellow;
     padding: 5px;
@@ -33,13 +46,54 @@ td {
     background-color: lightgray;
     padding: 5px;
 }
+.gain-loss {
+    background-color: white;
+}
+.gain-loss tr {
+    background-color: white;
+}
+.gain-loss td {
+    background-color: white;
+}
 
+/* old/new */
 .newitem:first-of-type {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
 }
 .newitem {
     display: none;
 }
 .olditem + .newitem {
     display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
+}
+
+/* show/hide */
+.researched-item {
+    display: none;
+}
+.unresearched-item {
+    display: none;
+}
+.unresearched-item:first-of-type {
+    display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
+}
+.researched-item + .unresearched-item {
+    display: table-row;
+    animation-duration: 1s;
+    animation-name: fadein;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
