@@ -83,8 +83,11 @@
   "What is the next gain going to be if I tap something?
   Returns {:thing 1 other 2} instead of just 1"
   (next-gain-or-loss state db thing item-loss apply-losses))
-
-(defn has-dependency? [state db thing]
+;
+(defn get-dependencies [state db thing]
+  (item-dependency db thing))
+;
+(defn satisfies-dependencies? [state db thing]
   (let [thing-deps (item-dependency db thing)
         has-deps (every? #(get-in state [:things %]) thing-deps)]
       has-deps))
@@ -94,7 +97,8 @@
   (let [tapped (tap state db thing :n n)]
     (and
       (nil? (some neg? (vals (:values tapped))))
-      (has-dependency? state db thing))))
+      (satisfies-dependencies? state db thing))))
+
 ;
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [db thing]

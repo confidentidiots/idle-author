@@ -27,7 +27,7 @@
               count (cell= (e/thing-count state key))]
         :when (not (= key :genesis))
         ; cell= here so dependency is re-checked when the state changes.
-        :when (cell= (e/has-dependency? state key))]
+        :when (cell= (e/satisfies-dependencies? state key))]
     (li :class (cell= {:unresearched-item (= count 0) :researched-item (> count 0)})
       (span :class "research-name" (str name " (" group ")"))
       (span :class "research-loss" (nexts :next next-loss))

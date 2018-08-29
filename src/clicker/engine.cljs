@@ -53,13 +53,14 @@
 (defn next-loss [state thing]
   (s/next-loss (get-state state) db thing))
 
-(defn has-dependency? [state thing]
-  (s/has-dependency? (get-state state) db thing))
+(defn satisfies-dependencies? [state thing]
+  (s/satisfies-dependencies? (get-state state) db thing))
 
 (defn has-started? [state]
   (not (nil? (get-in state [:things :genesis]))))
 
-
+(defn get-dependencies [state thing]
+  (s/get-dependencies (get-state state) db thing))
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [thing]
   (s/db-item-name db thing))

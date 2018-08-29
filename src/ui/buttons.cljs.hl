@@ -29,12 +29,14 @@
         :let [name (e/db-item-name key)
               next-loss (cell= (e/next-loss state key))
               next-gain (cell= (e/next-gain state key))
-              count (cell= (e/thing-count state key))]
+              count (cell= (e/thing-count state key))
+              dependencies (e/get-dependencies state key)]
         :when (not (= key :genesis))
         ; cell= here so dependency is re-checked when the state changes.
-        :when (cell= (e/has-dependency? state key))]
+        :when (cell= (e/satisfies-dependencies? state key))]
     (tr :class (cell= {:newitem (= count 0) :olditem (> count 0)})
       (td name)
+      (td (str dependencies))
       (td (nexts :next next-loss))
       (td (nexts :next next-gain))
       (td count)
@@ -47,6 +49,7 @@
       (thead
         (tr
           (th "Thing")
+          (th "Depends on")
           (th "$ Cost")
           (th "Boost")
           (th "# Bought")
@@ -60,6 +63,7 @@
       (thead
         (tr
           (th "Thing")
+          (th "Depends on")
           (th "Word cost")
           (th "$ Income")
           (th "# Sold")
