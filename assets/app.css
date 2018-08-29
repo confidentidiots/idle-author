@@ -71,24 +71,6 @@ td {
     animation-name: fadein;
 }
 
-/* show/hide */
-.researched-item {
-    display: none;
-}
-.unresearched-item {
-    display: none;
-}
-.unresearched-item:first-of-type {
-    display: table-row;
-    animation-duration: 1s;
-    animation-name: fadein;
-}
-.researched-item + .unresearched-item {
-    display: table-row;
-    animation-duration: 1s;
-    animation-name: fadein;
-}
-
 @keyframes fadein {
     from {
         opacity: 0;

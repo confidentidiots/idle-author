@@ -43,7 +43,8 @@
 
 (html
   (head
-    (link :href "app.css" :rel "stylesheet" :type "text/css"))
+    (link :href "app.css" :rel "stylesheet" :type "text/css")
+    (link :href "research.css" :rel "stylesheet" :type "text/css"))
   (body
 
     (if-tpl has-started
