@@ -1,0 +1,40 @@
+/* show/hide */
+.researched-item-product-level {
+  display: none;
+}
+.unresearched-item-product-level {
+  display: table-row;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
+.unresearched-item-product-level ~ .unresearched-item-product-level {
+  display: none;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
+.researched-item-product-level + .unresearched-item-product-level {
+  display: table-row;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
+
+
+/* show/hide */
+.researched-item-tool-level {
+  display: none;
+}
+.unresearched-item-tool-level {
+  display: table-row;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
+.unresearched-item-tool-level ~ .unresearched-item-tool-level {
+  display: none;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
+.researched-item-tool-level + .unresearched-item-tool-level {
+  display: table-row;
+  animation-duration: 1s;
+  animation-name: fadein;
+}
