@@ -28,7 +28,7 @@
     500)
   (js/setInterval game-loop 1000))
 
-(defc god false)
+(defc god true)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -44,45 +44,40 @@
 (html
   (head
     (link :href "app.css" :rel "stylesheet" :type "text/css")
+    (link :href "grids.css" :rel "stylesheet" :type "text/css")
     (link :href "research.css" :rel "stylesheet" :type "text/css"))
   (body
 
     (if-tpl has-started
 
+      (div :class "grid-all"
+
+        (div :class "stats"
+          (h3 clicks " words")
+          (button :click #(e/click state) "Write a word")
+          ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
+
+          (h5 "$" money " income")
+          (h5 "Creativity boost of " add-every-fmt " words every second"))
+
+        (research/item-list :state state :groups [:product-level :tool-level])
+
+        (buttons/tool-list :state state)
+        (buttons/product-list :state state))
+
       (div :class "start"
-
-        (div :class "stats-and-research"
-
-          (div :class "stats"
-            (h3 clicks " words")
-            (button :click #(e/click state) "Write a word")
-            ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
-
-            (h5 "$" money " income")
-            (h5 "Creativity boost of " add-every-fmt " words every second"))
-
-          (research/item-list :state state :groups [:product-level :tool-level]))
-
-        (if-tpl god
-          (div :class "debug"
-            (span "Words")
-            (for [level (range 6)]
-              (let [n (level-value-fn level)]
-                (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))
-            (span "Money")
-            (for [level (range 6)]
-              (let [n (level-value-fn level)]
-                (button :click #(swap! state update-in [:values :money] (fnil (fn [m] (+ m n)) 0)) n)))))
-
-        (div :class "stuff"
-          (buttons/tool-list :state state)
-          (buttons/product-list :state state)))
-
-      (div
         (button "Start" :click #(e/tap state :genesis))))
 
     (if-tpl god
       (div :class "debug"
+        (span "Words")
+        (for [level (range 6)]
+          (let [n (level-value-fn level)]
+            (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))
+        (span "Money")
+        (for [level (range 6)]
+          (let [n (level-value-fn level)]
+            (button :click #(swap! state update-in [:values :money] (fnil (fn [m] (+ m n)) 0)) n)))
         (h4 "State")
         (pre state-str)))))
 
