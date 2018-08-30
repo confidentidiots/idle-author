@@ -1,0 +1,21 @@
+/* grid */
+.sell {
+  grid-area: sell;
+}
+.upgrade {
+  grid-area: upgrade;
+}
+.research {
+  grid-area: research;
+}
+.stats {
+  grid-area: stats;
+}
+
+.grid-all {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+  "stats research"
+  "sell upgrade"
+}

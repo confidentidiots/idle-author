@@ -14,8 +14,8 @@ goog.require('hoplon.core');
  * @param {...*} var_args
  */
 ui.research.tap_button = (function() { 
-var ui$research$tap_button__delegate = function (args__13747__auto__){
-var vec__14616 = hoplon.core.parse_args(args__13747__auto__);
+var ui$research$tap_button__delegate = function (args__10015__auto__){
+var vec__14616 = hoplon.core.parse_args(args__10015__auto__);
 var map__14619 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14616,(0),null);
 var map__14619__$1 = ((((!((map__14619 == null)))?(((((map__14619.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14619.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14619):map__14619);
 var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14619__$1,cljs.core.cst$kw$state);
@@ -44,17 +44,17 @@ var G__14633 = kids;
 return (hoplon.core.button.cljs$core$IFn$_invoke$arity$6 ? hoplon.core.button.cljs$core$IFn$_invoke$arity$6(G__14628,G__14629,G__14630,G__14631,G__14632,G__14633) : hoplon.core.button.call(null,G__14628,G__14629,G__14630,G__14631,G__14632,G__14633));
 };
 var ui$research$tap_button = function (var_args){
-var args__13747__auto__ = null;
+var args__10015__auto__ = null;
 if (arguments.length > 0) {
 var G__14634__i = 0, G__14634__a = new Array(arguments.length -  0);
 while (G__14634__i < G__14634__a.length) {G__14634__a[G__14634__i] = arguments[G__14634__i + 0]; ++G__14634__i;}
-  args__13747__auto__ = new cljs.core.IndexedSeq(G__14634__a,0,null);
+  args__10015__auto__ = new cljs.core.IndexedSeq(G__14634__a,0,null);
 } 
-return ui$research$tap_button__delegate.call(this,args__13747__auto__);};
+return ui$research$tap_button__delegate.call(this,args__10015__auto__);};
 ui$research$tap_button.cljs$lang$maxFixedArity = 0;
 ui$research$tap_button.cljs$lang$applyTo = (function (arglist__14635){
-var args__13747__auto__ = cljs.core.seq(arglist__14635);
-return ui$research$tap_button__delegate(args__13747__auto__);
+var args__10015__auto__ = cljs.core.seq(arglist__14635);
+return ui$research$tap_button__delegate(args__10015__auto__);
 });
 ui$research$tap_button.cljs$core$IFn$_invoke$arity$variadic = ui$research$tap_button__delegate;
 return ui$research$tap_button;
@@ -64,8 +64,8 @@ return ui$research$tap_button;
  * @param {...*} var_args
  */
 ui.research.nexts = (function() { 
-var ui$research$nexts__delegate = function (args__13747__auto__){
-var vec__14636 = hoplon.core.parse_args(args__13747__auto__);
+var ui$research$nexts__delegate = function (args__10015__auto__){
+var vec__14636 = hoplon.core.parse_args(args__10015__auto__);
 var map__14639 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14636,(0),null);
 var map__14639__$1 = ((((!((map__14639 == null)))?(((((map__14639.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14639.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14639):map__14639);
 var next = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14639__$1,cljs.core.cst$kw$next);
@@ -73,13 +73,13 @@ var kids = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14636,(1),null);
 var G__14641 = cljs.core.cst$kw$class;
 var G__14642 = "gain-loss";
 var G__14643 = hoplon.core.loop_tpl_STAR_(next,((function (G__14641,G__14642,vec__14636,map__14639,map__14639__$1,next,kids){
-return (function (item__13817__auto__){
+return (function (item__10085__auto__){
 var vec__14644 = javelin.core.cell_map(cljs.core.identity,(function (){var fexpr__14647 = javelin.core.formula.cljs$core$IFn$_invoke$arity$1(((function (G__14641,G__14642,vec__14636,map__14639,map__14639__$1,next,kids){
 return (function (it){
 return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [it], null);
 });})(G__14641,G__14642,vec__14636,map__14639,map__14639__$1,next,kids))
 );
-return (fexpr__14647.cljs$core$IFn$_invoke$arity$1 ? fexpr__14647.cljs$core$IFn$_invoke$arity$1(item__13817__auto__) : fexpr__14647.call(null,item__13817__auto__));
+return (fexpr__14647.cljs$core$IFn$_invoke$arity$1 ? fexpr__14647.cljs$core$IFn$_invoke$arity$1(item__10085__auto__) : fexpr__14647.call(null,item__10085__auto__));
 })());
 var it = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14644,(0),null);
 var name = (function (){var fexpr__14650 = javelin.core.formula.cljs$core$IFn$_invoke$arity$1(((function (vec__14644,it,G__14641,G__14642,vec__14636,map__14639,map__14639__$1,next,kids){
@@ -113,17 +113,17 @@ return (hoplon.core.tr.cljs$core$IFn$_invoke$arity$2 ? hoplon.core.tr.cljs$core$
 return (hoplon.core.table.cljs$core$IFn$_invoke$arity$3 ? hoplon.core.table.cljs$core$IFn$_invoke$arity$3(G__14641,G__14642,G__14643) : hoplon.core.table.call(null,G__14641,G__14642,G__14643));
 };
 var ui$research$nexts = function (var_args){
-var args__13747__auto__ = null;
+var args__10015__auto__ = null;
 if (arguments.length > 0) {
 var G__14664__i = 0, G__14664__a = new Array(arguments.length -  0);
 while (G__14664__i < G__14664__a.length) {G__14664__a[G__14664__i] = arguments[G__14664__i + 0]; ++G__14664__i;}
-  args__13747__auto__ = new cljs.core.IndexedSeq(G__14664__a,0,null);
+  args__10015__auto__ = new cljs.core.IndexedSeq(G__14664__a,0,null);
 } 
-return ui$research$nexts__delegate.call(this,args__13747__auto__);};
+return ui$research$nexts__delegate.call(this,args__10015__auto__);};
 ui$research$nexts.cljs$lang$maxFixedArity = 0;
 ui$research$nexts.cljs$lang$applyTo = (function (arglist__14665){
-var args__13747__auto__ = cljs.core.seq(arglist__14665);
-return ui$research$nexts__delegate(args__13747__auto__);
+var args__10015__auto__ = cljs.core.seq(arglist__14665);
+return ui$research$nexts__delegate(args__10015__auto__);
 });
 ui$research$nexts.cljs$core$IFn$_invoke$arity$variadic = ui$research$nexts__delegate;
 return ui$research$nexts;
@@ -133,8 +133,8 @@ return ui$research$nexts;
  * @param {...*} var_args
  */
 ui.research.as_list = (function() { 
-var ui$research$as_list__delegate = function (args__13747__auto__){
-var vec__14666 = hoplon.core.parse_args(args__13747__auto__);
+var ui$research$as_list__delegate = function (args__10015__auto__){
+var vec__14666 = hoplon.core.parse_args(args__10015__auto__);
 var map__14669 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14666,(0),null);
 var map__14669__$1 = ((((!((map__14669 == null)))?(((((map__14669.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14669.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14669):map__14669);
 var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14669__$1,cljs.core.cst$kw$state);
@@ -297,17 +297,17 @@ break;
 return iter__4324__auto__(clicker.engine.db_items_by_group(group));
 };
 var ui$research$as_list = function (var_args){
-var args__13747__auto__ = null;
+var args__10015__auto__ = null;
 if (arguments.length > 0) {
 var G__14730__i = 0, G__14730__a = new Array(arguments.length -  0);
 while (G__14730__i < G__14730__a.length) {G__14730__a[G__14730__i] = arguments[G__14730__i + 0]; ++G__14730__i;}
-  args__13747__auto__ = new cljs.core.IndexedSeq(G__14730__a,0,null);
+  args__10015__auto__ = new cljs.core.IndexedSeq(G__14730__a,0,null);
 } 
-return ui$research$as_list__delegate.call(this,args__13747__auto__);};
+return ui$research$as_list__delegate.call(this,args__10015__auto__);};
 ui$research$as_list.cljs$lang$maxFixedArity = 0;
 ui$research$as_list.cljs$lang$applyTo = (function (arglist__14731){
-var args__13747__auto__ = cljs.core.seq(arglist__14731);
-return ui$research$as_list__delegate(args__13747__auto__);
+var args__10015__auto__ = cljs.core.seq(arglist__14731);
+return ui$research$as_list__delegate(args__10015__auto__);
 });
 ui$research$as_list.cljs$core$IFn$_invoke$arity$variadic = ui$research$as_list__delegate;
 return ui$research$as_list;
@@ -317,8 +317,8 @@ return ui$research$as_list;
  * @param {...*} var_args
  */
 ui.research.item_list = (function() { 
-var ui$research$item_list__delegate = function (args__13747__auto__){
-var vec__14732 = hoplon.core.parse_args(args__13747__auto__);
+var ui$research$item_list__delegate = function (args__10015__auto__){
+var vec__14732 = hoplon.core.parse_args(args__10015__auto__);
 var map__14735 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__14732,(0),null);
 var map__14735__$1 = ((((!((map__14735 == null)))?(((((map__14735.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__14735.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__14735):map__14735);
 var state = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__14735__$1,cljs.core.cst$kw$state);
@@ -387,17 +387,17 @@ return (hoplon.core.table.cljs$core$IFn$_invoke$arity$3 ? hoplon.core.table.cljs
 return (hoplon.core.div.cljs$core$IFn$_invoke$arity$3 ? hoplon.core.div.cljs$core$IFn$_invoke$arity$3(G__14737,G__14738,G__14739) : hoplon.core.div.call(null,G__14737,G__14738,G__14739));
 };
 var ui$research$item_list = function (var_args){
-var args__13747__auto__ = null;
+var args__10015__auto__ = null;
 if (arguments.length > 0) {
 var G__14753__i = 0, G__14753__a = new Array(arguments.length -  0);
 while (G__14753__i < G__14753__a.length) {G__14753__a[G__14753__i] = arguments[G__14753__i + 0]; ++G__14753__i;}
-  args__13747__auto__ = new cljs.core.IndexedSeq(G__14753__a,0,null);
+  args__10015__auto__ = new cljs.core.IndexedSeq(G__14753__a,0,null);
 } 
-return ui$research$item_list__delegate.call(this,args__13747__auto__);};
+return ui$research$item_list__delegate.call(this,args__10015__auto__);};
 ui$research$item_list.cljs$lang$maxFixedArity = 0;
 ui$research$item_list.cljs$lang$applyTo = (function (arglist__14754){
-var args__13747__auto__ = cljs.core.seq(arglist__14754);
-return ui$research$item_list__delegate(args__13747__auto__);
+var args__10015__auto__ = cljs.core.seq(arglist__14754);
+return ui$research$item_list__delegate(args__10015__auto__);
 });
 ui$research$item_list.cljs$core$IFn$_invoke$arity$variadic = ui$research$item_list__delegate;
 return ui$research$item_list;
