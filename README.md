@@ -7,6 +7,7 @@ Write a word.
 # Documentation
 
 - [dev](readme/dev.md)
+- [data](readme/data.md)
 - [notes](readme/notes.md)
 - [references](readme/references.md)
 
