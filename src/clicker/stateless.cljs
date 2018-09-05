@@ -2,7 +2,7 @@
   (:require
     [clicker.util :as u]
     [clojure.set]
-    [data.idb :refer [item-gain item-loss item-function item-name item-group item-dependency]]))
+    [data.idb :refer [item-gain item-loss item-function item-name item-group item-dependency item-ticker]]))
 
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
@@ -103,6 +103,9 @@
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [db thing]
   (item-name db thing))
+;
+(defn db-item-ticker [db thing]
+  (item-ticker db thing))
 ;
 (defn db-items-by-group [db group]
   (item-group db group))

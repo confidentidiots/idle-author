@@ -65,5 +65,8 @@
 (defn db-item-name [thing]
   (s/db-item-name db thing))
 ;
+(defn db-item-ticker [thing]
+  (s/db-item-ticker db thing))
+;
 (defn db-items-by-group [group]
   (s/db-items-by-group db group))

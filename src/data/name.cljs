@@ -3,6 +3,11 @@
 ; this can be i18nised
 (def data
   {
+    ; misc
+    :clicks "Words"
+    :money "Money"
+
+    ; actual game data
     :genesis "Genesis"
     :modern "Modern"
 

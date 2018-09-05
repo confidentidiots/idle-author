@@ -1,4 +1,5 @@
 Put :money and :clicks in the name.cljs lookup.
+Especially :clicks, since it ought to be "Words".
 
 Simpler strings (that can be i18nised):
 before: Creativity boost of 2.26 words every second
