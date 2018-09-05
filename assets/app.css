@@ -8,16 +8,27 @@ body {
 }
 
 /* tables */
+table {
+    border: thin solid;
+    border-collapse: collapse;
+}
+table.gain-loss {
+    border: white;
+    border-collapse: initial;
+}
+tr {
+    border: solid thin;
+}
 caption {
-    background-color: lightyellow;
+    background-color: white;
     padding: 5px;
 }
 th {
-    background-color: lightcyan;
+    background-color: white;
     padding: 5px;
 }
 td {
-    background-color: lightgray;
+    background-color: white;
     padding: 5px;
 }
 .gain-loss {
@@ -52,4 +63,18 @@ td {
     to {
         opacity: 1;
     }
+}
+
+/* buttons */
+button {
+    border: thin solid;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    background: #ffe2c0;
+}
+button:disabled,
+button[disabled]{
+  background-color: white;
+  color: black;
 }
