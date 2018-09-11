@@ -251,28 +251,56 @@ clicker.stateless.next_loss = (function clicker$stateless$next_loss(state,db,thi
 
 return clicker.stateless.next_gain_or_loss(state,db,thing,data.idb.item_loss,clicker.stateless.apply_losses);
 });
-clicker.stateless.get_dependencies = (function clicker$stateless$get_dependencies(state,db,thing){
+/**
+ * Arity-overloaded fn which returns the dependency(s) for a 'thing'
+ *   or the root dependency if no thing is specified.
+ */
+clicker.stateless.get_dependencies = (function clicker$stateless$get_dependencies(var_args){
+var G__6221 = arguments.length;
+switch (G__6221) {
+case 2:
+return clicker.stateless.get_dependencies.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
+
+break;
+case 3:
+return clicker.stateless.get_dependencies.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
+
+break;
+default:
+throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
+
+}
+});
+
+clicker.stateless.get_dependencies.cljs$core$IFn$_invoke$arity$2 = (function (state,db){
+return cljs.core.cst$kw$genesis;
+});
+
+clicker.stateless.get_dependencies.cljs$core$IFn$_invoke$arity$3 = (function (state,db,thing){
 return data.idb.item_dependency(db,thing);
 });
+
+clicker.stateless.get_dependencies.cljs$lang$maxFixedArity = 3;
+
 clicker.stateless.satisfies_dependencies_QMARK_ = (function clicker$stateless$satisfies_dependencies_QMARK_(state,db,thing){
 var thing_deps = data.idb.item_dependency(db,thing);
 var has_deps = cljs.core.every_QMARK_(((function (thing_deps){
-return (function (p1__6220_SHARP_){
-return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,p1__6220_SHARP_], null));
+return (function (p1__6223_SHARP_){
+return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,p1__6223_SHARP_], null));
 });})(thing_deps))
 ,thing_deps);
 return has_deps;
 });
 clicker.stateless.can_tap_QMARK_ = (function clicker$stateless$can_tap_QMARK_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___6228 = arguments.length;
-var i__4532__auto___6229 = (0);
+var len__4531__auto___6231 = arguments.length;
+var i__4532__auto___6232 = (0);
 while(true){
-if((i__4532__auto___6229 < len__4531__auto___6228)){
-args__4534__auto__.push((arguments[i__4532__auto___6229]));
+if((i__4532__auto___6232 < len__4531__auto___6231)){
+args__4534__auto__.push((arguments[i__4532__auto___6232]));
 
-var G__6230 = (i__4532__auto___6229 + (1));
-i__4532__auto___6229 = G__6230;
+var G__6233 = (i__4532__auto___6232 + (1));
+i__4532__auto___6232 = G__6233;
 continue;
 } else {
 }
@@ -283,10 +311,10 @@ var argseq__4535__auto__ = ((((3) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4535__auto__);
 });
 
-clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6225){
-var map__6226 = p__6225;
-var map__6226__$1 = ((((!((map__6226 == null)))?(((((map__6226.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6226.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6226):map__6226);
-var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6226__$1,cljs.core.cst$kw$n,(1));
+clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6228){
+var map__6229 = p__6228;
+var map__6229__$1 = ((((!((map__6229 == null)))?(((((map__6229.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6229.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6229):map__6229);
+var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6229__$1,cljs.core.cst$kw$n,(1));
 
 var tapped = clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic(state,db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$n,n], 0));
 var and__3938__auto__ = (cljs.core.some(cljs.core.neg_QMARK_,cljs.core.vals(cljs.core.cst$kw$values.cljs$core$IFn$_invoke$arity$1(tapped))) == null);
@@ -300,19 +328,22 @@ return and__3938__auto__;
 clicker.stateless.can_tap_QMARK_.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clicker.stateless.can_tap_QMARK_.cljs$lang$applyTo = (function (seq6221){
-var G__6222 = cljs.core.first(seq6221);
-var seq6221__$1 = cljs.core.next(seq6221);
-var G__6223 = cljs.core.first(seq6221__$1);
-var seq6221__$2 = cljs.core.next(seq6221__$1);
-var G__6224 = cljs.core.first(seq6221__$2);
-var seq6221__$3 = cljs.core.next(seq6221__$2);
+clicker.stateless.can_tap_QMARK_.cljs$lang$applyTo = (function (seq6224){
+var G__6225 = cljs.core.first(seq6224);
+var seq6224__$1 = cljs.core.next(seq6224);
+var G__6226 = cljs.core.first(seq6224__$1);
+var seq6224__$2 = cljs.core.next(seq6224__$1);
+var G__6227 = cljs.core.first(seq6224__$2);
+var seq6224__$3 = cljs.core.next(seq6224__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6222,G__6223,G__6224,seq6221__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6225,G__6226,G__6227,seq6224__$3);
 });
 
 clicker.stateless.db_item_name = (function clicker$stateless$db_item_name(db,thing){
 return data.idb.item_name(db,thing);
+});
+clicker.stateless.db_item_ticker = (function clicker$stateless$db_item_ticker(db,thing){
+return data.idb.item_ticker(db,thing);
 });
 clicker.stateless.db_items_by_group = (function clicker$stateless$db_items_by_group(db,group){
 return data.idb.item_group(db,group);

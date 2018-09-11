@@ -1,4 +1,7 @@
 /* grid */
+.ticker {
+  grid-area: ticker;
+}
 .sell {
   grid-area: sell;
 }
@@ -16,6 +19,7 @@
   display: grid;
   grid-gap: 10px;
   grid-template-areas:
+  "ticker ticker"
   "stats research"
   "sell upgrade"
 }
