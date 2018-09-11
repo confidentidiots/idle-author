@@ -13,6 +13,7 @@
 
 (defc state u/default-state)
 (defc= add-every (get-in state [:values :add-every] 0))
+(defc= ticker-text (first (get-in state [:ticker] ["Welcome..."])))
 
 (defn game-loop []
   (do
@@ -51,6 +52,8 @@
     (if-tpl has-started
 
       (div :class "grid-all"
+        (div :class "ticker"
+          (p ticker-text))
 
         (div :class "stats"
           (h3 clicks " words")

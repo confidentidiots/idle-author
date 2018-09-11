@@ -25,12 +25,18 @@
 (defn click [state & {:keys [change-fn] :or {change-fn inc}}]
   (swap! state update-in [:values :clicks] (fnil change-fn 0)))
 ;
+(defn add-ticker [state ticker]
+  "Adds ticker text to state if not added before."
+  (if (some #(= ticker %) (get-in state [:ticker]))
+    state
+    (update-in state [:ticker] conj ticker)))
+;
 (defn tap [state* thing & {:keys [n] :or {n 1}}]
   (let [state (get-state state*)
         ticker (s/db-item-ticker db thing)
         updated (-> state
                   (s/tap db thing :n n)
-                  (assoc-in [:ticker] ticker))]
+                  (add-ticker ticker))]
     (reset! state* updated)))
 ;
 (defn thing-count [state thing]
