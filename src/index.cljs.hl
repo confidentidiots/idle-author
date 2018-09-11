@@ -9,11 +9,11 @@
     [dao.dao :as dao]
     [ui.buttons :as buttons]
     [ui.levels :as levels]
-    [ui.research :as research]))
+    [ui.research :as research]
+    [ui.ticker :as ticker]))
 
 (defc state u/default-state)
 (defc= add-every (get-in state [:values :add-every] 0))
-(defc= ticker-text (first (get-in state [:ticker] ["Welcome..."])))
 
 (defn game-loop []
   (do
@@ -52,8 +52,7 @@
     (if-tpl has-started
 
       (div :class "grid-all"
-        (div :class "ticker"
-          (p ticker-text))
+        (ticker/show-ticker :state state)
 
         (div :class "stats"
           (h3 clicks " words")

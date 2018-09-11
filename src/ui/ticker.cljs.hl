@@ -1,0 +1,13 @@
+(ns ui.ticker
+  (:import [goog.string.format])
+  (:require
+    [clicker.util :as u]
+    [clicker.engine :as e]
+    [data.db :as db]
+    [goog.string :as gstring]
+    [goog.string.format]))
+;
+(defelem ^:private show-ticker [{:keys [state]} kids]
+  (let [ticker-text (cell= (first (get-in state [:ticker] '("Welcome..."))))]
+    (div :class "ticker"
+      (p ticker-text))))
