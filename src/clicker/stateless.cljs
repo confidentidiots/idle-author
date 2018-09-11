@@ -84,8 +84,11 @@
   Returns {:thing 1 other 2} instead of just 1"
   (next-gain-or-loss state db thing item-loss apply-losses))
 ;
-(defn get-dependencies [state db thing]
-  (item-dependency db thing))
+(defn get-dependencies
+  "Arity-overloaded fn which returns the dependency(s) for a 'thing'
+  or the root dependency if no thing is specified."
+  ([state db] :genesis) ; TODO get root dependency
+  ([state db thing] (item-dependency db thing)))
 ;
 (defn satisfies-dependencies? [state db thing]
   (let [thing-deps (item-dependency db thing)
@@ -98,7 +101,6 @@
     (and
       (nil? (some neg? (vals (:values tapped))))
       (satisfies-dependencies? state db thing))))
-
 ;
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [db thing]

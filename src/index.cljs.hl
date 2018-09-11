@@ -68,7 +68,7 @@
         (buttons/product-list :state state))
 
       (div :class "start"
-        (button "Start" :click #(e/tap state :genesis))))
+        (button "Start" :click #(e/start state))))
 
     (if-tpl god
       (div :class "debug"

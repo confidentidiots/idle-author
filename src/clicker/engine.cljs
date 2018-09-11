@@ -60,8 +60,13 @@
 (defn has-started? [state]
   (not (nil? (get-in state [:things :genesis]))))
 
-(defn get-dependencies [state thing]
-  (s/get-dependencies (get-state state) db thing))
+(defn get-dependencies
+  ([state] (s/get-dependencies (get-state state) db))
+  ([state thing] (s/get-dependencies (get-state state) db thing)))
+;
+(defn start [state]
+  (tap state (get-dependencies state)))
+
 ; DAO stuff ------------------------------------------------------
 (defn db-item-name [thing]
   (s/db-item-name db thing))
