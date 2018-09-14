@@ -55,6 +55,10 @@
     state
     (assoc-in state [:latest-new-thing] thing)))
 ;
+(defn get-latest-ticker [state db]
+  (let [latest (get-in state [:latest-new-thing])]
+    (db-item-ticker db latest)))
+;
 (defn tap [state db thing & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state
   and return the game state.
