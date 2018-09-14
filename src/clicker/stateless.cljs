@@ -46,7 +46,15 @@
 ;
 (defn apply-losses [state db thing & {:keys [quantity] :or {quantity 1}}]
   (apply-gains-or-losses state db thing item-loss apply-loss quantity))
-
+;
+(defn set-latest-new-thing [state thing]
+  "For things :a and :b, if :a is added, latest-new-thing is :a.
+  If :b is then added, latest-new-thing is :b.
+  If :a is added again, latest-new-thing is still :b"
+  (if (some #(= thing %) (keys (get-in state [:things])))
+    state
+    (assoc-in state [:latest-new-thing] thing)))
+;
 (defn tap [state db thing & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state
   and return the game state.
@@ -56,9 +64,13 @@
       (apply-gains db thing :quantity n)
       ; you lose some
       (apply-losses db thing :quantity n)
+
+      ; This must come before the subsequent update-in which updates the state.
+      (set-latest-new-thing thing)
       ; record that we've tapped one more of this thing.
       ; This must come last, as apply-* depends on "current-count"
       (update-in [:things thing] (fnil #(+ % n) 0))))
+
 ;
 ;
 (defn next-gain-or-loss [state db thing lookup-fn apply-fn]

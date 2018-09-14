@@ -1,3 +1,4 @@
+Hook up "you bought your first X" to status updater.
 Put :money and :clicks in the name.cljs lookup.
 Especially :clicks, since it ought to be "Words".
 

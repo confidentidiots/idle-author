@@ -146,6 +146,13 @@
 (deftest test-db-items-by-group
   (is (= [:simple :multi] (s/db-items-by-group test-db :simple-group))))
 
+(deftest test-set-latest-new-thing
+  (let [state1 (s/tap {} test-db :simple)
+        state2 (s/tap state1 test-db :complex)
+        state3 (s/tap state2 test-db :simple)]
+    (is (= (get-in state1 [:latest-new-thing]) :simple))
+    (is (= (get-in state2 [:latest-new-thing]) :complex))
+    (is (= (get-in state3 [:latest-new-thing]) :complex))))
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
 ;   (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))
