@@ -8,6 +8,9 @@
     [goog.string.format]))
 ;
 (defelem ^:private show-updates [{:keys [state]} kids]
-  (let [ticker-text (cell= (e/get-latest-ticker state))]
+  (let [thing (cell= (str (e/get-latest-new-thing state)))
+        ticker-text (cell= (e/get-latest-ticker state))]
     (div :class "ticker"
-      (p ticker-text))))
+      (p
+        (cell= (span :style "padding-right: 20px" thing))
+        (span ticker-text)))))

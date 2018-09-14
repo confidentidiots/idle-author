@@ -55,8 +55,11 @@
     state
     (assoc-in state [:latest-new-thing] thing)))
 ;
+(defn get-latest-new-thing [state]
+  (get-in state [:latest-new-thing]))
+;
 (defn get-latest-ticker [state db]
-  (let [latest (get-in state [:latest-new-thing])]
+  (let [latest (get-latest-new-thing state)]
     (db-item-ticker db latest)))
 ;
 (defn tap [state db thing & {:keys [n] :or {n 1}}]

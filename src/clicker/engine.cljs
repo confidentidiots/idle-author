@@ -59,7 +59,9 @@
 ;
 (defn start [state]
   (tap state (get-dependencies state)))
-
+;
+(defn get-latest-new-thing [state]
+  (s/get-latest-new-thing (get-state state)))
 ;
 (defn get-latest-ticker [state]
   (s/get-latest-ticker (get-state state) db))
