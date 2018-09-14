@@ -12,5 +12,5 @@
         ticker-text (cell= (e/get-latest-ticker state))]
     (div :class "ticker"
       (p
-        (cell= (span :style "padding-right: 20px" thing))
+        (cell= (strong :style "padding-right: 20px" thing))
         (span ticker-text)))))

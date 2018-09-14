@@ -13,8 +13,8 @@ clicker.stateless.future_quantities = (function clicker$stateless$future_quantit
 var current_count = cljs.core.get_in.cljs$core$IFn$_invoke$arity$3(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,thing], null),(0));
 var spread = cljs.core.range.cljs$core$IFn$_invoke$arity$2((1),((1) + quantity));
 var future_spread = cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (current_count,spread){
-return (function (p1__6178_SHARP_){
-return (current_count + p1__6178_SHARP_);
+return (function (p1__5828_SHARP_){
+return (current_count + p1__5828_SHARP_);
 });})(current_count,spread))
 ,spread);
 return future_spread;
@@ -30,8 +30,8 @@ var quantities = clicker.stateless.future_quantities(state,thing,quantity);
 var opposite = cljs.core.val(cljs.core.first((fun.cljs$core$IFn$_invoke$arity$2 ? fun.cljs$core$IFn$_invoke$arity$2(db,thing) : fun.call(null,db,thing))));
 var gain_fn = data.idb.item_function(db,v);
 var value = cljs.core.reduce.cljs$core$IFn$_invoke$arity$2(cljs.core._PLUS_,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (quantities,opposite,gain_fn){
-return (function (p1__6179_SHARP_){
-return (gain_fn.cljs$core$IFn$_invoke$arity$2 ? gain_fn.cljs$core$IFn$_invoke$arity$2(p1__6179_SHARP_,opposite) : gain_fn.call(null,p1__6179_SHARP_,opposite));
+return (function (p1__5829_SHARP_){
+return (gain_fn.cljs$core$IFn$_invoke$arity$2 ? gain_fn.cljs$core$IFn$_invoke$arity$2(p1__5829_SHARP_,opposite) : gain_fn.call(null,p1__5829_SHARP_,opposite));
 });})(quantities,opposite,gain_fn))
 ,quantities));
 var value_fn = cljs.core.partial.cljs$core$IFn$_invoke$arity$2(cljs.core._PLUS_,(op.cljs$core$IFn$_invoke$arity$1 ? op.cljs$core$IFn$_invoke$arity$1(value) : op.call(null,value)));
@@ -48,10 +48,10 @@ clicker.stateless.apply_gains_or_losses = (function clicker$stateless$apply_gain
 
 var it = (gol_fn.cljs$core$IFn$_invoke$arity$2 ? gol_fn.cljs$core$IFn$_invoke$arity$2(db,thing) : gol_fn.call(null,db,thing));
 var states = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (it){
-return (function (st,p__6180){
-var vec__6181 = p__6180;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6181,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__6181,(1),null);
+return (function (st,p__5830){
+var vec__5831 = p__5830;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__5831,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__5831,(1),null);
 return (apply_fn.cljs$core$IFn$_invoke$arity$6 ? apply_fn.cljs$core$IFn$_invoke$arity$6(k,v,st,db,thing,quantity) : apply_fn.call(null,k,v,st,db,thing,quantity));
 });})(it))
 ,state,it);
@@ -59,14 +59,14 @@ return states;
 });
 clicker.stateless.apply_gains = (function clicker$stateless$apply_gains(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___6191 = arguments.length;
-var i__4532__auto___6192 = (0);
+var len__4531__auto___5841 = arguments.length;
+var i__4532__auto___5842 = (0);
 while(true){
-if((i__4532__auto___6192 < len__4531__auto___6191)){
-args__4534__auto__.push((arguments[i__4532__auto___6192]));
+if((i__4532__auto___5842 < len__4531__auto___5841)){
+args__4534__auto__.push((arguments[i__4532__auto___5842]));
 
-var G__6193 = (i__4532__auto___6192 + (1));
-i__4532__auto___6192 = G__6193;
+var G__5843 = (i__4532__auto___5842 + (1));
+i__4532__auto___5842 = G__5843;
 continue;
 } else {
 }
@@ -77,37 +77,37 @@ var argseq__4535__auto__ = ((((3) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.stateless.apply_gains.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4535__auto__);
 });
 
-clicker.stateless.apply_gains.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6188){
-var map__6189 = p__6188;
-var map__6189__$1 = ((((!((map__6189 == null)))?(((((map__6189.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6189.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6189):map__6189);
-var quantity = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6189__$1,cljs.core.cst$kw$quantity,(1));
+clicker.stateless.apply_gains.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__5838){
+var map__5839 = p__5838;
+var map__5839__$1 = ((((!((map__5839 == null)))?(((((map__5839.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__5839.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__5839):map__5839);
+var quantity = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__5839__$1,cljs.core.cst$kw$quantity,(1));
 return clicker.stateless.apply_gains_or_losses(state,db,thing,data.idb.item_gain,clicker.stateless.apply_gain,quantity);
 });
 
 clicker.stateless.apply_gains.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clicker.stateless.apply_gains.cljs$lang$applyTo = (function (seq6184){
-var G__6185 = cljs.core.first(seq6184);
-var seq6184__$1 = cljs.core.next(seq6184);
-var G__6186 = cljs.core.first(seq6184__$1);
-var seq6184__$2 = cljs.core.next(seq6184__$1);
-var G__6187 = cljs.core.first(seq6184__$2);
-var seq6184__$3 = cljs.core.next(seq6184__$2);
+clicker.stateless.apply_gains.cljs$lang$applyTo = (function (seq5834){
+var G__5835 = cljs.core.first(seq5834);
+var seq5834__$1 = cljs.core.next(seq5834);
+var G__5836 = cljs.core.first(seq5834__$1);
+var seq5834__$2 = cljs.core.next(seq5834__$1);
+var G__5837 = cljs.core.first(seq5834__$2);
+var seq5834__$3 = cljs.core.next(seq5834__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6185,G__6186,G__6187,seq6184__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5835,G__5836,G__5837,seq5834__$3);
 });
 
 clicker.stateless.apply_losses = (function clicker$stateless$apply_losses(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___6201 = arguments.length;
-var i__4532__auto___6202 = (0);
+var len__4531__auto___5851 = arguments.length;
+var i__4532__auto___5852 = (0);
 while(true){
-if((i__4532__auto___6202 < len__4531__auto___6201)){
-args__4534__auto__.push((arguments[i__4532__auto___6202]));
+if((i__4532__auto___5852 < len__4531__auto___5851)){
+args__4534__auto__.push((arguments[i__4532__auto___5852]));
 
-var G__6203 = (i__4532__auto___6202 + (1));
-i__4532__auto___6202 = G__6203;
+var G__5853 = (i__4532__auto___5852 + (1));
+i__4532__auto___5852 = G__5853;
 continue;
 } else {
 }
@@ -118,37 +118,54 @@ var argseq__4535__auto__ = ((((3) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.stateless.apply_losses.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4535__auto__);
 });
 
-clicker.stateless.apply_losses.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6198){
-var map__6199 = p__6198;
-var map__6199__$1 = ((((!((map__6199 == null)))?(((((map__6199.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6199.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6199):map__6199);
-var quantity = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6199__$1,cljs.core.cst$kw$quantity,(1));
+clicker.stateless.apply_losses.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__5848){
+var map__5849 = p__5848;
+var map__5849__$1 = ((((!((map__5849 == null)))?(((((map__5849.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__5849.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__5849):map__5849);
+var quantity = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__5849__$1,cljs.core.cst$kw$quantity,(1));
 return clicker.stateless.apply_gains_or_losses(state,db,thing,data.idb.item_loss,clicker.stateless.apply_loss,quantity);
 });
 
 clicker.stateless.apply_losses.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clicker.stateless.apply_losses.cljs$lang$applyTo = (function (seq6194){
-var G__6195 = cljs.core.first(seq6194);
-var seq6194__$1 = cljs.core.next(seq6194);
-var G__6196 = cljs.core.first(seq6194__$1);
-var seq6194__$2 = cljs.core.next(seq6194__$1);
-var G__6197 = cljs.core.first(seq6194__$2);
-var seq6194__$3 = cljs.core.next(seq6194__$2);
+clicker.stateless.apply_losses.cljs$lang$applyTo = (function (seq5844){
+var G__5845 = cljs.core.first(seq5844);
+var seq5844__$1 = cljs.core.next(seq5844);
+var G__5846 = cljs.core.first(seq5844__$1);
+var seq5844__$2 = cljs.core.next(seq5844__$1);
+var G__5847 = cljs.core.first(seq5844__$2);
+var seq5844__$3 = cljs.core.next(seq5844__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6195,G__6196,G__6197,seq6194__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5845,G__5846,G__5847,seq5844__$3);
 });
 
+clicker.stateless.set_latest_new_thing = (function clicker$stateless$set_latest_new_thing(state,thing){
+
+if(cljs.core.truth_(cljs.core.some((function (p1__5854_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(thing,p1__5854_SHARP_);
+}),cljs.core.keys(cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things], null)))))){
+return state;
+} else {
+return cljs.core.assoc_in(state,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$latest_DASH_new_DASH_thing], null),thing);
+}
+});
+clicker.stateless.get_latest_new_thing = (function clicker$stateless$get_latest_new_thing(state){
+return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$latest_DASH_new_DASH_thing], null));
+});
+clicker.stateless.get_latest_ticker = (function clicker$stateless$get_latest_ticker(state,db){
+var latest = clicker.stateless.get_latest_new_thing(state);
+return (clicker.stateless.db_item_ticker.cljs$core$IFn$_invoke$arity$2 ? clicker.stateless.db_item_ticker.cljs$core$IFn$_invoke$arity$2(db,latest) : clicker.stateless.db_item_ticker.call(null,db,latest));
+});
 clicker.stateless.tap = (function clicker$stateless$tap(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___6212 = arguments.length;
-var i__4532__auto___6213 = (0);
+var len__4531__auto___5863 = arguments.length;
+var i__4532__auto___5864 = (0);
 while(true){
-if((i__4532__auto___6213 < len__4531__auto___6212)){
-args__4534__auto__.push((arguments[i__4532__auto___6213]));
+if((i__4532__auto___5864 < len__4531__auto___5863)){
+args__4534__auto__.push((arguments[i__4532__auto___5864]));
 
-var G__6214 = (i__4532__auto___6213 + (1));
-i__4532__auto___6213 = G__6214;
+var G__5865 = (i__4532__auto___5864 + (1));
+i__4532__auto___5864 = G__5865;
 continue;
 } else {
 }
@@ -159,50 +176,50 @@ var argseq__4535__auto__ = ((((3) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4535__auto__);
 });
 
-clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6209){
-var map__6210 = p__6209;
-var map__6210__$1 = ((((!((map__6210 == null)))?(((((map__6210.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6210.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6210):map__6210);
-var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6210__$1,cljs.core.cst$kw$n,(1));
+clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__5860){
+var map__5861 = p__5860;
+var map__5861__$1 = ((((!((map__5861 == null)))?(((((map__5861.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__5861.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__5861):map__5861);
+var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__5861__$1,cljs.core.cst$kw$n,(1));
 
-return cljs.core.update_in.cljs$core$IFn$_invoke$arity$3(clicker.stateless.apply_losses.cljs$core$IFn$_invoke$arity$variadic(clicker.stateless.apply_gains.cljs$core$IFn$_invoke$arity$variadic(state,db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$quantity,n], 0)),db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$quantity,n], 0)),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,thing], null),cljs.core.fnil.cljs$core$IFn$_invoke$arity$2(((function (map__6210,map__6210__$1,n){
-return (function (p1__6204_SHARP_){
-return (p1__6204_SHARP_ + n);
-});})(map__6210,map__6210__$1,n))
+return cljs.core.update_in.cljs$core$IFn$_invoke$arity$3(clicker.stateless.set_latest_new_thing(clicker.stateless.apply_losses.cljs$core$IFn$_invoke$arity$variadic(clicker.stateless.apply_gains.cljs$core$IFn$_invoke$arity$variadic(state,db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$quantity,n], 0)),db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$quantity,n], 0)),thing),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,thing], null),cljs.core.fnil.cljs$core$IFn$_invoke$arity$2(((function (map__5861,map__5861__$1,n){
+return (function (p1__5855_SHARP_){
+return (p1__5855_SHARP_ + n);
+});})(map__5861,map__5861__$1,n))
 ,(0)));
 });
 
 clicker.stateless.tap.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clicker.stateless.tap.cljs$lang$applyTo = (function (seq6205){
-var G__6206 = cljs.core.first(seq6205);
-var seq6205__$1 = cljs.core.next(seq6205);
-var G__6207 = cljs.core.first(seq6205__$1);
-var seq6205__$2 = cljs.core.next(seq6205__$1);
-var G__6208 = cljs.core.first(seq6205__$2);
-var seq6205__$3 = cljs.core.next(seq6205__$2);
+clicker.stateless.tap.cljs$lang$applyTo = (function (seq5856){
+var G__5857 = cljs.core.first(seq5856);
+var seq5856__$1 = cljs.core.next(seq5856);
+var G__5858 = cljs.core.first(seq5856__$1);
+var seq5856__$2 = cljs.core.next(seq5856__$1);
+var G__5859 = cljs.core.first(seq5856__$2);
+var seq5856__$3 = cljs.core.next(seq5856__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6206,G__6207,G__6208,seq6205__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5857,G__5858,G__5859,seq5856__$3);
 });
 
 clicker.stateless.next_gain_or_loss = (function clicker$stateless$next_gain_or_loss(state,db,thing,lookup_fn,apply_fn){
 
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,(function (){var iter__4324__auto__ = (function clicker$stateless$next_gain_or_loss_$_iter__6215(s__6216){
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,(function (){var iter__4324__auto__ = (function clicker$stateless$next_gain_or_loss_$_iter__5866(s__5867){
 return (new cljs.core.LazySeq(null,(function (){
-var s__6216__$1 = s__6216;
+var s__5867__$1 = s__5867;
 while(true){
-var temp__5457__auto__ = cljs.core.seq(s__6216__$1);
+var temp__5457__auto__ = cljs.core.seq(s__5867__$1);
 if(temp__5457__auto__){
-var s__6216__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__6216__$2)){
-var c__4322__auto__ = cljs.core.chunk_first(s__6216__$2);
+var s__5867__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__5867__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__5867__$2);
 var size__4323__auto__ = cljs.core.count(c__4322__auto__);
-var b__6218 = cljs.core.chunk_buffer(size__4323__auto__);
-if((function (){var i__6217 = (0);
+var b__5869 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__5868 = (0);
 while(true){
-if((i__6217 < size__4323__auto__)){
-var gain_key = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__6217);
-cljs.core.chunk_append(b__6218,(function (){var old_value_maybe_nil = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$values,gain_key], null));
+if((i__5868 < size__4323__auto__)){
+var gain_key = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__5868);
+cljs.core.chunk_append(b__5869,(function (){var old_value_maybe_nil = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$values,gain_key], null));
 var old_value = (((old_value_maybe_nil == null))?(0):old_value_maybe_nil);
 var next_state = (apply_fn.cljs$core$IFn$_invoke$arity$3 ? apply_fn.cljs$core$IFn$_invoke$arity$3(state,db,thing) : apply_fn.call(null,state,db,thing));
 var new_value = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(next_state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$values,gain_key], null));
@@ -210,8 +227,8 @@ var ret = (new_value - old_value);
 return cljs.core.PersistentArrayMap.createAsIfByAssoc([gain_key,ret]);
 })());
 
-var G__6219 = (i__6217 + (1));
-i__6217 = G__6219;
+var G__5870 = (i__5868 + (1));
+i__5868 = G__5870;
 continue;
 } else {
 return true;
@@ -219,19 +236,19 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__6218),clicker$stateless$next_gain_or_loss_$_iter__6215(cljs.core.chunk_rest(s__6216__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__5869),clicker$stateless$next_gain_or_loss_$_iter__5866(cljs.core.chunk_rest(s__5867__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__6218),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__5869),null);
 }
 } else {
-var gain_key = cljs.core.first(s__6216__$2);
+var gain_key = cljs.core.first(s__5867__$2);
 return cljs.core.cons((function (){var old_value_maybe_nil = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$values,gain_key], null));
 var old_value = (((old_value_maybe_nil == null))?(0):old_value_maybe_nil);
 var next_state = (apply_fn.cljs$core$IFn$_invoke$arity$3 ? apply_fn.cljs$core$IFn$_invoke$arity$3(state,db,thing) : apply_fn.call(null,state,db,thing));
 var new_value = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(next_state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$values,gain_key], null));
 var ret = (new_value - old_value);
 return cljs.core.PersistentArrayMap.createAsIfByAssoc([gain_key,ret]);
-})(),clicker$stateless$next_gain_or_loss_$_iter__6215(cljs.core.rest(s__6216__$2)));
+})(),clicker$stateless$next_gain_or_loss_$_iter__5866(cljs.core.rest(s__5867__$2)));
 }
 } else {
 return null;
@@ -256,8 +273,8 @@ return clicker.stateless.next_gain_or_loss(state,db,thing,data.idb.item_loss,cli
  *   or the root dependency if no thing is specified.
  */
 clicker.stateless.get_dependencies = (function clicker$stateless$get_dependencies(var_args){
-var G__6221 = arguments.length;
-switch (G__6221) {
+var G__5872 = arguments.length;
+switch (G__5872) {
 case 2:
 return clicker.stateless.get_dependencies.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -285,22 +302,22 @@ clicker.stateless.get_dependencies.cljs$lang$maxFixedArity = 3;
 clicker.stateless.satisfies_dependencies_QMARK_ = (function clicker$stateless$satisfies_dependencies_QMARK_(state,db,thing){
 var thing_deps = data.idb.item_dependency(db,thing);
 var has_deps = cljs.core.every_QMARK_(((function (thing_deps){
-return (function (p1__6223_SHARP_){
-return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,p1__6223_SHARP_], null));
+return (function (p1__5874_SHARP_){
+return cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(state,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$things,p1__5874_SHARP_], null));
 });})(thing_deps))
 ,thing_deps);
 return has_deps;
 });
 clicker.stateless.can_tap_QMARK_ = (function clicker$stateless$can_tap_QMARK_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___6231 = arguments.length;
-var i__4532__auto___6232 = (0);
+var len__4531__auto___5882 = arguments.length;
+var i__4532__auto___5883 = (0);
 while(true){
-if((i__4532__auto___6232 < len__4531__auto___6231)){
-args__4534__auto__.push((arguments[i__4532__auto___6232]));
+if((i__4532__auto___5883 < len__4531__auto___5882)){
+args__4534__auto__.push((arguments[i__4532__auto___5883]));
 
-var G__6233 = (i__4532__auto___6232 + (1));
-i__4532__auto___6232 = G__6233;
+var G__5884 = (i__4532__auto___5883 + (1));
+i__4532__auto___5883 = G__5884;
 continue;
 } else {
 }
@@ -311,10 +328,10 @@ var argseq__4535__auto__ = ((((3) < args__4534__auto__.length))?(new cljs.core.I
 return clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),(arguments[(2)]),argseq__4535__auto__);
 });
 
-clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__6228){
-var map__6229 = p__6228;
-var map__6229__$1 = ((((!((map__6229 == null)))?(((((map__6229.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__6229.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__6229):map__6229);
-var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__6229__$1,cljs.core.cst$kw$n,(1));
+clicker.stateless.can_tap_QMARK_.cljs$core$IFn$_invoke$arity$variadic = (function (state,db,thing,p__5879){
+var map__5880 = p__5879;
+var map__5880__$1 = ((((!((map__5880 == null)))?(((((map__5880.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__5880.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__5880):map__5880);
+var n = cljs.core.get.cljs$core$IFn$_invoke$arity$3(map__5880__$1,cljs.core.cst$kw$n,(1));
 
 var tapped = clicker.stateless.tap.cljs$core$IFn$_invoke$arity$variadic(state,db,thing,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$n,n], 0));
 var and__3938__auto__ = (cljs.core.some(cljs.core.neg_QMARK_,cljs.core.vals(cljs.core.cst$kw$values.cljs$core$IFn$_invoke$arity$1(tapped))) == null);
@@ -328,15 +345,15 @@ return and__3938__auto__;
 clicker.stateless.can_tap_QMARK_.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-clicker.stateless.can_tap_QMARK_.cljs$lang$applyTo = (function (seq6224){
-var G__6225 = cljs.core.first(seq6224);
-var seq6224__$1 = cljs.core.next(seq6224);
-var G__6226 = cljs.core.first(seq6224__$1);
-var seq6224__$2 = cljs.core.next(seq6224__$1);
-var G__6227 = cljs.core.first(seq6224__$2);
-var seq6224__$3 = cljs.core.next(seq6224__$2);
+clicker.stateless.can_tap_QMARK_.cljs$lang$applyTo = (function (seq5875){
+var G__5876 = cljs.core.first(seq5875);
+var seq5875__$1 = cljs.core.next(seq5875);
+var G__5877 = cljs.core.first(seq5875__$1);
+var seq5875__$2 = cljs.core.next(seq5875__$1);
+var G__5878 = cljs.core.first(seq5875__$2);
+var seq5875__$3 = cljs.core.next(seq5875__$2);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__6225,G__6226,G__6227,seq6224__$3);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__5876,G__5877,G__5878,seq5875__$3);
 });
 
 clicker.stateless.db_item_name = (function clicker$stateless$db_item_name(db,thing){

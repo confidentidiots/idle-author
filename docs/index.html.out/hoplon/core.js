@@ -611,29 +611,29 @@ return hoplon.core._elem_BANG_(elem,this$__$1,value);
 hoplon.core.spec_BANG_ = (function hoplon$core$spec_BANG_(){
 var opts10295_10323 = null;
 cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (opts10295_10323){
-return (function (ret__9665__auto__,p__10296){
+return (function (ret__9348__auto__,p__10296){
 var vec__10297 = p__10296;
-var ___9666__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10297,(0),null);
-var f__9667__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10297,(1),null);
-var sym__9668__auto__ = (f__9667__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9667__auto__.cljs$core$IFn$_invoke$arity$0() : f__9667__auto__.call(null));
-var G__10300 = ret__9665__auto__;
-if(cljs.core.truth_(sym__9668__auto__)){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10300,sym__9668__auto__);
+var ___9349__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10297,(0),null);
+var f__9350__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10297,(1),null);
+var sym__9351__auto__ = (f__9350__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9350__auto__.cljs$core$IFn$_invoke$arity$0() : f__9350__auto__.call(null));
+var G__10300 = ret__9348__auto__;
+if(cljs.core.truth_(sym__9351__auto__)){
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10300,sym__9351__auto__);
 } else {
 return G__10300;
 }
 });})(opts10295_10323))
 ,cljs.core.PersistentVector.EMPTY,cljs.spec.test.alpha.distinct_by(cljs.core.first,cljs.core.filter.cljs$core$IFn$_invoke$arity$2(((function (opts10295_10323){
-return (function (p1__9664__9669__auto__){
-var G__10302 = cljs.core.first(p1__9664__9669__auto__);
+return (function (p1__9347__9352__auto__){
+var G__10302 = cljs.core.first(p1__9347__9352__auto__);
 var fexpr__10301 = cljs.spec.test.alpha.instrumentable_syms.cljs$core$IFn$_invoke$arity$1(opts10295_10323);
 return (fexpr__10301.cljs$core$IFn$_invoke$arity$1 ? fexpr__10301.cljs$core$IFn$_invoke$arity$1(G__10302) : fexpr__10301.call(null,G__10302));
 });})(opts10295_10323))
 ,cljs.core.zipmap(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [((function (opts10295_10323){
 return (function (){
-var checked__9633__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_,new cljs.core.Var(function(){return hoplon.core._elem_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_elem_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/1xn5/ozpa12/index.html.out/hoplon/core.cljs",14,1,80,80,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._elem_BANG_)?hoplon.core._elem_BANG_.cljs$lang$test:null)])),opts10295_10323);
-if(cljs.core.truth_(checked__9633__auto__)){
-hoplon.core._elem_BANG_ = checked__9633__auto__;
+var checked__9316__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_,new cljs.core.Var(function(){return hoplon.core._elem_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_elem_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/iy3/ozpa12/index.html.out/hoplon/core.cljs",14,1,80,80,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._elem_BANG_)?hoplon.core._elem_BANG_.cljs$lang$test:null)])),opts10295_10323);
+if(cljs.core.truth_(checked__9316__auto__)){
+hoplon.core._elem_BANG_ = checked__9316__auto__;
 } else {
 }
 
@@ -643,29 +643,29 @@ return cljs.core.cst$sym$hoplon$core_SLASH__DASH_elem_BANG_;
 
 var opts10305_10324 = null;
 cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (opts10305_10324){
-return (function (ret__9665__auto__,p__10306){
+return (function (ret__9348__auto__,p__10306){
 var vec__10307 = p__10306;
-var ___9666__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10307,(0),null);
-var f__9667__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10307,(1),null);
-var sym__9668__auto__ = (f__9667__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9667__auto__.cljs$core$IFn$_invoke$arity$0() : f__9667__auto__.call(null));
-var G__10310 = ret__9665__auto__;
-if(cljs.core.truth_(sym__9668__auto__)){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10310,sym__9668__auto__);
+var ___9349__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10307,(0),null);
+var f__9350__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10307,(1),null);
+var sym__9351__auto__ = (f__9350__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9350__auto__.cljs$core$IFn$_invoke$arity$0() : f__9350__auto__.call(null));
+var G__10310 = ret__9348__auto__;
+if(cljs.core.truth_(sym__9351__auto__)){
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10310,sym__9351__auto__);
 } else {
 return G__10310;
 }
 });})(opts10305_10324))
 ,cljs.core.PersistentVector.EMPTY,cljs.spec.test.alpha.distinct_by(cljs.core.first,cljs.core.filter.cljs$core$IFn$_invoke$arity$2(((function (opts10305_10324){
-return (function (p1__9664__9669__auto__){
-var G__10312 = cljs.core.first(p1__9664__9669__auto__);
+return (function (p1__9347__9352__auto__){
+var G__10312 = cljs.core.first(p1__9347__9352__auto__);
 var fexpr__10311 = cljs.spec.test.alpha.instrumentable_syms.cljs$core$IFn$_invoke$arity$1(opts10305_10324);
 return (fexpr__10311.cljs$core$IFn$_invoke$arity$1 ? fexpr__10311.cljs$core$IFn$_invoke$arity$1(G__10312) : fexpr__10311.call(null,G__10312));
 });})(opts10305_10324))
 ,cljs.core.zipmap(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [((function (opts10305_10324){
 return (function (){
-var checked__9633__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_,new cljs.core.Var(function(){return hoplon.core._do_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_do_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/1xn5/ozpa12/index.html.out/hoplon/core.cljs",12,1,70,70,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._do_BANG_)?hoplon.core._do_BANG_.cljs$lang$test:null)])),opts10305_10324);
-if(cljs.core.truth_(checked__9633__auto__)){
-hoplon.core._do_BANG_ = checked__9633__auto__;
+var checked__9316__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_,new cljs.core.Var(function(){return hoplon.core._do_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_do_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/iy3/ozpa12/index.html.out/hoplon/core.cljs",12,1,70,70,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._do_BANG_)?hoplon.core._do_BANG_.cljs$lang$test:null)])),opts10305_10324);
+if(cljs.core.truth_(checked__9316__auto__)){
+hoplon.core._do_BANG_ = checked__9316__auto__;
 } else {
 }
 
@@ -675,29 +675,29 @@ return cljs.core.cst$sym$hoplon$core_SLASH__DASH_do_BANG_;
 
 var opts10315 = null;
 return cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (opts10315){
-return (function (ret__9665__auto__,p__10316){
+return (function (ret__9348__auto__,p__10316){
 var vec__10317 = p__10316;
-var ___9666__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10317,(0),null);
-var f__9667__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10317,(1),null);
-var sym__9668__auto__ = (f__9667__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9667__auto__.cljs$core$IFn$_invoke$arity$0() : f__9667__auto__.call(null));
-var G__10320 = ret__9665__auto__;
-if(cljs.core.truth_(sym__9668__auto__)){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10320,sym__9668__auto__);
+var ___9349__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10317,(0),null);
+var f__9350__auto__ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10317,(1),null);
+var sym__9351__auto__ = (f__9350__auto__.cljs$core$IFn$_invoke$arity$0 ? f__9350__auto__.cljs$core$IFn$_invoke$arity$0() : f__9350__auto__.call(null));
+var G__10320 = ret__9348__auto__;
+if(cljs.core.truth_(sym__9351__auto__)){
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(G__10320,sym__9351__auto__);
 } else {
 return G__10320;
 }
 });})(opts10315))
 ,cljs.core.PersistentVector.EMPTY,cljs.spec.test.alpha.distinct_by(cljs.core.first,cljs.core.filter.cljs$core$IFn$_invoke$arity$2(((function (opts10315){
-return (function (p1__9664__9669__auto__){
-var G__10322 = cljs.core.first(p1__9664__9669__auto__);
+return (function (p1__9347__9352__auto__){
+var G__10322 = cljs.core.first(p1__9347__9352__auto__);
 var fexpr__10321 = cljs.spec.test.alpha.instrumentable_syms.cljs$core$IFn$_invoke$arity$1(opts10315);
 return (fexpr__10321.cljs$core$IFn$_invoke$arity$1 ? fexpr__10321.cljs$core$IFn$_invoke$arity$1(G__10322) : fexpr__10321.call(null,G__10322));
 });})(opts10315))
 ,cljs.core.zipmap(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$hoplon$core_SLASH__DASH_on_BANG_], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [((function (opts10315){
 return (function (){
-var checked__9633__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_on_BANG_,new cljs.core.Var(function(){return hoplon.core._on_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_on_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_on_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/1xn5/ozpa12/index.html.out/hoplon/core.cljs",12,1,75,75,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._on_BANG_)?hoplon.core._on_BANG_.cljs$lang$test:null)])),opts10315);
-if(cljs.core.truth_(checked__9633__auto__)){
-hoplon.core._on_BANG_ = checked__9633__auto__;
+var checked__9316__auto__ = cljs.spec.test.alpha.instrument_1_STAR_(cljs.core.cst$sym$hoplon$core_SLASH__DASH_on_BANG_,new cljs.core.Var(function(){return hoplon.core._on_BANG_;},cljs.core.cst$sym$hoplon$core_SLASH__DASH_on_BANG_,cljs.core.PersistentHashMap.fromArrays([cljs.core.cst$kw$private,cljs.core.cst$kw$ns,cljs.core.cst$kw$name,cljs.core.cst$kw$file,cljs.core.cst$kw$end_DASH_column,cljs.core.cst$kw$column,cljs.core.cst$kw$line,cljs.core.cst$kw$end_DASH_line,cljs.core.cst$kw$arglists,cljs.core.cst$kw$doc,cljs.core.cst$kw$test],[true,cljs.core.cst$sym$hoplon$core,cljs.core.cst$sym$_DASH_on_BANG_,"/Users/juanuys/.boot/cache/tmp/Users/juanuys/Documents/clicker-games/idle-author/iy3/ozpa12/index.html.out/hoplon/core.cljs",12,1,75,75,cljs.core.list(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$sym$elem,cljs.core.cst$sym$this,cljs.core.cst$sym$value], null)),null,(cljs.core.truth_(hoplon.core._on_BANG_)?hoplon.core._on_BANG_.cljs$lang$test:null)])),opts10315);
+if(cljs.core.truth_(checked__9316__auto__)){
+hoplon.core._on_BANG_ = checked__9316__auto__;
 } else {
 }
 
