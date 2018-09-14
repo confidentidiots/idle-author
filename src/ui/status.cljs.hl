@@ -8,6 +8,6 @@
     [goog.string.format]))
 ;
 (defelem ^:private show-updates [{:keys [state]} kids]
-  (let [ticker-text (cell= (first (get-in state [:ticker] '("Welcome..."))))]
+  (let [ticker-text (cell= (e/get-latest-ticker state))]
     (div :class "ticker"
       (p ticker-text))))
