@@ -2,8 +2,21 @@
   (:require
     [clicker.util :as u]
     [clojure.set]
-    [data.idb :refer [item-gain item-loss item-function item-name item-group item-dependency item-ticker]]))
+    [data.idb :refer [item-gain item-loss item-function item-name item-group item-dependency item-ticker group-by-item]]))
+; DAO stuff ------------------------------------------------------
+(defn db-item-name [db thing]
+  (item-name db thing))
+;
+(defn db-item-ticker [db thing]
+  (item-ticker db thing))
+;
+(defn db-items-by-group [db group]
+  (item-group db group))
+;
+(defn db-group-by-item [db thing]
+  (group-by-item db thing))
 
+; service stuff ------------------------------------------------------
 (defn thing-count [state thing-key]
   (get-in state [:things thing-key] 0))
 ;
@@ -77,8 +90,6 @@
       ; record that we've tapped one more of this thing.
       ; This must come last, as apply-* depends on "current-count"
       (update-in [:things thing] (fnil #(+ % n) 0))))
-
-;
 ;
 (defn next-gain-or-loss [state db thing lookup-fn apply-fn]
   "What is the next gain/loss going to be if I tap something?
@@ -121,12 +132,3 @@
       (nil? (some neg? (vals (:values tapped))))
       (satisfies-dependencies? state db thing))))
 ;
-; DAO stuff ------------------------------------------------------
-(defn db-item-name [db thing]
-  (item-name db thing))
-;
-(defn db-item-ticker [db thing]
-  (item-ticker db thing))
-;
-(defn db-items-by-group [db group]
-  (item-group db group))

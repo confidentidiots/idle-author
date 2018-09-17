@@ -15,6 +15,9 @@
   (items [_ group-key]
     (map #(first %) (filter (fn [[k v]] (some (partial = group-key) v)) group/data)))
 
+  (group-by-item [_ item]
+    (first (first (filter #(some #{item} (second %)) group/data))))
+
   (item-dependency [_ item]
     (dependency/data item))
 

@@ -2,6 +2,7 @@
 ; https://danielcompton.net/2016/05/04/requiring-records-clojure-clojurescript
 (defprotocol IDB
   (items [this group-key])
+  (group-by-item [this item])
   (item-dependency [this item])
   (item-function [this item])
   (item-gain [this item])

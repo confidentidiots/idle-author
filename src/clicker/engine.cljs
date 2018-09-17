@@ -75,3 +75,6 @@
 ;
 (defn db-items-by-group [group]
   (s/db-items-by-group db group))
+;
+(defn db-group-by-item [thing]
+  (s/db-group-by-item db (keyword thing)))

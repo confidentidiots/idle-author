@@ -29,7 +29,7 @@
     500)
   (js/setInterval game-loop 1000))
 
-(defc god false)
+(defc god true)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)
@@ -41,6 +41,8 @@
 (defc= money (gstring/format "%.2f" (get-in state [:values :money] 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
 (defc= has-started (e/has-started? state))
+(defc= latest-thing (e/get-latest-new-thing state))
+(defc= latest-thing-group (e/db-group-by-item latest-thing))
 
 (html
   (head
@@ -52,13 +54,17 @@
     (if-tpl has-started
 
       (div :class "grid-all"
-        (status/show-updates :state state)
+        (status/show-updates
+          :state state
+          :latest-thing latest-thing
+          :latest-thing-group latest-thing-group)
 
         (div :class "stats"
           (h3 clicks " words")
           (button :click #(e/click state) "Write a word")
           ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
-
+          ; (h5 (cell= (str latest-thing)))
+          ; (h5 (cell= (str latest-thing-group)))
           (h5 "$" money " income")
           (h5 "Creativity boost of " add-every-fmt " words every second"))
 

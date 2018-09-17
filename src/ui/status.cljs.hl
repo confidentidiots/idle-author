@@ -7,10 +7,10 @@
     [goog.string :as gstring]
     [goog.string.format]))
 ;
-(defelem ^:private show-updates [{:keys [state]} kids]
-  (let [thing (cell= (str (e/get-latest-new-thing state)))
-        ticker-text (cell= (e/get-latest-ticker state))]
+(defelem ^:private show-updates [{:keys [state latest-thing latest-thing-group]} kids]
+  (let [ticker-text (cell= (e/get-latest-ticker state))]
     (div :class "ticker"
       (p
-        (cell= (strong :style "padding-right: 20px" thing))
+        (cell= (strong :style "padding-right: 20px" (str latest-thing-group)))
+        (cell= (strong :style "padding-right: 20px" (str latest-thing)))
         (span ticker-text)))))

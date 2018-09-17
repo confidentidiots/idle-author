@@ -161,6 +161,9 @@
     (is (= (s/get-latest-ticker state1 test-db) "A simple ticker."))
     (is (= (s/get-latest-ticker state2 test-db) "A complex ticker."))
     (is (= (s/get-latest-ticker state3 test-db) "A complex ticker."))))
+
+(deftest test-group-by-item
+  (is (= (s/db-group-by-item test-db :simple) :simple-group)))
 ; (deftest test-count
 ;   (is (= (s/thing-count {} :slogan) 0))
 ;   (is (= (s/thing-count { :things {:slogan 1}} :slogan) 1)))

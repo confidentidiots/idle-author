@@ -22,6 +22,10 @@
   (items [_ group-key]
     (map #(first %) (filter (fn [[k v]] (some (partial = group-key) v)) group/data)))
 
+  (group-by-item [_ item]
+    ; TODO this shouldn't really be first-first, since an item might be in 2+ groups.
+    (first (first (filter #(some #{item} (second %)) group/data))))
+
   (item-dependency [_ item]
     (dependency/data item))
 
