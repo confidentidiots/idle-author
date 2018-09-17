@@ -72,8 +72,10 @@
   (get-in state [:latest-new-thing]))
 ;
 (defn get-latest-ticker [state db]
-  (let [latest (get-latest-new-thing state)]
-    (db-item-ticker db latest)))
+  (let [latest (get-latest-new-thing state)
+        ; force keyword, because of browser storage making things string
+        latest-as-kw (keyword latest)]
+    (db-item-ticker db latest-as-kw)))
 ;
 (defn tap [state db thing & {:keys [n] :or {n 1}}]
   "Given I tap a thing, make changes to the current game state
