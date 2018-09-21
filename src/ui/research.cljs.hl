@@ -25,14 +25,14 @@
         :let [item-name (e/db-item-name key)
               next-loss (cell= (e/next-loss state key))
               count (cell= (e/thing-count state key))
-              dependencies (e/get-dependencies state key)
+              ; dependencies (e/get-dependencies state key)
               group-name (name group)]
         :when (not (= key :genesis))
         ; cell= here so dependency is re-checked when the state changes.
         :when (cell= (e/satisfies-dependencies? state key))]
     (tr :class (cell= {(str "unresearched-item-" group-name) (= count 0) (str "researched-item-" group-name) (> count 0)})
       (td item-name)
-      (td (str dependencies))
+      ; (td (str dependencies))
       (td (nexts :next next-loss))
       (td (tap-button :state state :key key :btn-txt btn-txt)))))
 ;
@@ -43,7 +43,7 @@
       (thead
         (tr
           (th "Thing")
-          (th "Depends on")
+          ; (th "Depends on")
           (th "Cost")
           (th "")))
       (for [group groups]
