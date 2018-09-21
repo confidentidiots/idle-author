@@ -41,8 +41,6 @@
 (defc= money (gstring/format "%.2f" (get-in state [:values :money] 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
 (defc= has-started (e/has-started? state))
-(defc= latest-thing (e/get-latest-new-thing state))
-(defc= latest-thing-group (e/db-group-by-item latest-thing))
 
 (html
   (head
@@ -55,9 +53,7 @@
 
       (div :class "grid-all"
         (status/show-updates
-          :state state
-          :latest-thing latest-thing
-          :latest-thing-group latest-thing-group)
+          :state state)
 
         (div :class "stats"
           (h3 clicks " words")

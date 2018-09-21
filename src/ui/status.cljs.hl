@@ -6,9 +6,12 @@
     [data.db :as db]
     [goog.string :as gstring]
     [goog.string.format]))
+
 ;
-(defelem ^:private show-updates [{:keys [state latest-thing latest-thing-group]} kids]
-  (let [ticker-text (cell= (e/get-latest-ticker state))]
+(defelem ^:private show-updates [{:keys [state]} kids]
+  (let [latest-thing (cell= (e/get-latest-new-thing state))
+        latest-thing-group (cell= (e/db-group-by-item latest-thing))
+        ticker-text (cell= (e/get-latest-ticker state))]
     (div :class "ticker"
       (p
         (cell= (strong :style "padding-right: 20px" (str latest-thing-group)))
