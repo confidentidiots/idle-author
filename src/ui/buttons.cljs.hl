@@ -9,7 +9,7 @@
 
 (defelem ^:private tap-button [{:keys [state key btn-txt n]} kids]
   (let [disabled (cell= (not (e/can-tap? state key :n n)))
-        click-fn #(e/tap state key n)]
+        click-fn #(e/tap state key :n n)]
     (button :disabled disabled :click click-fn n kids)))
 
 (defelem ^:private tap-buttons [{:keys [state key btn-txt]} kids]

@@ -75,11 +75,11 @@
     (if-tpl god
       (div :class "debug"
         (span "Words")
-        (for [level (range 6)]
+        (for [level (range 11)]
           (let [n (level-value-fn level)]
             (button :click #(e/click state :change-fn (fn [m] (+ m n))) n)))
         (span "Money")
-        (for [level (range 6)]
+        (for [level (range 11)]
           (let [n (level-value-fn level)]
             (button :click #(swap! state update-in [:values :money] (fnil (fn [m] (+ m n)) 0)) n)))
         (h4 "State")
