@@ -20,7 +20,12 @@
   [fmt & args]
   (apply gstring/format fmt args))
 
+(defn decimal-format
+  "formats decimal using the current locale"
+  [n]
+  (.format (goog.i18n.NumberFormat. (.-DECIMAL goog.i18n.NumberFormat.Format)) n))
+;
 (defn currency-format
   "formats currency using the current locale"
   [n]
-  (.format (goog.i18n.NumberFormat. (.-DECIMAL goog.i18n.NumberFormat.Format)) n))
+  (.format (goog.i18n.NumberFormat. (.-CURRENCY goog.i18n.NumberFormat.Format)) n))

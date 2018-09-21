@@ -17,7 +17,7 @@
     (for-tpl [it next]
       (let [name (cell= (str (key it)))
             val-bare (cell= (val it))
-            val (cell= (u/currency-format (Math/abs val-bare)))]
+            val (cell= (u/decimal-format (Math/abs val-bare)))]
         (tr (td name) (td val))))))
 
 (defelem ^:private as-list [{:keys [state group btn-txt]} kids]

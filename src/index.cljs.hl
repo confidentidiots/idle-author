@@ -38,7 +38,7 @@
 ; sentinels
 (defc= clicks (gstring/format "%.0f" (get-in state [:values :clicks] 0)))
 (defc= add-every-fmt (gstring/format "%.2f" add-every))
-(defc= money (gstring/format "%.2f" (get-in state [:values :money] 0)))
+(defc= money (u/currency-format (get-in state [:values :money] 0)))
 (defc= state-str (with-out-str (cljs.pprint/pprint state)))
 (defc= has-started (e/has-started? state))
 
@@ -61,7 +61,7 @@
           ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
           ; (h5 (cell= (str latest-thing)))
           ; (h5 (cell= (str latest-thing-group)))
-          (h5 "$" money " income")
+          (h5 money " income")
           (h5 "Creativity boost of " add-every-fmt " words every second"))
 
         (research/item-list :state state :groups [:product-level :tool-level])
