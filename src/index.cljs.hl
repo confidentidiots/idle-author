@@ -6,28 +6,21 @@
     [clojure.string :as string]
     [goog.string :as gstring]
     [goog.string.format]
-    [dao.dao :as dao]
     [ui.buttons :as buttons]
     [ui.levels :as levels]
     [ui.research :as research]
-    [ui.status :as status]))
+    [ui.status :as status]
+    [hoplon.storage-atom :refer [local-storage]]))
 
-(defc state u/default-state)
+(def state (-> (cell {}) (local-storage ::store)))
+; (defc state u/default-state)
 (defc= add-every (get-in state [:values :add-every] 0))
 
 (defn game-loop []
   (do
-    (e/click state :change-fn (fn [m] (+ m @add-every)))
-    (dao/put-state @state #())))
+    (e/click state :change-fn (fn [m] (+ m @add-every)))))
 
-(dosync
-  (dao/init-db)
-  (js/setTimeout
-    (fn []
-      (do
-        (dao/get-state "init" #(reset! state %))))
-    500)
-  (js/setInterval game-loop 1000))
+(js/setInterval game-loop 1000)
 
 (defc god true)
 (defn level-value-fn [n]
@@ -58,9 +51,6 @@
         (div :class "stats"
           (h3 clicks " words")
           (button :click #(e/click state) "Write a word")
-          ; (button :click (fn [] (dao/get-state "init" #(u/log "got result " %))) "get db")
-          ; (h5 (cell= (str latest-thing)))
-          ; (h5 (cell= (str latest-thing-group)))
           (h5 money " income")
           (h5 "Creativity boost of " add-every-fmt " words every second"))
 

@@ -10,9 +10,7 @@
                   [org.clojure/clojurescript "1.10.339"]
                   [tailrecursion/boot-jetty  "0.1.3"]
                   [onetom/boot-lein-generate "0.1.3" :scope "test"]
-    ;[adzerk/boot-test "1.2.0" :scope "test"]
                   [crisptrutski/boot-cljs-test "0.3.5-SNAPSHOT"]
-
                   [com.cemerick/piggieback "0.2.2"  :scope "test"]
                   [weasel                  "0.7.0"  :scope "test"]
                   [org.clojure/tools.nrepl "0.2.13" :scope "test"]
