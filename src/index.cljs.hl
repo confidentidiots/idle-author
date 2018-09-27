@@ -22,7 +22,7 @@
 
 (js/setInterval game-loop 1000)
 
-(defc god true)
+(defc god false)
 (defn level-value-fn [n]
   (+
     (Math/pow n 4)

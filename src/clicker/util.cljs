@@ -12,8 +12,6 @@
     (. js/console (log vs))
     v))
 
-(def default-state { :key "init"})
-
 (defn format
   "Formats a string using goog.string.format.
    e.g: (format \"Cost: %.2f\" 10.0234)"

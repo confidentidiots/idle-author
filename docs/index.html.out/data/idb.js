@@ -27,6 +27,25 @@ throw cljs.core.missing_protocol("IDB.items",this$);
 }
 });
 
+data.idb.group_by_item = (function data$idb$group_by_item(this$,item){
+if(((!((this$ == null))) && (!((this$.data$idb$IDB$group_by_item$arity$2 == null))))){
+return this$.data$idb$IDB$group_by_item$arity$2(this$,item);
+} else {
+var x__4243__auto__ = (((this$ == null))?null:this$);
+var m__4244__auto__ = (data.idb.group_by_item[goog.typeOf(x__4243__auto__)]);
+if(!((m__4244__auto__ == null))){
+return (m__4244__auto__.cljs$core$IFn$_invoke$arity$2 ? m__4244__auto__.cljs$core$IFn$_invoke$arity$2(this$,item) : m__4244__auto__.call(null,this$,item));
+} else {
+var m__4244__auto____$1 = (data.idb.group_by_item["_"]);
+if(!((m__4244__auto____$1 == null))){
+return (m__4244__auto____$1.cljs$core$IFn$_invoke$arity$2 ? m__4244__auto____$1.cljs$core$IFn$_invoke$arity$2(this$,item) : m__4244__auto____$1.call(null,this$,item));
+} else {
+throw cljs.core.missing_protocol("IDB.group-by-item",this$);
+}
+}
+}
+});
+
 data.idb.item_dependency = (function data$idb$item_dependency(this$,item){
 if(((!((this$ == null))) && (!((this$.data$idb$IDB$item_dependency$arity$2 == null))))){
 return this$.data$idb$IDB$item_dependency$arity$2(this$,item);
